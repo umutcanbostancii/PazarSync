@@ -4,7 +4,29 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-// Hata ayıklama mesajlarını kaldırıyorum, güvenlik için
+// Custom fetch fonksiyonu
+const customFetch = (url: URL | RequestInfo, init?: RequestInit) => {
+  // ASCII olmayan karakterleri önle
+  if (init?.headers) {
+    const headers = new Headers(init.headers);
+    
+    // Headers'ı kontrol et ve düzelt
+    headers.forEach((value, key) => {
+      // ASCII olmayan karakterleri filtrele
+      const safeValue = value.replace(/[^\x00-\x7F]/g, '');
+      if (safeValue !== value) {
+        headers.set(key, safeValue);
+      }
+    });
+
+    // Temizlenmiş headers'ı kullan
+    init.headers = headers;
+  }
+
+  // Fetch çağrısını yap
+  return fetch(url, init);
+};
+
 // Supabase istemci oluşturulur, özel header ayarları ile
 export const supabase = createClient(
   supabaseUrl,
@@ -16,18 +38,12 @@ export const supabase = createClient(
       detectSessionInUrl: true,
     },
     global: {
-      fetch: (...args) => {
-        // ISO-8859-1 karakter seti sorununu önlemek için özel fetch
-        return fetch(...args).catch(error => {
-          console.error('Fetch error:', error);
-          throw error;
-        });
-      }
+      fetch: customFetch
     }
   }
 );
 
 // Eğer supabase url ve api anahtarı yoksa uyarı ver
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase URL or API key is missing. Check your environment variables.')
+  console.warn('Supabase URL or API key is missing. Check your environment variables.');
 } 
