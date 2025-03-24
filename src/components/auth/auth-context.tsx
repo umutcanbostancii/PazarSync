@@ -63,26 +63,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Giriş yapma
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error };
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ 
+        email: email.trim(), 
+        password: password.trim() 
+      });
+      return { error };
+    } catch (err) {
+      console.error("SignIn error:", err);
+      return { error: err };
+    }
   };
 
   // Kayıt olma
   const signUp = async (email: string, password: string) => {
-    console.log("Auth context signUp çağrıldı:", { email, password });
-    
     try {
       const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
+        email: email.trim(),
+        password: password.trim(),
         options: {
           data: {
-            full_name: "", // Ek veri sonradan eklenebilir
+            full_name: "",
           },
+          emailRedirectTo: `${window.location.origin}/auth/login`
         },
       });
       
-      console.log("Supabase cevabı:", { data, error });
       return { data, error };
     } catch (error) {
       console.error("Supabase signUp hatası:", error);
@@ -97,10 +103,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Şifre sıfırlama
   const resetPassword = async (email: string) => {
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/update-password`,
-    });
-    return { error };
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+        redirectTo: `${window.location.origin}/auth/update-password`,
+      });
+      return { error };
+    } catch (err) {
+      console.error("Reset password error:", err);
+      return { error: err };
+    }
   };
 
   const value = {
