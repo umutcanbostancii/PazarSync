@@ -6,6 +6,7 @@ import 'swiper/css';
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/components/auth/auth-context";
 
 // Font yükleme
 const inter = Inter({ subsets: ["latin"] });
@@ -115,13 +116,15 @@ export default function RootLayout({
         }} />
       </head>
       <body className={inter.className} suppressHydrationWarning>
-        <ThemeProvider>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

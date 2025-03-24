@@ -1,73 +1,100 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "@/components/auth/auth-context";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function GirisPage() {
+export default function LoginPage() {
+  const router = useRouter();
+  const { signIn } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const { error } = await signIn({ email, password });
+      
+      if (error) {
+        throw error;
+      }
+      
+      router.push("/panel");
+    } catch (err: any) {
+      setError(err.message || "Giriş yapılırken bir hata oluştu.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="container-wide py-20">
-      <div className="max-w-md mx-auto bg-white rounded-xl p-8 shadow-sm">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-light mb-2">Giriş Yap</h1>
-          <p className="text-muted-foreground">
+    <div className="container flex items-center justify-center min-h-[calc(100vh-200px)] py-12">
+      <Card className="w-full max-w-md">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold">Giriş Yap</CardTitle>
+          <CardDescription>
             PazarSync hesabınıza giriş yapın
-          </p>
-        </div>
-
-        <form className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
-              E-posta Adresiniz
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-              placeholder="ornek@sirket.com"
-            />
-          </div>
-
-          <div>
-            <div className="flex justify-between items-center mb-2">
-              <label htmlFor="password" className="text-sm font-medium">
-                Şifreniz
-              </label>
-              <Link href="/sifremi-unuttum" className="text-xs text-primary hover:underline">
-                Şifremi Unuttum
-              </Link>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            <div className="space-y-2">
+              <Label htmlFor="email">E-posta</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="ornek@mail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
-            <input
-              type="password"
-              id="password"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-              placeholder="••••••••"
-            />
-          </div>
-
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="remember"
-              className="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary"
-            />
-            <label htmlFor="remember" className="ml-2 block text-sm text-muted-foreground">
-              Beni Hatırla
-            </label>
-          </div>
-
-          <div>
-            <Button type="submit" className="clean-button w-full">
-              Giriş Yap
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Şifre</Label>
+                <Link href="/sifre-sifirlama" className="text-sm text-primary hover:underline">
+                  Şifremi unuttum
+                </Link>
+              </div>
+              <Input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Giriş yapılıyor..." : "Giriş Yap"}
             </Button>
-          </div>
-        </form>
-
-        <div className="mt-8 text-center text-sm text-muted-foreground">
-          <p>Hesabınız yok mu? {" "}
-            <Link href="/kayit" className="text-primary hover:underline font-medium">
-              Hemen Kaydolun
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-center">
+          <p className="text-sm text-gray-500">
+            Hesabınız yok mu?{" "}
+            <Link href="/kayit" className="text-primary hover:underline">
+              Hemen kaydolun
             </Link>
           </p>
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
