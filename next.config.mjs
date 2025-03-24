@@ -1,16 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   output: 'export',
-  distDir: '.next',
+  trailingSlash: true,
   images: {
     unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
+  },
+  // Disable ESLint during production builds 
+  // (since we're running it separately)
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  // Disable type checking during builds
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };
 

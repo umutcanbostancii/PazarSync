@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
 
-const plans = {
+// Planlar burada tanımlanmış, bunlar statik export için kullanılacak
+export const plans = {
   starter: {
     name: "Başlangıç",
     price: "299",
@@ -432,4 +433,12 @@ export default function OdemePage() {
       </div>
     </div>
   );
+}
+
+export function generateStaticParams() {
+  return [
+    { plan: "starter" },
+    { plan: "pro" },
+    { plan: "enterprise" }
+  ];
 } 

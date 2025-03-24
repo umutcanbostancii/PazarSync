@@ -5,10 +5,7 @@
 [build.environment]
   NODE_VERSION = "18"
   NEXT_TELEMETRY_DISABLED = "1"
-  NODE_OPTIONS = "--no-warnings"
-  NEXT_IGNORE_TYPE_ERROR = "true"
-  CI = "false"
-  SKIP_TYPE_CHECK = "true"
+  NODE_ENV = "production"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
