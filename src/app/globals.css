@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 14% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 14% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 14% 10%;
+
+    --primary: 213 95% 36%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 213 85% 96%;
+    --secondary-foreground: 212 85% 32%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 212 85% 32%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 213 95% 36%;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 220 14% 10%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 14% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 14% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 212 85% 32%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212 85% 32%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-light tracking-tight;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  }
+
+  .hero-slider-container {
+    min-height: 600px;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-slider-container {
+      min-height: 700px;
+    }
+  }
+
+  .container-wide {
+    @apply container mx-auto px-2 sm:px-3 lg:px-4;
+    max-width: calc(80rem);
+  }
+
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-28;
+  }
+
+  .heading-xl {
+    @apply text-4xl sm:text-5xl md:text-6xl font-light tracking-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl sm:text-4xl md:text-5xl font-light tracking-tight;
+  }
+
+  .heading-md {
+    @apply text-2xl sm:text-3xl font-light tracking-tight;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:opacity-90 transition-opacity rounded-full;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors rounded-full;
+  }
+
+  /* Apple-style card without border */
+  .apple-card {
+    @apply bg-white rounded-xl p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_5px_20px_-5px_rgba(0,0,0,0.1),0_10px_30px_-5px_rgba(0,0,0,0.05)] transition-all duration-300;
+    border: none !important;
+  }
+
+  /* Clean buttons without borders */
+  .clean-button {
+    @apply rounded-full font-medium bg-primary text-white px-6 py-3 transition-all hover:shadow-md hover:opacity-90 focus:outline-none;
+    border: none !important;
+  }
+
+  /* Apple-style feature icon */
+  .feature-icon-container {
+    @apply w-14 h-14 flex items-center justify-center rounded-full bg-blue-50 mb-4;
+  }
+
+  /* Remove all borders from UI components */
+  .no-borders {
+    @apply border-0 shadow-sm;
+  }
+
+  /* Animation classes */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-up.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stagger-item {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .stagger-item.animate {
+    animation: fade-in-up 0.6s ease forwards;
+  }
+
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.03);
+  }
+
+  .subtle-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+}
