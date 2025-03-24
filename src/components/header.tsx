@@ -3,12 +3,21 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/components/auth/auth-context";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  
+  const isLoggedIn = !!user;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    window.location.href = "/";
   };
 
   // Navigation links to match screenshot
@@ -66,17 +75,37 @@ export function Header() {
 
         {/* Butonlar */}
         <div className="header-buttons hidden md:flex items-center gap-4">
-          <Link href="/auth/login">
-            <Button variant="outline" size="sm" className="no-borders">
-              Giriş Yap / Kayıt Ol
-            </Button>
-          </Link>
-          <Link href="/demo">
-            <Button size="sm" className="clean-button">
-              Ücretsiz Deneyin
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 h-4 w-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </Button>
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <Link href="/panel">
+                <Button variant="outline" size="sm" className="no-borders">
+                  Panel
+                </Button>
+              </Link>
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className="no-borders text-red-500 hover:text-red-600"
+                onClick={handleSignOut}
+              >
+                Çıkış Yap
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link href="/auth/login">
+                <Button variant="outline" size="sm" className="no-borders">
+                  Giriş Yap / Kayıt Ol
+                </Button>
+              </Link>
+              <Link href="/demo">
+                <Button size="sm" className="clean-button">
+                  Ücretsiz Deneyin
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 h-4 w-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -95,7 +124,7 @@ export function Header() {
       </div>
 
       {/* Mobile menu - Açılınca gösterilecek */}
-      <div className="md:hidden">
+      <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
         <div className="container-wide py-4 space-y-6">
           <nav className="flex flex-col space-y-4">
             {navLinks.map((item) => (
@@ -111,17 +140,39 @@ export function Header() {
           </nav>
 
           <div className="flex flex-col gap-3">
-            <Link href="/auth/login" className="w-full">
-              <Button variant="outline" className="w-full no-borders">
-                Giriş Yap / Kayıt Ol
-              </Button>
-            </Link>
-            <Link href="/demo" className="w-full">
-              <Button className="w-full clean-button">
-                Ücretsiz Deneyin
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 h-4 w-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </Button>
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link href="/panel" className="w-full">
+                  <Button variant="outline" className="w-full no-borders" onClick={() => setIsMenuOpen(false)}>
+                    Panel
+                  </Button>
+                </Link>
+                <Button 
+                  className="w-full no-borders text-red-500 hover:text-red-600"
+                  variant="outline"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    handleSignOut();
+                  }}
+                >
+                  Çıkış Yap
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/auth/login" className="w-full">
+                  <Button variant="outline" className="w-full no-borders" onClick={() => setIsMenuOpen(false)}>
+                    Giriş Yap / Kayıt Ol
+                  </Button>
+                </Link>
+                <Link href="/demo" className="w-full">
+                  <Button className="w-full clean-button" onClick={() => setIsMenuOpen(false)}>
+                    Ücretsiz Deneyin
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 h-4 w-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
