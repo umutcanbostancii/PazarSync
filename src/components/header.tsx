@@ -1,17 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  // Client-side rendering için güvenli yöntem
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -28,60 +22,8 @@ export function Header() {
     { name: "İletişim", href: "/iletisim" }
   ];
 
-  // Server-side rendering sırasında minimalist header göster
-  if (!isMounted) {
-    return (
-      <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container-wide flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center gap-2">
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 24 24"
-                stroke="#0066cc"
-                strokeWidth="2"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-primary"
-              >
-                <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1.5" />
-                <path d="M18 2v20" />
-                <path d="M9 11.5v-4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v4" />
-                <path d="M9 9h2" />
-                <path d="M11 13a2 2 0 0 1 4 0v4" />
-                <path d="M15 15h-2" />
-              </svg>
-              <span className="text-xl font-medium">PazarSync</span>
-            </Link>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-          <div className="hidden md:flex items-center gap-4">
-            {/* Placeholder butonlar - interaktif olmayan versiyon */}
-            <span className="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground">
-              Giriş Yap / Kayıt Ol
-            </span>
-            <span className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
-              Ücretsiz Deneyin
-            </span>
-          </div>
-        </div>
-      </header>
-    );
-  }
-
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header id="main-header" className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container-wide flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
@@ -106,8 +48,8 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Desktop navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        {/* Desktop navigation - inline-flex ekleyerek her zaman görünür olmasını sağladık */}
+        <nav className="inline-flex md:flex items-center gap-6">
           {navLinks.map((item) => (
             <Link
               key={item.name}
@@ -119,7 +61,8 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-4">
+        {/* Butonlar - inline-flex ile her zaman görünür */}
+        <div className="inline-flex md:flex items-center gap-4">
           <Link href="/auth/login">
             <Button variant="outline" size="sm" className="no-borders">
               Giriş Yap / Kayıt Ol
@@ -133,7 +76,7 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu button - küçük ekranlarda gösterilir */}
         <button
           className="md:hidden p-2 text-muted-foreground"
           onClick={toggleMenu}

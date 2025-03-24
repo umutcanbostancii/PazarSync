@@ -35,6 +35,38 @@
     --radius: 1rem;
   }
 
+  /* Bu CSS eklemeleri header görünürlüğünü zorlar */
+  header {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Container genişlik ayarları */
+  .container-wide {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 1400px;
+  }
+
+  /* Navigasyon bağlantılarını her zaman görünür yap */
+  header nav, 
+  header nav a,
+  header .hidden.md\:flex {
+    display: flex !important;
+    visibility: visible !important;
+  }
+  
+  /* Mobil menü düğmesini sadece küçük ekranlarda göster */
+  @media (min-width: 768px) {
+    header button.md\:hidden {
+      display: none !important;
+    }
+  }
+
   .dark {
     --background: 220 14% 10%;
     --foreground: 210 40% 98%;
@@ -94,11 +126,6 @@
     .hero-slider-container {
       min-height: 700px;
     }
-  }
-
-  .container-wide {
-    @apply container mx-auto px-2 sm:px-3 lg:px-4;
-    max-width: calc(80rem);
   }
 
   .section-padding {

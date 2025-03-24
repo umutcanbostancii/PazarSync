@@ -7,6 +7,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 
+// Font yükleme
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,6 +23,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Navigasyon menüsü görünürlüğünü garantilemek için sayfa yüklendiğinde çalışır
+            document.addEventListener('DOMContentLoaded', function() {
+              // Header görünürlüğünü kontrol et
+              var header = document.getElementById('main-header');
+              if (header) {
+                header.style.display = 'block';
+                
+                // Navigasyon menüsü ve butonlar
+                var navItems = header.querySelectorAll('nav, nav a, .md\\\\:flex');
+                navItems.forEach(function(item) {
+                  item.style.display = 'flex';
+                  item.style.visibility = 'visible';
+                });
+              }
+            });
+          `
+        }} />
+      </head>
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
