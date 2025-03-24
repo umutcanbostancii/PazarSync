@@ -18,8 +18,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  distDir: '.next',
-  // Webpack konfigürasyonu
   webpack: (config) => {
     // Modül çözümlemesi için alias ekle
     config.resolve.alias = {
