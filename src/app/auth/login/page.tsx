@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/components/auth/auth-context";
@@ -13,25 +13,54 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Sayfa yüklendiğinde önbelleği temizle
+  useEffect(() => {
+    // Input değerlerini sıfırla
+    setEmail("");
+    setPassword("");
+    setError("");
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
+    
+    // Alanları kontrol et
+    if (!email || !password) {
+      setError("E-posta ve şifre alanlarını doldurunuz");
+      return;
+    }
+    
+    // E-posta formatını kontrol et
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      setError("Geçerli bir e-posta adresi giriniz");
+      return;
+    }
+    
     setLoading(true);
     setError("");
 
     try {
-      console.log("Giriş denemesi:", { email });
+      const trimmedEmail = email.trim();
+      const trimmedPassword = password.trim();
       
-      const { error } = await signIn(email, password);
+      const { error: signInError } = await signIn(trimmedEmail, trimmedPassword);
       
-      if (error) {
-        throw error;
+      if (signInError) {
+        if (signInError.message) {
+          setError(signInError.message);
+        } else {
+          setError("Giriş yapılırken bir hata oluştu. Lütfen tekrar deneyiniz.");
+        }
+        return;
       }
       
       // Başarılı giriş, panele yönlendir
       router.push("/panel");
     } catch (err) {
       console.error("Giriş hatası:", err);
-      setError(err.message || "Giriş yapılırken bir hata oluştu");
+      setError("Beklenmeyen bir hata oluştu. Lütfen tekrar deneyiniz.");
     } finally {
       setLoading(false);
     }
