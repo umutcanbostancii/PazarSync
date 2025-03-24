@@ -14,6 +14,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Webpack konfigürasyonu
+  webpack: (config) => {
+    // Modül çözümlemesi için alias ekle
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': `${__dirname}/src`
+    };
+    
+    return config;
+  },
 };
 
 export default nextConfig;
