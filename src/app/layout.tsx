@@ -24,21 +24,91 @@ export default function RootLayout({
   return (
     <html lang="tr" suppressHydrationWarning>
       <head>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            #main-header {
+              display: flex !important;
+              visibility: visible !important;
+              position: sticky;
+              top: 0;
+              z-index: 9999;
+              width: 100%;
+            }
+            #main-header .container-wide {
+              display: flex !important;
+              align-items: center;
+              justify-content: space-between;
+            }
+            #main-header nav {
+              display: flex !important;
+              visibility: visible !important;
+            }
+            #main-header .header-buttons {
+              display: flex !important;
+              visibility: visible !important;
+            }
+            @media (max-width: 767px) {
+              #main-header nav, 
+              #main-header .header-buttons {
+                display: none !important;
+              }
+              #main-header.menu-open nav {
+                display: flex !important;
+                position: absolute;
+                top: 4rem;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                flex-direction: column;
+              }
+            }
+          `
+        }} />
         <script dangerouslySetInnerHTML={{
           __html: `
-            // Navigasyon menüsü görünürlüğünü garantilemek için sayfa yüklendiğinde çalışır
             document.addEventListener('DOMContentLoaded', function() {
-              // Header görünürlüğünü kontrol et
+              console.log('DOM fully loaded - fixing header visibility');
               var header = document.getElementById('main-header');
               if (header) {
-                header.style.display = 'block';
+                header.style.display = 'flex';
+                header.style.visibility = 'visible';
                 
-                // Navigasyon menüsü ve butonlar
-                var navItems = header.querySelectorAll('nav, nav a, .md\\\\:flex');
-                navItems.forEach(function(item) {
-                  item.style.display = 'flex';
-                  item.style.visibility = 'visible';
-                });
+                var nav = header.querySelector('nav');
+                if (nav && window.innerWidth >= 768) {
+                  nav.style.display = 'flex';
+                  nav.style.visibility = 'visible';
+                }
+                
+                var buttons = header.querySelector('.header-buttons');
+                if (buttons && window.innerWidth >= 768) {
+                  buttons.style.display = 'flex';
+                  buttons.style.visibility = 'visible';
+                }
+              } else {
+                console.error('Header element not found!');
+              }
+            });
+
+            // Backup mechanism in case DOMContentLoaded doesn't fire
+            window.addEventListener('load', function() {
+              console.log('Window loaded - fallback header visibility fix');
+              var header = document.getElementById('main-header');
+              if (header) {
+                header.style.display = 'flex';
+                header.style.visibility = 'visible';
+                
+                var nav = header.querySelector('nav');
+                if (nav && window.innerWidth >= 768) {
+                  nav.style.display = 'flex';
+                  nav.style.visibility = 'visible';
+                }
+                
+                var buttons = header.querySelector('.header-buttons');
+                if (buttons && window.innerWidth >= 768) {
+                  buttons.style.display = 'flex';
+                  buttons.style.visibility = 'visible';
+                }
               }
             });
           `
