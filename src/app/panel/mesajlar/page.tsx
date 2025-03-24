@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, ChevronDown, Clock, Mail, MailOpen, AlertCircle, Reply, Trash2 } from "lucide-react";
+import { Search, Filter, ChevronDown, Clock, Mail, MailOpen, AlertCircle, Reply, Trash2, MailX, MailCheck, Archive, Paperclip, FileText, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
@@ -244,6 +244,7 @@ export default function MesajlarPage() {
             </select>
             <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
           </div>
+          
           <div className="w-1/2 relative">
             <select 
               className="w-full px-4 py-2 border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
@@ -258,110 +259,133 @@ export default function MesajlarPage() {
           </div>
         </div>
       </div>
-
+      
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-1">
-          <Card className="h-[calc(100vh-220px)] flex flex-col">
-            <CardHeader>
-              <CardTitle>Gelen Kutusu</CardTitle>
-              <CardDescription>
-                {filteredMessages.length} mesaj gösteriliyor
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex-grow overflow-auto p-0">
-              <div className="divide-y">
-                {filteredMessages.map((message: Message) => (
-                  <div 
-                    key={message.id} 
-                    className={`p-4 cursor-pointer hover:bg-muted/50 ${selectedMessage?.id === message.id ? 'bg-muted/50' : ''} ${message.status === 'unread' ? 'border-l-4 border-blue-500' : ''}`}
-                    onClick={() => handleOpenMessage(message)}
-                  >
-                    <div className="flex justify-between items-start mb-1">
-                      <span className="font-medium">{message.senderName}</span>
-                      <span className="text-xs text-muted-foreground flex items-center">
-                        <Clock className="h-3 w-3 mr-1" />
-                        {formatDate(message.receivedDate).split(' ')[0]}
-                      </span>
-                    </div>
-                    <div className="text-sm font-medium mb-1">{message.subject}</div>
-                    <div className="text-xs text-muted-foreground line-clamp-2 mb-2">
-                      {message.content}
-                    </div>
-                    <div className="flex justify-between items-center">
-                      {getStatusBadge(message.status)}
-                      {message.marketplace && (
-                        <span className="text-xs bg-gray-100 px-2 py-0.5 rounded">
-                          {message.marketplace}
-                        </span>
-                      )}
-                      {getPriorityIndicator(message.priority)}
-                    </div>
+          <div className="bg-card rounded-lg border overflow-hidden">
+            <div className="p-4 border-b">
+              <h2 className="font-medium">Mesaj Listesi</h2>
+            </div>
+            
+            <div className="max-h-[70vh] overflow-y-auto">
+              {filteredMessages.length === 0 ? (
+                <div className="p-8 text-center">
+                  <div className="mx-auto mb-4 h-12 w-12 rounded-full bg-muted flex items-center justify-center">
+                    <MailX className="h-6 w-6 text-muted-foreground" />
                   </div>
-                ))}
-
-                {filteredMessages.length === 0 && (
-                  <div className="p-8 text-center">
-                    <p className="text-muted-foreground">Mesaj bulunamadı. Farklı bir arama terimi veya filtre deneyin.</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+                  <h3 className="font-medium mb-1">Mesaj Bulunamadı</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Arama kriterlerinize uygun mesaj bulunamadı.
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  {filteredMessages.map((message) => (
+                    <div 
+                      key={message.id}
+                      className={`border-b p-3 cursor-pointer hover:bg-muted/50 transition-colors ${selectedMessage?.id === message.id ? "bg-muted" : ""}`}
+                      onClick={() => setSelectedMessage(message)}
+                    >
+                      <div className="flex justify-between items-start mb-1">
+                        <div className="font-medium truncate" style={{ maxWidth: "80%" }}>
+                          {message.senderName}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {new Date(message.receivedDate).toLocaleDateString()}
+                        </div>
+                      </div>
+                      <div className="text-sm font-medium mb-1 truncate">
+                        {message.subject}
+                      </div>
+                      <div className="text-xs text-muted-foreground mb-2 line-clamp-2">
+                        {message.content}
+                      </div>
+                      <div className="flex justify-between items-center">
+                        {getStatusBadge(message.status)}
+                        {getPriorityIndicator(message.priority)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-
+        
         <div className="md:col-span-2">
           {selectedMessage ? (
-            <Card className="h-[calc(100vh-220px)] flex flex-col">
-              <CardHeader className="pb-2 flex flex-row justify-between items-start">
+            <Card>
+              <CardHeader className="flex flex-row items-start justify-between space-y-0">
                 <div>
                   <CardTitle className="text-xl">{selectedMessage.subject}</CardTitle>
-                  <div className="flex items-center mt-1 space-x-2">
-                    <span className="text-sm">
-                      <span className="font-medium">{selectedMessage.senderName}</span>
-                      <span className="text-muted-foreground"> &lt;{selectedMessage.senderEmail}&gt;</span>
-                    </span>
+                  <CardDescription className="flex items-center mt-1 gap-2">
+                    <span>Gönderen: {selectedMessage.senderName} &lt;{selectedMessage.senderEmail}&gt;</span>
                     {selectedMessage.marketplace && (
-                      <span className="text-xs bg-gray-100 px-2 py-0.5 rounded">
+                      <Badge variant="outline" className="ml-2">
                         {selectedMessage.marketplace}
-                      </span>
+                      </Badge>
                     )}
-                    {getPriorityIndicator(selectedMessage.priority)}
-                  </div>
-                  <CardDescription className="mt-1">
-                    {formatDate(selectedMessage.receivedDate)}
                   </CardDescription>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    {new Date(selectedMessage.receivedDate).toLocaleString('tr-TR')}
+                  </div>
                 </div>
-                <div className="flex space-x-2">
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => handleReplyMessage(selectedMessage)}
-                  >
-                    <Reply className="h-4 w-4 mr-1" /> Yanıtla
+                <div className="flex gap-2">
+                  <Button variant="ghost" size="sm" onClick={() => alert("Yanıtlandı olarak işaretlendi")}>
+                    <MailCheck className="h-4 w-4 mr-1" /> 
+                    <span className="hidden sm:inline">İşaretle</span>
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => handleArchiveMessage(selectedMessage)}
-                  >
-                    <Trash2 className="h-4 w-4 mr-1" /> Arşivle
+                  <Button variant="ghost" size="sm" onClick={() => alert("Arşivlendi")}>
+                    <Archive className="h-4 w-4 mr-1" /> 
+                    <span className="hidden sm:inline">Arşivle</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={() => alert("Silindi")}>
+                    <Trash2 className="h-4 w-4 mr-1" /> 
+                    <span className="hidden sm:inline">Sil</span>
                   </Button>
                 </div>
               </CardHeader>
-              <CardContent className="flex-grow overflow-auto pt-4 border-t">
+              <CardContent className="border-t pt-4">
                 <div className="prose max-w-none">
                   <p>{selectedMessage.content}</p>
+                </div>
+
+                <div className="mt-8 border-t pt-4">
+                  <h3 className="font-medium mb-4">Mesajı Yanıtla</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <textarea 
+                        className="w-full border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary min-h-[150px]"
+                        placeholder="Mesajınızı buraya yazın..."
+                      ></textarea>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm">
+                          <Paperclip className="h-4 w-4 mr-1" /> Dosya Ekle
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <FileText className="h-4 w-4 mr-1" /> Şablon
+                        </Button>
+                      </div>
+                      <Button>
+                        <Send className="h-4 w-4 mr-1" /> Yanıtla
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           ) : (
-            <Card className="h-[calc(100vh-220px)] flex flex-col items-center justify-center">
-              <div className="text-center p-8">
-                <Mail className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-medium mb-2">Mesaj seçilmedi</h3>
-                <p className="text-muted-foreground">Detayını görmek için soldaki listeden bir mesaj seçin.</p>
+            <div className="flex h-full items-center justify-center rounded-lg border bg-card min-h-[60vh]">
+              <div className="text-center max-w-md p-8">
+                <Mail className="mx-auto h-12 w-12 text-muted-foreground opacity-50 mb-4" />
+                <h3 className="text-lg font-medium mb-2">Bir mesaj seçin</h3>
+                <p className="text-sm text-muted-foreground">
+                  Detayları görüntülemek ve yanıtlamak için sol taraftan bir mesaj seçin.
+                </p>
               </div>
-            </Card>
+            </div>
           )}
         </div>
       </div>
