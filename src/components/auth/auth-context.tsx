@@ -25,9 +25,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     // Mevcut session'ı kontrol etme
     const setSessionFromSupabase = async () => {
       try {
+        // Session bilgisini alma
         const { data: { session }, error } = await supabase.auth.getSession();
         
         if (error) {
@@ -35,21 +38,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           return;
         }
 
-        setSession(session);
-        setUser(session?.user || null);
+        // Component hala mount edilmişse state güncelle
+        if (isMounted) {
+          setSession(session);
+          setUser(session?.user || null);
+        }
       } catch (error) {
         console.error('Error setting session:', error);
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     // Auth durumunu dinleme
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        setSession(session);
-        setUser(session?.user || null);
-        setLoading(false);
+        if (isMounted) {
+          setSession(session);
+          setUser(session?.user || null);
+          setLoading(false);
+        }
       }
     );
 
@@ -57,6 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Cleanup
     return () => {
+      isMounted = false;
       subscription.unsubscribe();
     };
   }, []);
@@ -64,10 +75,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Giriş yapma
   const signIn = async (email: string, password: string) => {
     try {
+      // email ve password değerlerini düzgün şekilde temizle
+      const sanitizedEmail = email.trim();
+      const sanitizedPassword = password.trim();
+      
+      if (!sanitizedEmail || !sanitizedPassword) {
+        return { error: new Error('E-posta ve şifre gereklidir') };
+      }
+      
+      // ASCII olmayan karakterleri kontrol et
+      if (!/^[\x00-\x7F]*$/.test(sanitizedPassword)) {
+        return { error: new Error('Şifre sadece ASCII karakterler içermelidir') };
+      }
+      
       const { error } = await supabase.auth.signInWithPassword({ 
-        email: email.trim(), 
-        password: password.trim() 
+        email: sanitizedEmail, 
+        password: sanitizedPassword 
       });
+      
       return { error };
     } catch (err) {
       console.error("SignIn error:", err);
@@ -78,9 +103,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Kayıt olma
   const signUp = async (email: string, password: string) => {
     try {
+      // email ve password değerlerini düzgün şekilde temizle
+      const sanitizedEmail = email.trim();
+      const sanitizedPassword = password.trim();
+      
+      if (!sanitizedEmail || !sanitizedPassword) {
+        return { data: null, error: new Error('E-posta ve şifre gereklidir') };
+      }
+      
+      // ASCII olmayan karakterleri kontrol et
+      if (!/^[\x00-\x7F]*$/.test(sanitizedPassword)) {
+        return { data: null, error: new Error('Şifre sadece ASCII karakterler içermelidir') };
+      }
+      
       const { data, error } = await supabase.auth.signUp({
-        email: email.trim(),
-        password: password.trim(),
+        email: sanitizedEmail,
+        password: sanitizedPassword,
         options: {
           data: {
             full_name: "",
@@ -98,13 +136,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Çıkış yapma
   const signOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch (error) {
+      console.error("SignOut error:", error);
+    }
   };
 
   // Şifre sıfırlama
   const resetPassword = async (email: string) => {
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      const sanitizedEmail = email.trim();
+      
+      if (!sanitizedEmail) {
+        return { error: new Error('E-posta adresi gereklidir') };
+      }
+      
+      const { error } = await supabase.auth.resetPasswordForEmail(sanitizedEmail, {
         redirectTo: `${window.location.origin}/auth/update-password`,
       });
       return { error };
