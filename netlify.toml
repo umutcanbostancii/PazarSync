@@ -8,9 +8,6 @@
   NODE_ENV = "production"
   NPM_FLAGS = "--legacy-peer-deps --production=false"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
 [[headers]]
   for = "/*"
   [headers.values]
