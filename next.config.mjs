@@ -7,7 +7,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const nextConfig = {
+  output: 'export',
   images: {
+    unoptimized: true,
     domains: ['ext.same-assets.com'],
   },
   eslint: {
@@ -16,6 +18,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  distDir: '.next',
   // Webpack konfigürasyonu
   webpack: (config) => {
     // Modül çözümlemesi için alias ekle

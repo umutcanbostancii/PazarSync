@@ -1,6 +1,6 @@
 [build]
-  command = "npm install && NODE_ENV=production npx next build --debug"
-  publish = "out"
+  command = "npm install && NODE_ENV=production npx next build && ls -la"
+  publish = ".next/out"
 
 [build.environment]
   NODE_VERSION = "18"
