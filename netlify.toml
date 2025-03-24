@@ -19,7 +19,4 @@
 [images]
   remote_images = [
     "https://ext.same-assets.com/**"
-  ]
-
-[plugins.inputs]
-  staticExport = true 
+  ] 
