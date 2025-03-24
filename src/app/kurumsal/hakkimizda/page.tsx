@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 // Milestone veri yapısı
 interface Milestone {
   year: string;
@@ -52,11 +54,11 @@ export default function HakkimizdaPage() {
         <div className="mb-16">
           <a href="/kurumsal" className="text-primary inline-flex items-center mb-8">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 rotate-180"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            Kurumsal'a Dön
+            Kurumsal&apos;a Dön
           </a>
           <h1 className="heading-lg mb-6">Hakkımızda</h1>
           <p className="text-muted-foreground text-lg max-w-3xl">
-            2018 yılında kurulan PazarSync, Türkiye'nin önde gelen e-ticaret entegrasyon platformu olarak hizmet vermektedir.
+            2018 yılında kurulan PazarSync, Türkiye&apos;nin önde gelen e-ticaret entegrasyon platformu olarak hizmet vermektedir.
           </p>
         </div>
 
@@ -76,10 +78,11 @@ export default function HakkimizdaPage() {
               </p>
             </div>
             <div className="relative h-[300px] md:h-[400px] order-1 lg:order-2">
-              <img
+              <Image
                 src="/images/why-choose-us.jpg"
                 alt="PazarSync Ekibi"
-                className="object-cover rounded-xl w-full h-full"
+                className="object-cover rounded-xl"
+                fill
               />
             </div>
           </div>

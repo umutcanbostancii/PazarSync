@@ -284,8 +284,8 @@ export default function APIDocsPage() {
         <div className="mb-16">
           <h1 className="heading-lg mb-6">API Dokümantasyonu</h1>
           <p className="text-muted-foreground text-lg max-w-3xl">
-            PazarSync API'si, tüm e-ticaret operasyonlarınızı programatik olarak yönetmenize olanak tanır. 
-            Bu dokümantasyon, API'mizin nasıl kullanılacağı hakkında detaylı bilgiler içermektedir.
+            PazarSync API&apos;si, tüm e-ticaret operasyonlarınızı programatik olarak yönetmenize olanak tanır. 
+            Bu dokümantasyon, API&apos;mizin nasıl kullanılacağı hakkında detaylı bilgiler içermektedir.
           </p>
         </div>
 
@@ -295,13 +295,13 @@ export default function APIDocsPage() {
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <h3 className="text-xl font-medium mb-4">Kimlik Doğrulama</h3>
             <p className="text-muted-foreground mb-4">
-              PazarSync API'si, OAuth 2.0 protokolünü kullanır. API isteklerinde kullanmak üzere bir erişim tokenı almak için 
+              PazarSync API&apos;si, OAuth 2.0 protokolünü kullanır. API isteklerinde kullanmak üzere bir erişim tokenı almak için 
               öncelikle API istemci kimliği ve sırrı almanız gerekiyor.
             </p>
             <div className="mb-4">
               <h4 className="font-medium mb-2">1. API Kimlik Bilgilerini Edinin</h4>
               <p className="text-muted-foreground">
-                PazarSync hesabınızda, "Ayarlar → API" bölümünden API istemci kimliği ve sırrı edinebilirsiniz.
+                PazarSync hesabınızda, &quot;Ayarlar → API&quot; bölümünden API istemci kimliği ve sırrı edinebilirsiniz.
               </p>
             </div>
             <div className="mb-4">

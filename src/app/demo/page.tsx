@@ -8,7 +8,7 @@ export default function DemoPage() {
         <div className="text-center mb-16">
           <h1 className="heading-lg mb-6">Ücretsiz Demo</h1>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            PazarSync'in güçlü özelliklerini keşfedin. 14 gün boyunca tüm özellikleri ücretsiz olarak kullanabilirsiniz.
+            PazarSync&apos;in güçlü özelliklerini keşfedin. 14 gün boyunca tüm özellikleri ücretsiz olarak kullanabilirsiniz.
           </p>
         </div>
 

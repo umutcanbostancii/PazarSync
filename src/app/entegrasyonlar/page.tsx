@@ -129,7 +129,7 @@ export default function EntegrasyonlarPage() {
           <div className="p-8 bg-white rounded-xl shadow-sm">
             <h2 className="text-2xl font-medium mb-4">Geliştirilmekte Olan Özellikler</h2>
             <p className="text-muted-foreground mb-6">
-              PazarSync'i sürekli geliştiriyoruz! Yakında eklenecek olan özellikleri takipte kalın.
+              PazarSync&apos;i sürekli geliştiriyoruz! Yakında eklenecek olan özellikleri takipte kalın.
             </p>
             <ul className="list-disc pl-6 space-y-2 mb-6">
               <li>Stok takibi (Geliştirme aşamasında)</li>
@@ -163,7 +163,7 @@ export default function EntegrasyonlarPage() {
           
           <div className="space-y-6 mt-4">
             <p>
-              PazarSync, Türkiye'nin ve dünyanın en popüler e-ticaret pazaryerleriyle tam entegrasyon sağlar. Ürünlerinizi sadece bir kez tanımlayarak tüm pazaryerlerinde otomatik olarak listeleyebilirsiniz.
+              PazarSync, Türkiye&apos;nin ve dünyanın en popüler e-ticaret pazaryerleriyle tam entegrasyon sağlar. Ürünlerinizi sadece bir kez tanımlayarak tüm pazaryerlerinde otomatik olarak listeleyebilirsiniz.
             </p>
             
             <div className="space-y-4">

@@ -60,7 +60,7 @@ export default function KurumsalPage() {
             <div>
               <h2 className="text-3xl font-light mb-4">E-Ticaret İşlemlerinizi Basitleştiriyoruz</h2>
               <p className="text-muted-foreground mb-6">
-                PazarSync, 2018 yılında e-ticaret satıcılarının karşılaştığı karmaşık entegrasyon sorunlarını çözmek için kuruldu. Bugün Türkiye'nin önde gelen e-ticaret entegrasyon platformu olarak binlerce satıcıya hizmet veriyoruz.
+                PazarSync, 2018 yılında e-ticaret satıcılarının karşılaştığı karmaşık entegrasyon sorunlarını çözmek için kuruldu. Bugün Türkiye&apos;nin önde gelen e-ticaret entegrasyon platformu olarak binlerce satıcıya hizmet veriyoruz.
               </p>
               <p className="text-muted-foreground mb-6">
                 Misyonumuz, e-ticaret satıcılarının pazaryeri entegrasyonlarını basitleştirerek, onların satışlarına ve büyümelerine odaklanmalarını sağlamaktır. Müşterilerimize zaman kazandırırken, ciro artışı sağlıyoruz.

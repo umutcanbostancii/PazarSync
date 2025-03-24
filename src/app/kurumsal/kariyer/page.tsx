@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export default function KariyerPage() {
   const openPositions = [
     {
@@ -49,7 +51,7 @@ export default function KariyerPage() {
         <div className="mb-16">
           <a href="/kurumsal" className="text-primary inline-flex items-center mb-8">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 rotate-180"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            Kurumsal'a Dön
+            Kurumsal&apos;a Dön
           </a>
           <h1 className="heading-lg mb-6">Kariyer Fırsatları</h1>
           <p className="text-muted-foreground text-lg max-w-3xl">
@@ -63,7 +65,7 @@ export default function KariyerPage() {
             <div>
               <h2 className="text-3xl font-light mb-6">Neden PazarSync?</h2>
               <p className="text-muted-foreground mb-4">
-                PazarSync'te çalışmak, e-ticaret sektöründe fark yaratan bir ekibin parçası olmak demektir. Hızla büyüyen şirketimizde, her gün binlerce işletmenin başarısına katkıda bulunacak yenilikçi çözümler geliştiriyoruz.
+                PazarSync&apos;te çalışmak, e-ticaret sektöründe fark yaratan bir ekibin parçası olmak demektir. Hızla büyüyen şirketimizde, her gün binlerce işletmenin başarısına katkıda bulunacak yenilikçi çözümler geliştiriyoruz.
               </p>
               <p className="text-muted-foreground mb-4">
                 Çalışanlarımıza sunduğumuz avantajlar:
@@ -78,10 +80,11 @@ export default function KariyerPage() {
               </ul>
             </div>
             <div className="relative h-[300px] md:h-[400px]">
-              <img
+              <Image
                 src="/images/team/team.jpg"
                 alt="PazarSync Ekibi"
-                className="object-cover rounded-xl w-full h-full"
+                className="object-cover rounded-xl"
+                fill
               />
             </div>
           </div>

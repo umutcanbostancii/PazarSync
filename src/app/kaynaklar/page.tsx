@@ -47,7 +47,7 @@ export default function KaynaklarPage() {
         <div className="text-center mb-16">
           <h1 className="heading-lg mb-6">Kaynaklar</h1>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            PazarSync'i daha etkili kullanmak için ihtiyaç duyacağınız tüm kaynaklar, kılavuzlar ve dokümantasyonlar.
+            PazarSync&apos;i daha etkili kullanmak için ihtiyaç duyacağınız tüm kaynaklar, kılavuzlar ve dokümantasyonlar.
           </p>
         </div>
 

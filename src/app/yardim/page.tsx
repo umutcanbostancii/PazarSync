@@ -8,7 +8,7 @@ export default function YardimPage() {
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
       ),
       items: [
-        { title: "PazarSync'e Hoş Geldiniz", link: "/yardim/hosgeldiniz" },
+        { title: "PazarSync&apos;e Hoş Geldiniz", link: "/yardim/hosgeldiniz" },
         { title: "Hesabınızı Oluşturma ve Kurulum", link: "/yardim/hesap-kurulumu" },
         { title: "Hızlı Başlangıç Rehberi", link: "/yardim/hizli-baslangic" },
         { title: "Pazaryeri Bağlantılarını Kurma", link: "/yardim/pazaryeri-baglantilari" },
@@ -77,7 +77,7 @@ export default function YardimPage() {
   ];
 
   const popularArticles = [
-    { title: "PazarSync'e Yeni Pazaryeri Nasıl Eklenir?", link: "/yardim/pazaryeri-ekleme" },
+    { title: "PazarSync&apos;e Yeni Pazaryeri Nasıl Eklenir?", link: "/yardim/pazaryeri-ekleme" },
     { title: "Ürün İçeriklerini Yapay Zeka ile Optimize Etme", link: "/yardim/ai-optimizasyon" },
     { title: "Otomatik Fiyat Güncelleme Kuralları Oluşturma", link: "/yardim/fiyat-kurallari" },
     { title: "Pazaryeri Komisyonlarını Hesaplama", link: "/yardim/komisyon-hesaplama" },
@@ -91,7 +91,7 @@ export default function YardimPage() {
         <div className="text-center mb-16">
           <h1 className="heading-lg mb-6">Yardım Merkezi</h1>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            PazarSync'i kullanmak hakkında tüm sorularınızın cevaplarını bulabileceğiniz kapsamlı rehber.
+            PazarSync&apos;i kullanmak hakkında tüm sorularınızın cevaplarını bulabileceğiniz kapsamlı rehber.
           </p>
           <div className="mt-10 max-w-2xl mx-auto">
             <div className="relative">
@@ -150,7 +150,7 @@ export default function YardimPage() {
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="font-medium mb-2">PazarSync'e Başlangıç</h3>
+                <h3 className="font-medium mb-2">PazarSync&apos;e Başlangıç</h3>
                 <p className="text-sm text-muted-foreground">Temel özellikleri ve kurulum adımlarını öğrenin (5:32)</p>
               </div>
             </div>

@@ -27,7 +27,7 @@ export default function MisyonVizyonPage() {
           </div>
           <div className="bg-secondary/20 rounded-xl p-8">
             <blockquote className="text-xl italic border-l-4 border-primary pl-4 py-2">
-              "E-ticaret ekosisteminde her işletmenin başarılı olabilmesi için gereken teknolojik altyapıyı sağlamak ve işletmeleri büyütmek için çalışıyoruz."
+              &quot;E-ticaret ekosisteminde her işletmenin başarılı olabilmesi için gereken teknolojik altyapıyı sağlamak ve işletmeleri büyütmek için çalışıyoruz.&quot;
             </blockquote>
             <div className="mt-4 flex items-center">
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-primary font-bold">AY</div>
@@ -78,7 +78,7 @@ export default function MisyonVizyonPage() {
               PazarSync olarak, yapay zeka ve otomatizasyon teknolojileriyle e-ticaret operasyonlarını en verimli hale getirerek, işletmelerin iş süreçlerini basitleştirmek ve satışlarını artırmak istiyoruz.
             </p>
             <p className="text-muted-foreground">
-              2030 yılına kadar Türkiye'den çıkan ve dünya çapında tanınan bir teknoloji markası olma hedefimizi gerçekleştirmek için var gücümüzle çalışıyoruz.
+              2030 yılına kadar Türkiye&apos;den çıkan ve dünya çapında tanınan bir teknoloji markası olma hedefimizi gerçekleştirmek için var gücümüzle çalışıyoruz.
             </p>
           </div>
         </div>

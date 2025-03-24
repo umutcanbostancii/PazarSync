@@ -9,7 +9,7 @@ export default function RegisterPage() {
             Hesap Oluşturun
           </h1>
           <p className="text-sm text-muted-foreground">
-            PazarSync'e kaydolun ve e-ticaret deneyiminizi geliştirin.
+            PazarSync&apos;e kaydolun ve e-ticaret deneyiminizi geliştirin.
           </p>
         </div>
 
@@ -81,7 +81,7 @@ export default function RegisterPage() {
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
                 <a href="/kullanim-sartlari" className="text-blue-600 hover:underline">Kullanım Şartları</a> ve 
-                <a href="/gizlilik-politikasi" className="text-blue-600 hover:underline"> Gizlilik Politikası</a>'nı kabul ediyorum
+                <a href="/gizlilik-politikasi" className="text-blue-600 hover:underline"> Gizlilik Politikası</a>&apos;nı kabul ediyorum
               </label>
             </div>
             
