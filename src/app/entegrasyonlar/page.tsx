@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 
 export default function EntegrasyonlarPage() {
-  const [openDialog, setOpenDialog] = useState<string | null>(null);
+  const [openDialog, setOpenDialog] = useState(null);
 
   const marketplaces = [
     { name: "Trendyol", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Trendyol_logo.svg/2560px-Trendyol_logo.svg.png" },
