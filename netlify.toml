@@ -12,7 +12,4 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
 
-[images]
-  remote_images = [
-    "https://ext.same-assets.com/**"
-  ] 
+# Görüntü dönüşüm ayarları kaldırıldı, çünkü Next.js'in kendi görüntü optimizasyonu kullanılıyor 
