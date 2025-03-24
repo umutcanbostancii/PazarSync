@@ -33,17 +33,18 @@ const plans = {
     ]
   },
   enterprise: {
-    name: "Kurumsal",
-    price: "1199",
-    description: "Büyük ölçekli ve çok kanallı e-ticaret operasyonları için",
+    name: "Enterprise",
+    price: "1299",
+    description: "Büyük ölçekli işletmeler için tam entegrasyon çözümü",
     features: [
       "Sınırsız pazaryeri entegrasyonu",
       "Sınırsız ürün",
-      "Anlık ürün güncellemesi",
-      "Özel veri çekme çözümleri", 
-      "Özel API erişimi",
-      "Öncelikli 7/24 destek",
-      "Özel eğitim ve danışmanlık"
+      "Gerçek zamanlı otomatik ürün güncellemesi",
+      "Özel API entegrasyonları",
+      "Özel veri çekme sistemleri",
+      "Yapay zeka destekli içerik ve fiyat optimizasyonu",
+      "7/24 öncelikli destek",
+      "Özel eğitim ve danışmanlık hizmetleri"
     ]
   }
 };
