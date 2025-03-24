@@ -69,8 +69,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Kayıt olma
   const signUp = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signUp({ email, password });
-    return { data, error };
+    console.log("Auth context signUp çağrıldı:", { email, password });
+    
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: "", // Ek veri sonradan eklenebilir
+          },
+        },
+      });
+      
+      console.log("Supabase cevabı:", { data, error });
+      return { data, error };
+    } catch (error) {
+      console.error("Supabase signUp hatası:", error);
+      return { data: null, error };
+    }
   };
 
   // Çıkış yapma

@@ -1,6 +1,63 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/components/auth/auth-context";
+
 export default function RegisterPage() {
+  const router = useRouter();
+  const { signUp } = useAuth();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    // Form doğrulama
+    if (password !== passwordConfirm) {
+      setError("Şifreler eşleşmiyor");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Şifre en az 8 karakter olmalıdır");
+      return;
+    }
+
+    if (!acceptTerms) {
+      setError("Kullanım şartlarını ve gizlilik politikasını kabul etmelisiniz");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      console.log("Kayıt işlemi başlıyor", { email, password, firstName, lastName });
+      
+      const { data, error } = await signUp(email, password);
+      
+      console.log("Kayıt cevabı:", { data, error });
+      
+      if (error) {
+        throw error;
+      }
+      
+      router.push("/auth/register-success");
+    } catch (err) {
+      console.error("Kayıt hatası:", err);
+      setError(err.message || "Kayıt sırasında bir hata oluştu");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="container flex flex-col items-center justify-center min-h-screen py-12">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px] md:w-[450px]">
@@ -14,7 +71,13 @@ export default function RegisterPage() {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <form className="space-y-4">
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded">
+              {error}
+            </div>
+          )}
+          
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label htmlFor="firstName" className="block text-sm font-medium">Ad</label>
@@ -23,6 +86,8 @@ export default function RegisterPage() {
                   placeholder="Ahmet"
                   type="text"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   required
                 />
               </div>
@@ -33,6 +98,8 @@ export default function RegisterPage() {
                   placeholder="Yılmaz"
                   type="text"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   required
                 />
               </div>
@@ -45,6 +112,8 @@ export default function RegisterPage() {
                 placeholder="ornek@sirket.com"
                 type="email"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -56,6 +125,8 @@ export default function RegisterPage() {
                 placeholder="••••••••"
                 type="password"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               <p className="text-xs text-gray-500">En az 8 karakter, bir büyük harf ve bir rakam içermeli</p>
@@ -68,6 +139,8 @@ export default function RegisterPage() {
                 placeholder="••••••••"
                 type="password"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                value={passwordConfirm}
+                onChange={(e) => setPasswordConfirm(e.target.value)}
                 required
               />
             </div>
@@ -77,6 +150,8 @@ export default function RegisterPage() {
                 id="terms"
                 type="checkbox"
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                checked={acceptTerms}
+                onChange={(e) => setAcceptTerms(e.target.checked)}
                 required
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
@@ -88,21 +163,22 @@ export default function RegisterPage() {
             <button
               type="submit"
               className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              disabled={loading}
             >
-              Kayıt Ol
+              {loading ? "Kayıt Yapılıyor..." : "Kayıt Ol"}
             </button>
           </form>
 
           <div className="mt-4 pt-4 border-t border-gray-200">
             <p className="text-center text-sm mb-2">Veya şununla devam edin</p>
             <div className="grid grid-cols-2 gap-4">
-              <button className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md">
+              <button type="button" className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mr-2" viewBox="0 0 16 16">
                   <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
                 </svg>
                 Google
               </button>
-              <button className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md">
+              <button type="button" className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mr-2" viewBox="0 0 16 16">
                   <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
                 </svg>

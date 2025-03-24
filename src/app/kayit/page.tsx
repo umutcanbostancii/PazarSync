@@ -33,13 +33,11 @@ export default function RegisterPage() {
     setError("");
 
     try {
-      const { error } = await signUp({ 
-        email, 
-        password,
-        options: {
-          data: { full_name: fullName }
-        }
-      });
+      console.log("Kayıt işlemi başlıyor:", { email, password, fullName });
+      
+      const { data, error } = await signUp(email, password);
+      
+      console.log("Kayıt cevabı:", { data, error });
       
       if (error) {
         throw error;
@@ -47,6 +45,7 @@ export default function RegisterPage() {
       
       router.push("/kayit-onay");
     } catch (err: any) {
+      console.error("Kayıt hatası:", err);
       setError(err.message || "Kayıt sırasında bir hata oluştu.");
     } finally {
       setLoading(false);
