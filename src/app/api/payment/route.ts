@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createPayment, savePaymentToDatabase } from '@/lib/payment/iyzico-service';
-import { PLAN_PRICES } from '@/lib/payment/iyzico-config';
+import { PLAN_PRICES } from '@/lib/payment/plan-config';
 import { supabase } from '@/lib/supabase';
 
 // Ödeme oluşturma endpoint'i

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/auth-context';
-import { PLAN_PRICES, PLAN_FEATURES, SUBSCRIPTION_PLANS } from '@/lib/payment/iyzico-config';
+import { PLAN_PRICES, PLAN_FEATURES, SUBSCRIPTION_PLANS } from '@/lib/payment/plan-config';
 
 type PlanType = keyof typeof SUBSCRIPTION_PLANS;
 

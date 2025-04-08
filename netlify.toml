@@ -5,6 +5,8 @@
 [build.environment]
   NODE_VERSION = "18"
   NEXT_TELEMETRY_DISABLED = "1"
+  IYZICO_API_KEY = "sandbox-afXhZPW0MQlE4dCUUlHcEopnMUhOPTR3"
+  IYZICO_SECRET_KEY = "sandbox-wbwpzKIiplZxI3hh5ALI4EXaVtSjwPxK"
 
 [[headers]]
   for = "/*"
