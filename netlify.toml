@@ -1,5 +1,5 @@
 [build]
-  command = "npm install && NODE_ENV=production npx next build"
+  command = "npm install && mkdir -p .next/server/chunks/resources && cp -r node_modules/iyzipay/lib/resources/* .next/server/chunks/resources/ && NODE_ENV=production npx next build"
   publish = ".next"
 
 [build.environment]
