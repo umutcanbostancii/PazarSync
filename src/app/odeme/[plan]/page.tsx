@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/auth-context';
 import PaymentForm from '@/components/payment/PaymentForm';
-import { SUBSCRIPTION_PLANS } from '@/lib/payment/iyzico-config';
+import { SUBSCRIPTION_PLANS } from '@/lib/payment/plan-config';
 
 type PlanType = keyof typeof SUBSCRIPTION_PLANS;
 
@@ -54,13 +54,4 @@ export default function CheckoutPage({ params }: { params: { plan: string } }) {
       </div>
     </div>
   );
-}
-
-// Bu sayfanın statik olarak oluşturulacak parametrelerini belirliyoruz
-export function generateStaticParams() {
-  return [
-    { plan: 'starter' },
-    { plan: 'pro' },
-    { plan: 'enterprise' },
-  ];
 } 
