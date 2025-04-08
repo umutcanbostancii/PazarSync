@@ -72,65 +72,108 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Giriş yapma
+  // Giriş yapma - geliştirilmiş hata yakalama
   const signIn = async (email: string, password: string) => {
     try {
-      // email ve password değerlerini düzgün şekilde temizle
+      // Email ve password temizleme
       const sanitizedEmail = email.trim();
       const sanitizedPassword = password.trim();
       
+      // Boş alan kontrolü
       if (!sanitizedEmail || !sanitizedPassword) {
         return { error: new Error('E-posta ve şifre gereklidir') };
       }
       
-      // ASCII olmayan karakterleri kontrol et
+      // ASCII kontrolü - bu kontrol hem frontend hem de API hatalarını önler
       if (!/^[\x00-\x7F]*$/.test(sanitizedPassword)) {
-        return { error: new Error('Şifre sadece ASCII karakterler içermelidir') };
+        return { error: new Error('Şifre sadece ASCII karakterler içermelidir (Türkçe karakter kullanmayın)') };
       }
       
-      const { error } = await supabase.auth.signInWithPassword({ 
-        email: sanitizedEmail, 
-        password: sanitizedPassword 
-      });
+      console.log('Giriş denemesi:', { email: sanitizedEmail });
       
-      return { error };
-    } catch (err) {
-      console.error("SignIn error:", err);
-      return { error: err };
+      // Özel error handling ile login
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({ 
+          email: sanitizedEmail, 
+          password: sanitizedPassword 
+        });
+        
+        if (error) {
+          console.error('Login error:', error);
+          
+          // Spesifik hata mesajları
+          if (error.message.includes('Invalid login credentials')) {
+            return { error: new Error('Geçersiz e-posta veya şifre') };
+          }
+          
+          return { error };
+        }
+        
+        console.log('Login başarılı:', data);
+        return { error: null };
+      } catch (innerError) {
+        console.error('Login exception:', innerError);
+        return { error: innerError };
+      }
+    } catch (outerError) {
+      console.error("SignIn genel hata:", outerError);
+      return { error: outerError };
     }
   };
 
-  // Kayıt olma
+  // Kayıt olma - geliştirilmiş implementasyon
   const signUp = async (email: string, password: string) => {
     try {
-      // email ve password değerlerini düzgün şekilde temizle
+      // Email ve password temizleme
       const sanitizedEmail = email.trim();
       const sanitizedPassword = password.trim();
       
+      // Boş alan kontrolü  
       if (!sanitizedEmail || !sanitizedPassword) {
         return { data: null, error: new Error('E-posta ve şifre gereklidir') };
       }
       
-      // ASCII olmayan karakterleri kontrol et
+      // ASCII kontrolü
       if (!/^[\x00-\x7F]*$/.test(sanitizedPassword)) {
-        return { data: null, error: new Error('Şifre sadece ASCII karakterler içermelidir') };
+        return { data: null, error: new Error('Şifre sadece ASCII karakterler içermelidir (Türkçe karakter kullanmayın)') };
       }
       
-      const { data, error } = await supabase.auth.signUp({
-        email: sanitizedEmail,
-        password: sanitizedPassword,
-        options: {
-          data: {
-            full_name: "",
-          },
-          emailRedirectTo: `${window.location.origin}/auth/login`
-        },
-      });
+      console.log('Kayıt denemesi:', { email: sanitizedEmail });
       
-      return { data, error };
-    } catch (error) {
-      console.error("Supabase signUp hatası:", error);
-      return { data: null, error };
+      // Daha güvenilir error handling ile signup
+      try {
+        // Kayıt işlemi
+        const { data, error } = await supabase.auth.signUp({
+          email: sanitizedEmail,
+          password: sanitizedPassword,
+          options: {
+            data: {
+              full_name: "",
+            },
+            emailRedirectTo: `${window.location.origin}/auth/login`
+          },
+        });
+        
+        if (error) {
+          console.error('Signup error:', error);
+          
+          // Spesifik hata mesajları
+          if (error.message.includes('already registered')) {
+            return { data: null, error: new Error('Bu e-posta adresi zaten kayıtlı') };
+          }
+          
+          return { data: null, error };
+        }
+        
+        console.log('Kayıt başarılı:', data);
+        return { data, error: null };
+      } catch (innerError) {
+        console.error('Signup exception:', innerError);
+        return { data: null, error: innerError };
+      }
+    } catch (outerError) {
+      console.error("SignUp genel hata:", outerError);
+      return { data: null, error: outerError };
     }
   };
 
@@ -143,7 +186,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Şifre sıfırlama
+  // Şifre sıfırlama - geliştirilmiş implementasyon
   const resetPassword = async (email: string) => {
     try {
       const sanitizedEmail = email.trim();
@@ -152,10 +195,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { error: new Error('E-posta adresi gereklidir') };
       }
       
+      // Şifre sıfırlama isteği
       const { error } = await supabase.auth.resetPasswordForEmail(sanitizedEmail, {
         redirectTo: `${window.location.origin}/auth/update-password`,
       });
-      return { error };
+      
+      if (error) {
+        console.error('Password reset error:', error);
+        return { error };
+      }
+      
+      return { error: null };
     } catch (err) {
       console.error("Reset password error:", err);
       return { error: err };

@@ -1,246 +1,267 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '@/components/auth/auth-context';
+import { PLAN_PRICES, PLAN_FEATURES, SUBSCRIPTION_PLANS } from '@/lib/payment/plan-config';
 
-// Plan tipini tanımlayalım
-interface PlanFeature {
-  id: string;
-  name: string;
-  price: string;
-  description: string;
-  features: string[];
-  details: string[];
-  popular: boolean;
-  buttonText: string;
-  buttonLink: string;
-}
+export default function PricingPage() {
+  const { user } = useAuth();
+  const [isAnnual, setIsAnnual] = useState(false);
 
-export default function FiyatlarPage() {
-  const [selectedPlan, setSelectedPlan] = useState<PlanFeature | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  // Yıllık ödeme indirim oranı
+  const annualDiscount = 0.20; // %20 indirim
 
-  const plans: PlanFeature[] = [
-    {
-      id: "starter",
-      name: "Başlangıç",
-      price: "299",
-      description: "Küçük ölçekli e-ticaret işletmeleri için ideal başlangıç paketi",
-      features: [
-        "5 farklı pazaryeri entegrasyonu",
-        "1000 ürüne kadar",
-        "Günlük otomatik ürün güncellemesi",
-        "Web sitelerinden ürün çekme",
-        "E-mail destek"
-      ],
-      popular: false,
-      buttonText: "Ücretsiz Deneyin",
-      buttonLink: "/odeme/starter",
-      details: [
-        "Aylık fatura opsiyonu",
-        "İlk 14 gün ücretsiz deneme",
-        "Teknik kurulum desteği",
-        "7/24 e-mail destek",
-        "Pazaryeri API entegrasyonları",
-        "Kolay kurulum",
-        "Ürün içe ve dışa aktarma",
-        "Herhangi bir web sitesinden ürün çekme"
-      ]
-    },
-    {
-      id: "pro",
-      name: "Pro",
-      price: "599",
-      description: "Orta ölçekli işletmeler için genişletilmiş yetenekler",
-      features: [
-        "10 farklı pazaryeri entegrasyonu",
-        "5000 ürüne kadar",
-        "Saatlik otomatik ürün güncellemesi",
-        "Gelişmiş web sitesi veri çekme",
-        "Yapay zeka destekli içerik iyileştirme",
-        "E-mail ve telefon desteği"
-      ],
-      popular: true,
-      buttonText: "Pro Paketi Seçin",
-      buttonLink: "/odeme/pro",
-      details: [
-        "Aylık veya yıllık fatura opsiyonu (yıllık ödemeye %15 indirim)",
-        "İlk 14 gün ücretsiz deneme",
-        "Ayrıcalıklı teknik destek",
-        "7/24 telefon ve e-mail desteği",
-        "10+ Pazaryeri API entegrasyonları",
-        "Yardımlı kurulum",
-        "Gelişmiş ürün yönetimi",
-        "Otomatik veri çekme zamanlaması",
-        "Yapay zeka ile ürün açıklaması optimizasyonu",
-        "Çoklu kullanıcı desteği",
-        "Gelişmiş analitik ve raporlar"
-      ]
-    },
-    {
-      id: "enterprise",
-      name: "Kurumsal",
-      price: "1199",
-      description: "Büyük ölçekli ve çok kanallı e-ticaret operasyonları için",
-      features: [
-        "Sınırsız pazaryeri entegrasyonu",
-        "Sınırsız ürün",
-        "Anlık ürün güncellemesi",
-        "Özel veri çekme çözümleri",
-        "Özel API erişimi",
-        "Öncelikli 7/24 destek",
-        "Özel eğitim ve danışmanlık"
-      ],
-      popular: false,
-      buttonText: "İletişime Geçin",
-      buttonLink: "/odeme/enterprise",
-      details: [
-        "Aylık, yıllık veya özel fatura opsiyonları",
-        "İlk 30 gün ücretsiz deneme",
-        "Öncelikli teknik destek",
-        "Tam 7/24 destek",
-        "Sınırsız Pazaryeri entegrasyonları",
-        "VIP kurulum desteği",
-        "Özel API erişimi",
-        "Özel veri çekme ve işleme modülleri",
-        "Özel raporlar ve analizler",
-        "Kişiselleştirilmiş danışmanlık hizmetleri",
-        "Gelişmiş veri analizi opsiyonları",
-        "İsteğe özel geliştirmeler"
-      ]
+  // İndirim hesaplama fonksiyonu
+  const calculateDiscountedPrice = (price: number) => {
+    if (isAnnual) {
+      const annualPrice = price * 12;
+      const discountedPrice = annualPrice * (1 - annualDiscount);
+      return discountedPrice / 12; // Aylık eşdeğeri
     }
-  ];
-
-  const openDialog = (plan: PlanFeature) => {
-    setSelectedPlan(plan);
-    setIsDialogOpen(true);
-  };
-  
-  const redirectToPayment = (planId: string) => {
-    // Bu fonksiyon ödeme sayfasına yönlendirecek
-    window.location.href = `/odeme/${planId}`;
+    return price;
   };
 
   return (
-    <div className="container-wide py-20">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="heading-lg mb-6">Fiyatlandırma</h1>
-          <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            İşletmenizin büyüklüğüne ve ihtiyaçlarınıza uygun esnek fiyatlandırma planları sunuyoruz. Tüm planlarımız 14 gün ücretsiz deneme ile başlar.
-          </p>
-        </div>
+    <div className="container mx-auto px-4 py-16">
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <h1 className="text-4xl font-bold mb-4">İşletmenize Uygun Planı Seçin</h1>
+        <p className="text-lg text-gray-600 mb-8">
+          Tüm planlarımız, temel özelliklerimize erişim sağlar. Daha fazla ürün, pazaryeri entegrasyonu ve öncelikli destek için üst seviye planları tercih edebilirsiniz.
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plans.map((plan: PlanFeature) => (
-            <div
-              key={plan.name}
-              className={`bg-white rounded-xl p-8 shadow-sm relative hover:shadow-md transition-shadow cursor-pointer ${
-                plan.popular ? "border-2 border-primary" : ""
+        {/* Periyot seçimi */}
+        <div className="flex items-center justify-center mb-8">
+          <span className={`mr-3 ${isAnnual ? 'text-gray-500' : 'font-semibold'}`}>Aylık</span>
+          <button
+            onClick={() => setIsAnnual(!isAnnual)}
+            className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200"
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${
+                isAnnual ? 'translate-x-6' : 'translate-x-1'
               }`}
-              onClick={() => openDialog(plan)}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs font-semibold py-1 px-4 rounded-full">
-                  En Popüler
-                </div>
-              )}
-
-              <div className="text-center mb-6">
-                <h2 className="text-2xl font-medium mb-3">{plan.name}</h2>
-                <p className="text-muted-foreground mb-4">{plan.description}</p>
-                <div className="mb-6">
-                  <span className="text-4xl font-light">{plan.price}</span>
-                  <span className="text-lg text-muted-foreground"> TL / ay</span>
-                </div>
-              </div>
-
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature: string, idx: number) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="text-center mt-auto">
-                <Button
-                  className={plan.popular ? "clean-button w-full" : "w-full"}
-                  variant={plan.popular ? "default" : "outline"}
-                >
-                  Detayları Görüntüle
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground mb-6">
-            Özel ihtiyaçlarınız mı var? Ürün başına ödeme veya özel paket seçenekleri için iletişime geçin.
-          </p>
-          <Link href="/iletisim">
-            <Button variant="outline">
-              Özel Fiyat Teklifi Alın
-            </Button>
-          </Link>
+            />
+          </button>
+          <span className={`ml-3 ${isAnnual ? 'font-semibold' : 'text-gray-500'}`}>
+            Yıllık <span className="text-green-600 text-sm">(%20 indirim)</span>
+          </span>
         </div>
       </div>
 
-      {/* Plan Detayları Modal */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        {selectedPlan && (
-          <DialogContent className="max-w-xl">
-            <DialogHeader>
-              <DialogTitle className="text-2xl font-medium mb-2">
-                {selectedPlan.name} Paket Detayları
-              </DialogTitle>
-              <DialogDescription>
-                Paket fiyatı: <span className="font-semibold">{selectedPlan.price} TL / ay</span>
-              </DialogDescription>
-            </DialogHeader>
-            
-            <div className="my-4">
-              <h3 className="text-lg font-medium mb-3">Bu pakete dahil olanlar:</h3>
-              <ul className="space-y-3">
-                {selectedPlan.details.map((detail: string, idx: number) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
+      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* STARTER PLAN */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="p-6 border-b">
+            <h2 className="text-2xl font-bold mb-2">
+              {PLAN_FEATURES[SUBSCRIPTION_PLANS.STARTER].name}
+            </h2>
+            <p className="text-gray-600 mb-6">
+              {PLAN_FEATURES[SUBSCRIPTION_PLANS.STARTER].description}
+            </p>
+            <div className="flex items-baseline">
+              <span className="text-4xl font-bold">
+                ₺{calculateDiscountedPrice(PLAN_PRICES[SUBSCRIPTION_PLANS.STARTER]).toFixed(2)}
+              </span>
+              <span className="text-gray-600 ml-2">/ ay</span>
             </div>
-            
-            <DialogFooter className="mt-6 gap-4">
-              <Button
-                variant="outline"
-                onClick={() => setIsDialogOpen(false)}
-                className="w-full sm:w-auto"
-              >
-                Kapat
-              </Button>
-              <Button 
-                className="clean-button w-full sm:w-auto"
-                onClick={() => redirectToPayment(selectedPlan.id)}
-              >
-                {selectedPlan.id === 'enterprise' ? 'İletişime Geçin' : 'Satın Al'}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        )}
-      </Dialog>
+            {isAnnual && (
+              <div className="mt-2 text-sm text-green-600">
+                Yıllık ödemede aylık ₺{(PLAN_PRICES[SUBSCRIPTION_PLANS.STARTER] * annualDiscount).toFixed(2)} tasarruf!
+              </div>
+            )}
+          </div>
+
+          <div className="p-6">
+            <ul className="mb-6 space-y-3">
+              {PLAN_FEATURES[SUBSCRIPTION_PLANS.STARTER].features.map((feature, index) => (
+                <li key={index} className="flex items-start">
+                  <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+              <li className="flex items-start">
+                <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>
+                  <strong>{PLAN_FEATURES[SUBSCRIPTION_PLANS.STARTER].maxProducts}</strong> ürün senkronizasyonu
+                </span>
+              </li>
+              <li className="flex items-start">
+                <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>
+                  <strong>{PLAN_FEATURES[SUBSCRIPTION_PLANS.STARTER].maxMarketplaces}</strong> pazaryeri entegrasyonu
+                </span>
+              </li>
+            </ul>
+
+            <Link
+              href={user ? `/odeme/starter` : '/auth/login?redirect=/odeme/starter'}
+              className="block w-full text-center py-3 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+            >
+              {user ? 'Hemen Başla' : 'Giriş Yap ve Başla'}
+            </Link>
+          </div>
+        </div>
+
+        {/* PRO PLAN */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-blue-500 transform scale-105 z-10">
+          <div className="bg-blue-500 text-white text-center py-2 text-sm font-semibold">
+            EN ÇOK TERCİH EDİLEN
+          </div>
+          <div className="p-6 border-b">
+            <h2 className="text-2xl font-bold mb-2">
+              {PLAN_FEATURES[SUBSCRIPTION_PLANS.PRO].name}
+            </h2>
+            <p className="text-gray-600 mb-6">
+              {PLAN_FEATURES[SUBSCRIPTION_PLANS.PRO].description}
+            </p>
+            <div className="flex items-baseline">
+              <span className="text-4xl font-bold">
+                ₺{calculateDiscountedPrice(PLAN_PRICES[SUBSCRIPTION_PLANS.PRO]).toFixed(2)}
+              </span>
+              <span className="text-gray-600 ml-2">/ ay</span>
+            </div>
+            {isAnnual && (
+              <div className="mt-2 text-sm text-green-600">
+                Yıllık ödemede aylık ₺{(PLAN_PRICES[SUBSCRIPTION_PLANS.PRO] * annualDiscount).toFixed(2)} tasarruf!
+              </div>
+            )}
+          </div>
+
+          <div className="p-6">
+            <ul className="mb-6 space-y-3">
+              {PLAN_FEATURES[SUBSCRIPTION_PLANS.PRO].features.map((feature, index) => (
+                <li key={index} className="flex items-start">
+                  <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+              <li className="flex items-start">
+                <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>
+                  <strong>{PLAN_FEATURES[SUBSCRIPTION_PLANS.PRO].maxProducts}</strong> ürün senkronizasyonu
+                </span>
+              </li>
+              <li className="flex items-start">
+                <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>
+                  <strong>{PLAN_FEATURES[SUBSCRIPTION_PLANS.PRO].maxMarketplaces}</strong> pazaryeri entegrasyonu
+                </span>
+              </li>
+            </ul>
+
+            <Link
+              href={user ? `/odeme/pro` : '/auth/login?redirect=/odeme/pro'}
+              className="block w-full text-center py-3 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+            >
+              {user ? 'Hemen Başla' : 'Giriş Yap ve Başla'}
+            </Link>
+          </div>
+        </div>
+
+        {/* ENTERPRISE PLAN */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="p-6 border-b">
+            <h2 className="text-2xl font-bold mb-2">
+              {PLAN_FEATURES[SUBSCRIPTION_PLANS.ENTERPRISE].name}
+            </h2>
+            <p className="text-gray-600 mb-6">
+              {PLAN_FEATURES[SUBSCRIPTION_PLANS.ENTERPRISE].description}
+            </p>
+            <div className="flex items-baseline">
+              <span className="text-4xl font-bold">
+                ₺{calculateDiscountedPrice(PLAN_PRICES[SUBSCRIPTION_PLANS.ENTERPRISE]).toFixed(2)}
+              </span>
+              <span className="text-gray-600 ml-2">/ ay</span>
+            </div>
+            {isAnnual && (
+              <div className="mt-2 text-sm text-green-600">
+                Yıllık ödemede aylık ₺{(PLAN_PRICES[SUBSCRIPTION_PLANS.ENTERPRISE] * annualDiscount).toFixed(2)} tasarruf!
+              </div>
+            )}
+          </div>
+
+          <div className="p-6">
+            <ul className="mb-6 space-y-3">
+              {PLAN_FEATURES[SUBSCRIPTION_PLANS.ENTERPRISE].features.map((feature, index) => (
+                <li key={index} className="flex items-start">
+                  <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+              <li className="flex items-start">
+                <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>
+                  <strong>{PLAN_FEATURES[SUBSCRIPTION_PLANS.ENTERPRISE].maxProducts}+</strong> ürün senkronizasyonu
+                </span>
+              </li>
+              <li className="flex items-start">
+                <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>
+                  <strong>{PLAN_FEATURES[SUBSCRIPTION_PLANS.ENTERPRISE].maxMarketplaces}</strong> pazaryeri entegrasyonu
+                </span>
+              </li>
+            </ul>
+
+            <Link
+              href={user ? `/odeme/enterprise` : '/auth/login?redirect=/odeme/enterprise'}
+              className="block w-full text-center py-3 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+            >
+              {user ? 'Hemen Başla' : 'Giriş Yap ve Başla'}
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="text-center mt-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl font-bold mb-4">Sık Sorulan Sorular</h2>
+
+        <div className="text-left space-y-6 mt-8">
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Hangi ödeme yöntemlerini kabul ediyorsunuz?</h3>
+            <p className="text-gray-600">Kredi ve banka kartları ile ödeme yapabilirsiniz. Tüm ödemeler SSL ile şifrelenir ve güvenli bir şekilde işlenir.</p>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Aboneliğimi istediğim zaman iptal edebilir miyim?</h3>
+            <p className="text-gray-600">Evet, herhangi bir zamanda aboneliğinizi iptal edebilirsiniz. İptal işlemi sonraki ödeme döneminden itibaren geçerli olur.</p>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Üst pakete geçiş yapabilir miyim?</h3>
+            <p className="text-gray-600">Evet, istediğiniz zaman daha üst bir pakete geçiş yapabilirsiniz. Geçiş yaptığınızda, kalan süre için orantılı olarak ücretlendirme yapılır.</p>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Deneme sürümü var mı?</h3>
+            <p className="text-gray-600">Şu anda 7 günlük ücretsiz deneme sürümümüz bulunmaktadır. Deneme süresi boyunca tüm özelliklere erişebilirsiniz.</p>
+          </div>
+        </div>
+
+        <div className="mt-12">
+          <p className="text-gray-600">
+            Başka sorularınız varsa, <Link href="/iletisim" className="text-blue-600 hover:underline">iletişim sayfamız</Link> üzerinden bize ulaşabilirsiniz.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
