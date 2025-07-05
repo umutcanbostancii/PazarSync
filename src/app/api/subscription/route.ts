@@ -4,7 +4,7 @@ import {
   cancelSubscription, 
   getSubscriptionDetails 
 } from '@/lib/payment/iyzico-service';
-import { supabase } from '@/lib/supabase';
+import { supabaseAdmin } from '@/lib/supabaseAdmin';
 
 // Abonelik oluşturma endpoint'i
 export async function POST(request: NextRequest) {
@@ -12,11 +12,16 @@ export async function POST(request: NextRequest) {
     const data = await request.json();
     const { userId, planId, cardToken } = data;
 
-    // Kullanıcı doğrulama
-    const { data: authData, error: authError } = await supabase.auth.getUser();
-    if (authError || !authData.user || authData.user.id !== userId) {
+    // Kullanıcı doğrulama - Server-side admin client kullan
+    const { data: user, error: userError } = await supabaseAdmin
+      .from('users')
+      .select('id')
+      .eq('id', userId)
+      .single();
+
+    if (userError || !user) {
       return NextResponse.json(
-        { error: 'Yetkisiz erişim' }, 
+        { error: 'Kullanıcı bulunamadı' }, 
         { status: 401 }
       );
     }
@@ -49,7 +54,7 @@ export async function POST(request: NextRequest) {
     const endDate = new Date();
     endDate.setMonth(endDate.getMonth() + 1); // 1 aylık abonelik
 
-    const { data: dbSubscription, error: dbError } = await supabase
+    const { data: dbSubscription, error: dbError } = await supabaseAdmin
       .from('subscriptions')
       .insert({
         user_id: userId,
@@ -108,17 +113,22 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    // Kullanıcı doğrulama
-    const { data: authData, error: authError } = await supabase.auth.getUser();
-    if (authError || !authData.user || authData.user.id !== userId) {
+    // Kullanıcı doğrulama - Server-side admin client kullan
+    const { data: user, error: userError } = await supabaseAdmin
+      .from('users')
+      .select('id')
+      .eq('id', userId)
+      .single();
+
+    if (userError || !user) {
       return NextResponse.json(
-        { error: 'Yetkisiz erişim' }, 
+        { error: 'Kullanıcı bulunamadı' }, 
         { status: 401 }
       );
     }
 
     // Aboneliği veritabanında kontrol et
-    const { data: subscription, error: subError } = await supabase
+    const { data: subscription, error: subError } = await supabaseAdmin
       .from('subscriptions')
       .select('*')
       .eq('id', subscriptionId)
@@ -136,7 +146,7 @@ export async function DELETE(request: NextRequest) {
     const cancelResult = await cancelSubscription(subscriptionId);
 
     // Aboneliği veritabanında güncelle
-    const { error: updateError } = await supabase
+    const { error: updateError } = await supabaseAdmin
       .from('subscriptions')
       .update({ 
         status: 'cancelled',
@@ -189,17 +199,22 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Kullanıcı doğrulama
-    const { data: authData, error: authError } = await supabase.auth.getUser();
-    if (authError || !authData.user || authData.user.id !== userId) {
+    // Kullanıcı doğrulama - Server-side admin client kullan
+    const { data: user, error: userError } = await supabaseAdmin
+      .from('users')
+      .select('id')
+      .eq('id', userId)
+      .single();
+
+    if (userError || !user) {
       return NextResponse.json(
-        { error: 'Yetkisiz erişim' }, 
+        { error: 'Kullanıcı bulunamadı' }, 
         { status: 401 }
       );
     }
 
     // Aktif abonelikleri getir
-    const { data: subscriptions, error: subError } = await supabase
+    const { data: subscriptions, error: subError } = await supabaseAdmin
       .from('subscriptions')
       .select('*')
       .eq('user_id', userId)

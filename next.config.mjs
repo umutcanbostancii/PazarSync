@@ -7,7 +7,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const nextConfig = {
-  // output: 'export', // Development modunda devre dışı
   images: {
     unoptimized: true,
     domains: ['ext.same-assets.com'],
@@ -19,15 +18,29 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
-  webpack: (config) => {
+  experimental: {
+    // Remove invalid options that cause warnings
+    esmExternals: true,
+  },
+  webpack: (config, { isServer }) => {
     // Modül çözümlemesi için alias ekle
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': resolve(__dirname, 'src')
     };
     
+    // İyzico paket sorunları için externals ekle
+    if (isServer) {
+      config.externals = config.externals || [];
+      config.externals.push('iyzipay');
+    }
+    
     return config;
   },
+  // Production optimizations
+  poweredByHeader: false,
+  generateEtags: false,
+  compress: true,
 };
 
 export default nextConfig;

@@ -1,12 +1,18 @@
 [build]
-  command = "npm install && NODE_ENV=production npx next build && mkdir -p .next/server/chunks/resources && cp -r node_modules/iyzipay/lib/resources/* .next/server/chunks/resources/"
+  command = "npm install && NODE_ENV=production npx next build"
   publish = ".next"
 
 [build.environment]
   NODE_VERSION = "18"
   NEXT_TELEMETRY_DISABLED = "1"
-  IYZICO_API_KEY = "sandbox-afXhZPW0MQlE4dCUUlHcEopnMUhOPTR3"
-  IYZICO_SECRET_KEY = "sandbox-wbwpzKIiplZxI3hh5ALI4EXaVtSjwPxK"
+  # İyzico API settings (set these in Netlify dashboard for security)
+  # IYZICO_API_KEY = "your-sandbox-api-key"
+  # IYZICO_SECRET_KEY = "your-sandbox-secret-key"
+  IYZICO_USE_REAL_API = "false"
+  # Supabase settings (set these in Netlify dashboard for security)
+  # NEXT_PUBLIC_SUPABASE_URL = "your-supabase-url"
+  # NEXT_PUBLIC_SUPABASE_ANON_KEY = "your-supabase-anon-key"
+  # SUPABASE_SERVICE_ROLE_KEY = "your-supabase-service-role-key"
 
 [[headers]]
   for = "/*"
@@ -15,3 +21,7 @@
     X-XSS-Protection = "1; mode=block"
 
 # Görüntü dönüşüm ayarları kaldırıldı, çünkü Next.js'in kendi görüntü optimizasyonu kullanılıyor 
+
+# Production build optimizations
+[build.processing]
+  skip_processing = false 
