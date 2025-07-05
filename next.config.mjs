@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const nextConfig = {
-  output: 'export',
+  // output: 'export', // Development modunda devre dışı
   images: {
     unoptimized: true,
     domains: ['ext.same-assets.com'],
@@ -18,6 +18,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  reactStrictMode: false,
   webpack: (config) => {
     // Modül çözümlemesi için alias ekle
     config.resolve.alias = {

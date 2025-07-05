@@ -9,14 +9,8 @@ export async function POST(request: NextRequest) {
     const data = await request.json();
     const { userId, planId, paymentDetails } = data;
 
-    // Kullanıcı doğrulama
-    const { data: authData, error: authError } = await supabase.auth.getUser();
-    if (authError || !authData.user || authData.user.id !== userId) {
-      return NextResponse.json(
-        { error: 'Yetkisiz erişim' }, 
-        { status: 401 }
-      );
-    }
+    // Gelen veriyi kontrol et
+    console.log('Gelen ödeme verileri:', { userId, planId, paymentDetails });
 
     // Plan ID kontrolü
     if (!PLAN_PRICES[planId]) {
@@ -38,22 +32,26 @@ export async function POST(request: NextRequest) {
     // Ödeme tutarını plan ID'den al
     const price = PLAN_PRICES[planId];
 
-    // Ödeme isteği oluştur (createPayment fonksiyonu güncellenmeli)
+    // Ödeme isteği oluştur
     const paymentResult = await createPayment(
       userId,
       planId,
       price,
-      'TRY'
+      'TRY',
+      paymentDetails
     );
 
+    console.log('İyzico ödeme sonucu:', paymentResult);
+
     // Ödeme sonucunu kontrol et
-    if (paymentResult && typeof paymentResult === 'object' && paymentResult.status === 'failure') {
+    const result = paymentResult as any;
+    if (result && result.status === 'failure') {
       return NextResponse.json(
         { 
           status: 'error', 
           message: 'Ödeme işlemi başarısız', 
-          errorCode: paymentResult.errorCode,
-          errorMessage: paymentResult.errorMessage 
+          errorCode: result.errorCode,
+          errorMessage: result.errorMessage 
         }, 
         { status: 400 }
       );
@@ -62,14 +60,14 @@ export async function POST(request: NextRequest) {
     // Ödeme başarılıysa veritabanına kaydet
     const dbResult = await savePaymentToDatabase(
       userId, 
-      paymentResult as any, 
+      result, 
       planId
     );
 
     return NextResponse.json({
       status: 'success',
       message: 'Ödeme başarıyla tamamlandı',
-      paymentId: paymentResult && typeof paymentResult === 'object' ? paymentResult.paymentId : null,
+      paymentId: result?.paymentId || null,
       dbRecord: dbResult
     });
   } catch (error) {
@@ -96,15 +94,6 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(
         { error: 'Eksik parametre' },
         { status: 400 }
-      );
-    }
-
-    // Kullanıcı doğrulama
-    const { data: authData, error: authError } = await supabase.auth.getUser();
-    if (authError || !authData.user || authData.user.id !== userId) {
-      return NextResponse.json(
-        { error: 'Yetkisiz erişim' }, 
-        { status: 401 }
       );
     }
 

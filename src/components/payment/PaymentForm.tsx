@@ -21,6 +21,14 @@ export default function PaymentForm({ selectedPlan }: PaymentFormProps) {
   const planInfo = PLAN_FEATURES[SUBSCRIPTION_PLANS[selectedPlan]];
   const planPrice = PLAN_PRICES[SUBSCRIPTION_PLANS[selectedPlan]];
 
+  // Debug log'ları
+  console.log('🔍 PaymentForm Debug:', {
+    selectedPlan,
+    user: user ? { id: user.id, email: user.email } : null,
+    planInfo,
+    planPrice
+  });
+
   // Form state
   const [formData, setFormData] = useState({
     cardHolderName: '',
@@ -100,18 +108,24 @@ export default function PaymentForm({ selectedPlan }: PaymentFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('💰 Form Submit Başladı!');
     setError(null);
     setSuccess(null);
 
+    console.log('👤 User Check:', user ? 'User var' : 'User YOK!');
     if (!user) {
+      console.log('❌ User yoksa hata mesajı gösteriliyor');
       setError('Ödeme yapmak için giriş yapmalısınız');
       return;
     }
 
+    console.log('✅ Validation başlıyor...');
     if (!validateForm()) {
+      console.log('❌ Validation başarısız!');
       return;
     }
 
+    console.log('🚀 API çağrısı başlıyor...');
     setIsLoading(true);
 
     try {

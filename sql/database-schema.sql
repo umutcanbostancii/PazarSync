@@ -220,6 +220,15 @@ ALTER TABLE payments ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Kullanıcılar kendi ödemelerini görebilir" 
   ON payments FOR SELECT USING (auth.uid() = user_id);
 
+CREATE POLICY "Kullanıcılar kendi ödemelerini ekleyebilir" 
+  ON payments FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Kullanıcılar kendi ödemelerini güncelleyebilir" 
+  ON payments FOR UPDATE USING (auth.uid() = user_id);
+
+CREATE POLICY "Kullanıcılar kendi ödemelerini silebilir" 
+  ON payments FOR DELETE USING (auth.uid() = user_id);
+
 -- INVOICES: Fatura bilgilerini saklar
 CREATE TABLE IF NOT EXISTS invoices (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -237,6 +246,15 @@ ALTER TABLE invoices ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "Kullanıcılar kendi faturalarını görebilir" 
   ON invoices FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Kullanıcılar kendi faturalarını ekleyebilir" 
+  ON invoices FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Kullanıcılar kendi faturalarını güncelleyebilir" 
+  ON invoices FOR UPDATE USING (auth.uid() = user_id);
+
+CREATE POLICY "Kullanıcılar kendi faturalarını silebilir" 
+  ON invoices FOR DELETE USING (auth.uid() = user_id);
 
 -- CONTACT_MESSAGES: İletişim formundan gelen mesajları saklar
 CREATE TYPE message_status AS ENUM ('new', 'read', 'answered');

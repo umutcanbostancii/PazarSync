@@ -1,10 +1,10 @@
 // Bu dosya client-side'da kullanılabilir (plan bilgilerini içerir)
 
-// Subscription plan IDs
+// Subscription plan IDs (database schema'sına uygun)
 export const SUBSCRIPTION_PLANS = {
-  STARTER: 'starter_plan',
-  PRO: 'pro_plan',
-  ENTERPRISE: 'enterprise_plan',
+  STARTER: 'starter',
+  PRO: 'pro',
+  ENTERPRISE: 'enterprise',
 };
 
 // Plan ücretleri

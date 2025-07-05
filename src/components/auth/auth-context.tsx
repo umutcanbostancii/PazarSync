@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { Session, User } from '@supabase/supabase-js';
 
 // Auth Context tipi
-type AuthContextType = {
+interface AuthContextType {
   session: Session | null;
   user: User | null;
   loading: boolean;
@@ -13,7 +13,7 @@ type AuthContextType = {
   signUp: (email: string, password: string) => Promise<{ error: any; data: any }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: any }>;
-};
+}
 
 // Auth Context'i oluşturma
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -30,21 +30,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Mevcut session'ı kontrol etme
     const setSessionFromSupabase = async () => {
       try {
-        // Session bilgisini alma
         const { data: { session }, error } = await supabase.auth.getSession();
         
         if (error) {
-          console.error("Error fetching session:", error);
+          console.error("Session alma hatası:", error);
           return;
         }
 
-        // Component hala mount edilmişse state güncelle
         if (isMounted) {
           setSession(session);
           setUser(session?.user || null);
         }
       } catch (error) {
-        console.error('Error setting session:', error);
+        console.error('Session kurma hatası:', error);
       } finally {
         if (isMounted) {
           setLoading(false);
@@ -54,7 +52,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Auth durumunu dinleme
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      async (event, session) => {
+        console.log('Auth state changed:', event, session);
+        
         if (isMounted) {
           setSession(session);
           setUser(session?.user || null);
@@ -65,154 +65,129 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     setSessionFromSupabase();
 
-    // Cleanup
     return () => {
       isMounted = false;
       subscription.unsubscribe();
     };
   }, []);
 
-  // Giriş yapma - geliştirilmiş hata yakalama
-  const signIn = async (email: string, password: string) => {
+  // Giriş yapma
+  const signIn = async (email: string, password: string): Promise<{ error: any }> => {
     try {
-      // Email ve password temizleme
-      const sanitizedEmail = email.trim();
+      const sanitizedEmail = email.trim().toLowerCase();
       const sanitizedPassword = password.trim();
       
-      // Boş alan kontrolü
       if (!sanitizedEmail || !sanitizedPassword) {
         return { error: new Error('E-posta ve şifre gereklidir') };
       }
       
-      // ASCII kontrolü - bu kontrol hem frontend hem de API hatalarını önler
-      if (!/^[\x00-\x7F]*$/.test(sanitizedPassword)) {
-        return { error: new Error('Şifre sadece ASCII karakterler içermelidir (Türkçe karakter kullanmayın)') };
-      }
-      
       console.log('Giriş denemesi:', { email: sanitizedEmail });
       
-      // Özel error handling ile login
-      try {
-        const { data, error } = await supabase.auth.signInWithPassword({ 
-          email: sanitizedEmail, 
-          password: sanitizedPassword 
-        });
+      const { data, error } = await supabase.auth.signInWithPassword({ 
+        email: sanitizedEmail, 
+        password: sanitizedPassword 
+      });
+      
+      if (error) {
+        console.error('Login hatası:', error);
         
-        if (error) {
-          console.error('Login error:', error);
-          
-          // Spesifik hata mesajları
-          if (error.message.includes('Invalid login credentials')) {
-            return { error: new Error('Geçersiz e-posta veya şifre') };
-          }
-          
-          return { error };
+        if (error.message.includes('Invalid login credentials')) {
+          return { error: new Error('Geçersiz e-posta veya şifre') };
         }
         
-        console.log('Login başarılı:', data);
-        return { error: null };
-      } catch (innerError) {
-        console.error('Login exception:', innerError);
-        return { error: innerError };
+        return { error: new Error(error.message) };
       }
+      
+      console.log('Login başarılı:', data);
+      return { error: null };
     } catch (outerError) {
-      console.error("SignIn genel hata:", outerError);
-      return { error: outerError };
+      console.error("SignIn genel hatası:", outerError);
+      return { error: new Error('Giriş yapılırken beklenmeyen bir hata oluştu') };
     }
   };
 
-  // Kayıt olma - geliştirilmiş implementasyon
-  const signUp = async (email: string, password: string) => {
+  // Kayıt olma
+  const signUp = async (email: string, password: string): Promise<{ error: any; data: any }> => {
     try {
-      // Email ve password temizleme
-      const sanitizedEmail = email.trim();
+      const sanitizedEmail = email.trim().toLowerCase();
       const sanitizedPassword = password.trim();
       
-      // Boş alan kontrolü  
       if (!sanitizedEmail || !sanitizedPassword) {
         return { data: null, error: new Error('E-posta ve şifre gereklidir') };
       }
       
-      // ASCII kontrolü
-      if (!/^[\x00-\x7F]*$/.test(sanitizedPassword)) {
-        return { data: null, error: new Error('Şifre sadece ASCII karakterler içermelidir (Türkçe karakter kullanmayın)') };
+      if (sanitizedPassword.length < 8) {
+        return { data: null, error: new Error('Şifre en az 8 karakter olmalıdır') };
       }
       
       console.log('Kayıt denemesi:', { email: sanitizedEmail });
       
-      // Daha güvenilir error handling ile signup
-      try {
-        // Kayıt işlemi
-        const { data, error } = await supabase.auth.signUp({
-          email: sanitizedEmail,
-          password: sanitizedPassword,
-          options: {
-            data: {
-              full_name: "",
-            },
-            emailRedirectTo: `${window.location.origin}/auth/login`
-          },
-        });
-        
-        if (error) {
-          console.error('Signup error:', error);
-          
-          // Spesifik hata mesajları
-          if (error.message.includes('already registered')) {
-            return { data: null, error: new Error('Bu e-posta adresi zaten kayıtlı') };
+      const { data, error } = await supabase.auth.signUp({
+        email: sanitizedEmail,
+        password: sanitizedPassword,
+        options: {
+          data: {
+            full_name: "",
           }
-          
-          return { data: null, error };
+        }
+      });
+      
+      if (error) {
+        console.error('Kayıt hatası:', error);
+        
+        if (error.message.includes('already registered')) {
+          return { data: null, error: new Error('Bu e-posta adresi zaten kayıtlı') };
         }
         
-        console.log('Kayıt başarılı:', data);
-        return { data, error: null };
-      } catch (innerError) {
-        console.error('Signup exception:', innerError);
-        return { data: null, error: innerError };
+        return { data: null, error: new Error(error.message) };
       }
+      
+      console.log('Kayıt başarılı:', data);
+      return { data, error: null };
     } catch (outerError) {
-      console.error("SignUp genel hata:", outerError);
-      return { data: null, error: outerError };
+      console.error("SignUp genel hatası:", outerError);
+      return { data: null, error: new Error('Kayıt olurken beklenmeyen bir hata oluştu') };
     }
   };
 
   // Çıkış yapma
-  const signOut = async () => {
+  const signOut = async (): Promise<void> => {
     try {
-      await supabase.auth.signOut();
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error("Çıkış hatası:", error);
+      }
     } catch (error) {
-      console.error("SignOut error:", error);
+      console.error("SignOut hatası:", error);
     }
   };
 
-  // Şifre sıfırlama - geliştirilmiş implementasyon
-  const resetPassword = async (email: string) => {
+  // Şifre sıfırlama
+  const resetPassword = async (email: string): Promise<{ error: any }> => {
     try {
-      const sanitizedEmail = email.trim();
+      const sanitizedEmail = email.trim().toLowerCase();
       
       if (!sanitizedEmail) {
         return { error: new Error('E-posta adresi gereklidir') };
       }
       
-      // Şifre sıfırlama isteği
       const { error } = await supabase.auth.resetPasswordForEmail(sanitizedEmail, {
-        redirectTo: `${window.location.origin}/auth/update-password`,
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/update-password`,
       });
       
       if (error) {
-        console.error('Password reset error:', error);
-        return { error };
+        console.error('Şifre sıfırlama hatası:', error);
+        return { error: new Error(error.message) };
       }
       
       return { error: null };
     } catch (err) {
-      console.error("Reset password error:", err);
-      return { error: err };
+      console.error("Reset password hatası:", err);
+      return { error: new Error('Şifre sıfırlama işlemi başarısız') };
     }
   };
 
-  const value = {
+  const value: AuthContextType = {
     session,
     user,
     loading,
@@ -226,7 +201,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 }
 
 // Auth context kullanımı için hook
-export function useAuth() {
+export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');

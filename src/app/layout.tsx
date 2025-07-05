@@ -7,6 +7,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/components/auth/auth-context";
+import { ClientBody } from "./ClientBody";
 
 // Font yükleme
 const inter = Inter({ subsets: ["latin"] });
@@ -66,63 +67,12 @@ export default function RootLayout({
             }
           `
         }} />
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            document.addEventListener('DOMContentLoaded', function() {
-              console.log('DOM fully loaded - fixing header visibility');
-              var header = document.getElementById('main-header');
-              if (header) {
-                header.style.display = 'flex';
-                header.style.visibility = 'visible';
-                
-                var nav = header.querySelector('nav');
-                if (nav && window.innerWidth >= 768) {
-                  nav.style.display = 'flex';
-                  nav.style.visibility = 'visible';
-                }
-                
-                var buttons = header.querySelector('.header-buttons');
-                if (buttons && window.innerWidth >= 768) {
-                  buttons.style.display = 'flex';
-                  buttons.style.visibility = 'visible';
-                }
-              } else {
-                console.error('Header element not found!');
-              }
-            });
 
-            // Backup mechanism in case DOMContentLoaded doesn't fire
-            window.addEventListener('load', function() {
-              console.log('Window loaded - fallback header visibility fix');
-              var header = document.getElementById('main-header');
-              if (header) {
-                header.style.display = 'flex';
-                header.style.visibility = 'visible';
-                
-                var nav = header.querySelector('nav');
-                if (nav && window.innerWidth >= 768) {
-                  nav.style.display = 'flex';
-                  nav.style.visibility = 'visible';
-                }
-                
-                var buttons = header.querySelector('.header-buttons');
-                if (buttons && window.innerWidth >= 768) {
-                  buttons.style.display = 'flex';
-                  buttons.style.visibility = 'visible';
-                }
-              }
-            });
-          `
-        }} />
       </head>
       <body className={inter.className} suppressHydrationWarning>
         <AuthProvider>
           <ThemeProvider>
-            <div className="flex min-h-screen flex-col">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
+            <ClientBody>{children}</ClientBody>
           </ThemeProvider>
         </AuthProvider>
       </body>
