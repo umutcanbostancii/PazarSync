@@ -72,7 +72,7 @@ export default function BlogPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
             <Link href={post.slug} key={post.id} className="group">
-              <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-border">
                 <div className="relative h-48">
                   <Image
                     src={post.image}
@@ -84,10 +84,10 @@ export default function BlogPage() {
                 </div>
                 <div className="p-6">
                   <div className="flex justify-between items-center mb-3">
-                    <span className="text-xs font-medium bg-secondary px-3 py-1 rounded-full">{post.category}</span>
+                    <span className="text-xs font-medium bg-muted px-3 py-1 rounded-full text-card-foreground">{post.category}</span>
                     <span className="text-xs text-muted-foreground">{post.date}</span>
                   </div>
-                  <h2 className="text-xl font-medium mb-3 group-hover:text-primary transition-colors">{post.title}</h2>
+                  <h2 className="text-xl font-medium mb-3 group-hover:text-primary transition-colors text-card-foreground">{post.title}</h2>
                   <p className="text-muted-foreground text-sm mb-4">{post.excerpt}</p>
                   <span className="text-primary text-sm font-medium inline-flex items-center group-hover:underline">
                     Devamını Oku

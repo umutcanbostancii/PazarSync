@@ -39,6 +39,7 @@ export function MarketplaceSection() {
                     alt={marketplace.name}
                     style={{ maxHeight: 40, maxWidth: 96, objectFit: 'contain', width: 'auto', height: '100%' }}
                     loading="lazy"
+                    onError={(e) => { e.currentTarget.src = marketplace.logo; }} // Dark logo yoksa light logo göster
                   />
                 </div>
                 <h3 className="text-lg font-semibold text-center mb-2">{marketplace.name}</h3>

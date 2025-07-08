@@ -93,61 +93,61 @@ export default function MisyonVizyonPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+            <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-border">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
               </div>
-              <h3 className="font-medium text-xl mb-2">Müşteri Odaklılık</h3>
+              <h3 className="font-medium text-xl mb-2 text-card-foreground">Müşteri Odaklılık</h3>
               <p className="text-muted-foreground">
                 Müşterilerimizin başarısı bizim başarımızdır. Her kararımızda müşteri ihtiyaçlarını ön planda tutuyoruz.
               </p>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+            <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-border">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </div>
-              <h3 className="font-medium text-xl mb-2">Yenilikçilik</h3>
+              <h3 className="font-medium text-xl mb-2 text-card-foreground">Yenilikçilik</h3>
               <p className="text-muted-foreground">
                 Sürekli olarak yeni teknolojileri takip ediyor ve ürünlerimizi geliştiriyoruz. Yerinde saymak yerine, hep ileriyi hedefliyoruz.
               </p>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+            <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-border">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               </div>
-              <h3 className="font-medium text-xl mb-2">Kalite</h3>
+              <h3 className="font-medium text-xl mb-2 text-card-foreground">Kalite</h3>
               <p className="text-muted-foreground">
                 Ürünlerimizin ve hizmetlerimizin en yüksek kalite standartlarına uygun olmasını sağlıyoruz. Kaliteden asla ödün vermiyoruz.
               </p>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+            <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-border">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
               </div>
-              <h3 className="font-medium text-xl mb-2">Şeffaflık</h3>
+              <h3 className="font-medium text-xl mb-2 text-card-foreground">Şeffaflık</h3>
               <p className="text-muted-foreground">
                 Müşterilerimiz, çalışanlarımız ve iş ortaklarımızla olan tüm ilişkilerimizde şeffaflığı benimsiyoruz.
               </p>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+            <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-border">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2"/><rect x="3" y="4" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="2"/><path d="M8 2v2"/><path d="M16 2v2"/></svg>
               </div>
-              <h3 className="font-medium text-xl mb-2">Takım Çalışması</h3>
+              <h3 className="font-medium text-xl mb-2 text-card-foreground">Takım Çalışması</h3>
               <p className="text-muted-foreground">
                 Birlikte daha güçlü olduğumuza inanıyoruz. Farklı perspektiflere saygı duyuyor ve birlikte çalışarak başarıya ulaşıyoruz.
               </p>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+            <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow border border-border">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg>
               </div>
-              <h3 className="font-medium text-xl mb-2">Tutku ve Kararlılık</h3>
+              <h3 className="font-medium text-xl mb-2 text-card-foreground">Tutku ve Kararlılık</h3>
               <p className="text-muted-foreground">
                 E-ticaret teknolojilerine olan tutkumuz ve hedeflerimize ulaşma konusundaki kararlılığımız, başarımızın temel taşlarıdır.
               </p>

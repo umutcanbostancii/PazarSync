@@ -54,7 +54,7 @@ export default function KaynaklarPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {resources.map((resource, index) => (
             <Link href={resource.link} key={index} className="group hover-scale">
-              <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full flex flex-col no-borders">
+              <div className="bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full flex flex-col no-borders">
                 <div className="relative h-40">
                   <Image
                     src={resource.image}
@@ -65,7 +65,7 @@ export default function KaynaklarPage() {
                   />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
-                  <h2 className="text-xl font-medium mb-2 group-hover:text-primary transition-colors">{resource.title}</h2>
+                  <h2 className="text-xl font-medium mb-2 group-hover:text-primary transition-colors text-card-foreground">{resource.title}</h2>
                   <p className="text-muted-foreground text-sm flex-1">{resource.description}</p>
                   <div className="mt-4">
                     <span className="text-primary text-sm font-medium inline-flex items-center group-hover:gap-2 transition-all duration-300">
@@ -79,7 +79,7 @@ export default function KaynaklarPage() {
           ))}
         </div>
 
-        <div className="mt-16 p-8 bg-secondary/10 rounded-xl">
+        <div className="mt-16 p-8 bg-muted rounded-xl">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-light mb-4">İhtiyacınız olan kaynağı bulamadınız mı?</h2>
             <p className="text-muted-foreground">

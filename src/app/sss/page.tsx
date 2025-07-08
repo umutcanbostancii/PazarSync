@@ -102,8 +102,8 @@ export default function SSSPage() {
         <div className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
             {faqCategories.map((category, idx) => (
-              <a key={idx} href={`#category-${idx}`} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center border border-gray-100">
-                <h2 className="text-xl font-medium">{category.title}</h2>
+              <a key={idx} href={`#category-${idx}`} className="bg-card rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-center border border-border">
+                <h2 className="text-xl font-medium text-card-foreground">{category.title}</h2>
                 <p className="text-sm text-muted-foreground mt-2">{category.items.length} soru</p>
               </a>
             ))}
@@ -113,11 +113,11 @@ export default function SSSPage() {
         <div className="space-y-16">
           {faqCategories.map((category, categoryIndex) => (
             <div key={categoryIndex} id={`category-${categoryIndex}`} className="scroll-mt-24">
-              <h2 className="text-2xl font-light mb-8 border-b pb-4">{category.title}</h2>
+              <h2 className="text-2xl font-light mb-8 border-b border-border pb-4 text-card-foreground">{category.title}</h2>
               <div className="space-y-6">
                 {category.items.map((item, itemIndex) => (
-                  <div key={itemIndex} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                    <h3 className="text-xl font-medium mb-4">{item.question}</h3>
+                  <div key={itemIndex} className="bg-card rounded-xl p-6 shadow-sm border border-border">
+                    <h3 className="text-xl font-medium mb-4 text-card-foreground">{item.question}</h3>
                     <p className="text-muted-foreground">{item.answer}</p>
                   </div>
                 ))}
@@ -127,14 +127,14 @@ export default function SSSPage() {
         </div>
 
         <div className="mt-20 text-center">
-          <h2 className="text-2xl font-light mb-4">Başka sorularınız mı var?</h2>
+          <h2 className="text-2xl font-light mb-4 text-card-foreground">Başka sorularınız mı var?</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
             Aradığınız bilgiyi bulamadıysanız, destek ekibimiz yardımcı olmaktan mutluluk duyacaktır. 
             Bize e-posta gönderin veya canlı destek hattımızdan ulaşın.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a href="/iletisim" className="inline-block">
-              <button className="bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 transition-colors w-full">
+              <button className="bg-primary text-primary-foreground px-6 py-3 rounded-full hover:bg-primary/90 transition-colors w-full">
                 İletişime Geçin
               </button>
             </a>

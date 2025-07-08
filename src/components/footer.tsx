@@ -12,7 +12,6 @@ export function Footer() {
         { name: "Özellikler", href: "/ozellikler" },
         { name: "Entegrasyonlar", href: "/entegrasyonlar" },
         { name: "Fiyatlar", href: "/fiyatlar" },
-        { name: "Güncellemeler", href: "/guncellemeler" },
       ],
     },
     {
@@ -29,8 +28,6 @@ export function Footer() {
       links: [
         { name: "SSS", href: "/sss" },
         { name: "Yardım Merkezi", href: "/yardim" },
-        { name: "API Dokümantasyonu", href: "/api-docs" },
-        { name: "Bilgi Bankası", href: "/bilgi-bankasi" },
       ],
     },
     {
@@ -38,7 +35,7 @@ export function Footer() {
       links: [
         { name: "Gizlilik Politikası", href: "/gizlilik-politikasi" },
         { name: "Kullanım Şartları", href: "/kullanim-sartlari" },
-        { name: "KVKK", href: "/kvkk" },
+        { name: "KVKK", href: "/kurumsal/kvkk" },
         { name: "Çerez Politikası", href: "/cerez-politikasi" },
       ],
     },
@@ -169,7 +166,7 @@ export function Footer() {
                 Kullanım Şartları
               </Link>
               <Link 
-                href="/kvkk" 
+                href="/kurumsal/kvkk" 
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 KVKK

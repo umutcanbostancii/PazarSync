@@ -49,13 +49,13 @@ export default function OzelliklerPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl shadow-sm">
+            <div key={index} className="bg-card p-6 rounded-xl shadow-sm border border-border">
               <div className="flex gap-4">
                 <div className="flex-shrink-0 mt-1">
                   <CheckCircle className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-medium mb-2">{feature.title}</h2>
+                  <h2 className="text-xl font-medium mb-2 text-card-foreground">{feature.title}</h2>
                   <p className="text-muted-foreground">{feature.description}</p>
                 </div>
               </div>
@@ -64,14 +64,14 @@ export default function OzelliklerPage() {
         </div>
 
         <div className="mt-20">
-          <div className="bg-secondary/10 p-8 rounded-xl">
+          <div className="bg-muted p-8 rounded-xl border border-border">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-2xl font-light mb-4">Zahmetsiz Veri Çıkarma ve Yapay Zeka Optimizasyonu</h2>
+                <h2 className="text-2xl font-light mb-4 text-card-foreground">Zahmetsiz Veri Çıkarma ve Yapay Zeka Optimizasyonu</h2>
                 <p className="text-muted-foreground mb-6">
                   İstediğiniz herhangi bir web sitesi, toptancı veya markadan ürünleri istediğiniz formatta çıkarın, ürün açıklamalarını yapay zeka ile optimize edin ve görsellerinizi düzenleyin.
                 </p>
-                <div className="text-sm font-medium bg-primary text-white inline-block py-2 px-4 rounded-lg">
+                <div className="text-sm font-medium bg-primary text-primary-foreground inline-block py-2 px-4 rounded-lg">
                   Ürün başına sadece 6 TL
                 </div>
               </div>

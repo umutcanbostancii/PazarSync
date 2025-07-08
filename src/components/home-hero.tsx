@@ -40,6 +40,7 @@ export function HomeHero() {
                     fill
                     sizes="96px"
                     className="object-contain"
+                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/trendyol.svg"; }}
                   />
                 </div>
                 <div className="h-8 w-24 relative">
@@ -49,6 +50,7 @@ export function HomeHero() {
                     fill
                     sizes="96px"
                     className="object-contain"
+                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/hepsiburada.svg"; }}
                   />
                 </div>
                 <div className="h-8 w-24 relative">
@@ -58,6 +60,7 @@ export function HomeHero() {
                     fill
                     sizes="96px"
                     className="object-contain"
+                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/shopify.svg"; }}
                   />
                 </div>
                 <div className="h-8 w-24 relative">
@@ -67,6 +70,7 @@ export function HomeHero() {
                     fill
                     sizes="96px"
                     className="object-contain"
+                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/ikas.svg"; }}
                   />
                 </div>
                 <div className="h-8 w-24 relative">
@@ -76,6 +80,7 @@ export function HomeHero() {
                     fill
                     sizes="96px"
                     className="object-contain"
+                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/etsy.svg"; }}
                   />
                 </div>
                 <div className="h-8 w-24 relative">
@@ -85,6 +90,7 @@ export function HomeHero() {
                     fill
                     sizes="96px"
                     className="object-contain"
+                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/amazon-for-light-mode.svg"; }}
                   />
                 </div>
                 <span className="text-sm text-muted-foreground hover:text-primary">

@@ -87,7 +87,7 @@ const EkibimizPage = () => {
           <h2 className="text-3xl font-light mb-12 text-center">Yönetim Ekibimiz</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
-              <div key={index} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
+              <div key={index} className="bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
                 <div className="relative h-64">
                   <Image
                     src={member.image}
@@ -97,7 +97,7 @@ const EkibimizPage = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-medium mb-1">{member.name}</h3>
+                  <h3 className="text-xl font-medium mb-1 text-card-foreground">{member.name}</h3>
                   <p className="text-primary font-medium text-sm mb-3">{member.position}</p>
                   <p className="text-muted-foreground text-sm">{member.bio}</p>
                 </div>

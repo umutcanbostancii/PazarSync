@@ -15,8 +15,8 @@ export default function GizlilikPolitikasiPage() {
           <p className="text-sm text-muted-foreground mt-2">Son güncelleme: 15 Ekim 2023</p>
         </div>
         
-        <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 mb-10">
-          <div className="prose prose-lg max-w-none">
+        <div className="bg-card rounded-xl p-8 shadow-sm border border-border mb-10">
+          <div className="prose prose-lg max-w-none text-card-foreground">
             <h2>1. Giriş</h2>
             <p>
               PazarSync Yazılım ve Teknoloji A.Ş. ("PazarSync" veya "biz") olarak, gizliliğinize değer veriyor ve kişisel verilerinizi 
@@ -137,7 +137,7 @@ export default function GizlilikPolitikasiPage() {
           </div>
         </div>
         
-        <div className="flex justify-between mt-10 p-6 bg-gray-50 rounded-xl">
+        <div className="flex justify-between mt-10 p-6 bg-muted rounded-xl">
           <a href="/kullanim-sartlari" className="text-primary hover:underline flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2"><path d="m15 18-6-6 6-6"/></svg>
             Kullanım Şartları

@@ -92,25 +92,25 @@ export default function HakkimizdaPage() {
         <div className="mb-20">
           <h2 className="text-3xl font-light mb-8 text-center">Değerlerimiz</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow h-full">
+            <div className="bg-card rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow h-full border border-border">
               <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-full mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
               </div>
-              <h3 className="text-xl font-medium mb-3">Güvenilirlik</h3>
+              <h3 className="text-xl font-medium mb-3 text-card-foreground">Güvenilirlik</h3>
               <p className="text-muted-foreground">Müşterilerimize her zaman güvenilir ve şeffaf bir hizmet sunarak uzun vadeli ilişkiler kuruyoruz.</p>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow h-full">
+            <div className="bg-card rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow h-full border border-border">
               <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-full mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               </div>
-              <h3 className="text-xl font-medium mb-3">Sürekli İyileştirme</h3>
+              <h3 className="text-xl font-medium mb-3 text-card-foreground">Sürekli İyileştirme</h3>
               <p className="text-muted-foreground">Sürekli öğrenme ve gelişme kültürümüz ile her zaman daha iyisini sunmak için çalışıyoruz.</p>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow h-full">
+            <div className="bg-card rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow h-full border border-border">
               <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-full mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
               </div>
-              <h3 className="text-xl font-medium mb-3">Müşteri Odaklılık</h3>
+              <h3 className="text-xl font-medium mb-3 text-card-foreground">Müşteri Odaklılık</h3>
               <p className="text-muted-foreground">Tüm kararlarımızda ve ürün geliştirmelerimizde müşterilerimizin ihtiyaçlarını ön planda tutuyoruz.</p>
             </div>
           </div>

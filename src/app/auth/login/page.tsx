@@ -37,7 +37,7 @@ export default function LoginPage() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (loading) return;
     
@@ -101,31 +101,31 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-card p-6 rounded-lg shadow-md border border-border">
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded">
+            <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 text-destructive rounded">
               {error}
             </div>
           )}
           
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium">E-posta</label>
+              <label htmlFor="email" className="block text-sm font-medium text-card-foreground">E-posta</label>
               <input
                 id="email"
                 type="email"
                 placeholder="ornek@sirket.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                className="w-full px-3 py-2 border border-border rounded-md bg-background text-card-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary"
                 required
               />
             </div>
             
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="text-sm font-medium">Şifre</label>
-                <Link href="/auth/reset-password" className="text-sm font-medium text-blue-600 hover:underline">
+                <label htmlFor="password" className="text-sm font-medium text-card-foreground">Şifre</label>
+                <Link href="/auth/reset-password" className="text-sm font-medium text-primary hover:underline">
                   Şifremi Unuttum
                 </Link>
               </div>
@@ -136,12 +136,12 @@ export default function LoginPage() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md pr-10"
+                  className="w-full px-3 py-2 border border-border rounded-md pr-10 bg-background text-card-foreground focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   required
                 />
                 <button 
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-card-foreground"
                   onClick={togglePasswordVisibility}
                 >
                   {showPassword ? (
@@ -156,39 +156,39 @@ export default function LoginPage() {
                   )}
                 </button>
               </div>
-              <p className="text-xs text-gray-500 mt-1">Not: Şifrenizde Türkçe karakter kullanmayınız.</p>
+              <p className="text-xs text-muted-foreground mt-1">Not: Şifrenizde Türkçe karakter kullanmayınız.</p>
             </div>
 
             <div className="flex items-center space-x-2">
               <input
                 id="remember"
                 type="checkbox"
-                className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                className="h-4 w-4 text-primary border-border rounded"
               />
-              <label htmlFor="remember" className="text-sm text-gray-700">
+              <label htmlFor="remember" className="text-sm text-card-foreground">
                 Beni hatırla
               </label>
             </div>
             
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              className="w-full py-2 px-4 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
               disabled={loading}
             >
               {loading ? "Giriş Yapılıyor..." : "Giriş Yap"}
             </button>
           </form>
 
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <p className="text-center text-sm mb-2">Veya şununla devam edin</p>
+          <div className="mt-4 pt-4 border-t border-border">
+            <p className="text-center text-sm mb-2 text-card-foreground">Veya şununla devam edin</p>
             <div className="grid grid-cols-2 gap-4">
-              <button type="button" className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md">
+              <button type="button" className="flex items-center justify-center py-2 px-4 border border-border rounded-md bg-background text-card-foreground hover:bg-muted">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mr-2" viewBox="0 0 16 16">
                   <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
                 </svg>
                 Google
               </button>
-              <button type="button" className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md">
+              <button type="button" className="flex items-center justify-center py-2 px-4 border border-border rounded-md bg-background text-card-foreground hover:bg-muted">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mr-2" viewBox="0 0 16 16">
                   <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
                 </svg>
@@ -198,8 +198,8 @@ export default function LoginPage() {
           </div>
           
           <div className="mt-6 text-center text-sm">
-            Hesabınız yok mu?{" "}
-            <a href="/auth/register" className="text-blue-600 hover:underline">
+            <span className="text-card-foreground">Hesabınız yok mu?</span>{" "}
+            <a href="/auth/register" className="text-primary hover:underline">
               Hesap Oluşturun
             </a>
           </div>

@@ -49,7 +49,7 @@ export function Header() {
   return (
     <header 
       id="main-header" 
-      className={`sticky top-0 z-50 w-full border-b bg-white dark:bg-black text-gray-900 dark:text-white shadow-sm ${isMenuOpen ? 'menu-open' : ''}`}
+      className={`sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-sm text-foreground shadow-sm ${isMenuOpen ? 'menu-open' : ''}`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">

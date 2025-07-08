@@ -252,8 +252,8 @@ export default function SozlesmelerPage() {
                     onClick={() => setSelectedAgreement(agreement)}
                     className={`text-left px-4 py-3 rounded-lg transition-colors ${
                       selectedAgreement.id === agreement.id
-                        ? "bg-primary text-white"
-                        : "hover:bg-gray-100"
+                        ? "bg-primary text-primary-foreground"
+                        : "hover:bg-muted text-card-foreground"
                     }`}
                   >
                     {agreement.title}
@@ -261,8 +261,8 @@ export default function SozlesmelerPage() {
                 ))}
               </nav>
               
-              <div className="mt-12 p-5 bg-gray-50 rounded-xl">
-                <h3 className="font-medium mb-3">Yardıma mı ihtiyacınız var?</h3>
+              <div className="mt-12 p-5 bg-muted rounded-xl">
+                <h3 className="font-medium mb-3 text-card-foreground">Yardıma mı ihtiyacınız var?</h3>
                 <p className="text-muted-foreground text-sm mb-4">
                   Yasal dökümanlarımız hakkında sorularınız için bizimle iletişime geçebilirsiniz.
                 </p>
@@ -283,24 +283,24 @@ export default function SozlesmelerPage() {
               <p className="text-muted-foreground">{selectedAgreement.subtitle}</p>
             </div>
             
-            <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+            <div className="bg-card rounded-xl p-8 shadow-sm border border-border">
               <div 
-                className="prose prose-lg max-w-none"
+                className="prose prose-lg max-w-none text-card-foreground"
                 dangerouslySetInnerHTML={{ __html: selectedAgreement.content }}
               />
             </div>
             
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-gray-50 rounded-xl">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-muted rounded-xl">
               <div>
-                <p className="text-sm text-center sm:text-left">
+                <p className="text-sm text-center sm:text-left text-card-foreground">
                   Bu dökümanın yazıcı dostu versiyonunu indirin veya paylaşın.
                 </p>
               </div>
               <div className="flex gap-3">
-                <button className="px-4 py-2 bg-white rounded-lg border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors">
+                <button className="px-4 py-2 bg-card rounded-lg border border-border text-sm font-medium hover:bg-muted transition-colors">
                   PDF İndir
                 </button>
-                <button className="px-4 py-2 bg-white rounded-lg border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors">
+                <button className="px-4 py-2 bg-card rounded-lg border border-border text-sm font-medium hover:bg-muted transition-colors">
                   Paylaş
                 </button>
               </div>

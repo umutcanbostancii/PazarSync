@@ -89,14 +89,14 @@ export default function BlogReaderPage() {
       <div className="max-w-3xl mx-auto">
         <Link href="/blog" className="text-primary text-sm mb-6 inline-block hover:underline">← Tüm Bloglar</Link>
         <div className="mb-8">
-          <span className="text-xs font-medium bg-secondary px-3 py-1 rounded-full mr-2">{post.category}</span>
+          <span className="text-xs font-medium bg-muted px-3 py-1 rounded-full mr-2 text-card-foreground">{post.category}</span>
           <span className="text-xs text-muted-foreground">{post.date}</span>
         </div>
-        <h1 className="text-3xl font-bold mb-6 text-foreground">{post.title}</h1>
+        <h1 className="text-3xl font-bold mb-6 text-card-foreground">{post.title}</h1>
         <div className="relative w-full h-64 mb-8 rounded-xl overflow-hidden">
           <Image src={post.image} alt={post.title} fill className="object-cover" />
         </div>
-        <article className="prose prose-lg max-w-none text-foreground" dangerouslySetInnerHTML={{ __html: post.content }} />
+        <article className="prose prose-lg max-w-none text-card-foreground" dangerouslySetInnerHTML={{ __html: post.content }} />
       </div>
     </div>
   );

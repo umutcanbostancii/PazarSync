@@ -98,7 +98,7 @@ export default function YardimPage() {
               <input
                 type="text"
                 placeholder="Nasıl yardımcı olabiliriz?"
-                className="w-full py-4 px-6 pr-12 rounded-full border border-gray-300 focus:outline-none focus:border-primary transition-colors"
+                className="w-full py-4 px-6 pr-12 rounded-full border border-border bg-background text-card-foreground focus:outline-none focus:border-primary transition-colors"
               />
               <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -110,9 +110,9 @@ export default function YardimPage() {
         {/* Help Categories */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {helpCategories.map((category, idx) => (
-            <div key={idx} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+            <div key={idx} className="bg-card rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-border">
               <div className="text-primary mb-4">{category.icon}</div>
-              <h2 className="text-xl font-medium mb-4">{category.title}</h2>
+              <h2 className="text-xl font-medium mb-4 text-card-foreground">{category.title}</h2>
               <ul className="space-y-2">
                 {category.items.map((item, i) => (
                   <li key={i}>
@@ -125,15 +125,15 @@ export default function YardimPage() {
         </div>
 
         {/* Popular Articles */}
-        <div className="bg-primary/5 rounded-xl p-8 md:p-10 mb-16">
-          <h2 className="text-2xl font-light mb-6">Popüler Makaleler</h2>
+        <div className="bg-muted rounded-xl p-8 md:p-10 mb-16 border border-border">
+          <h2 className="text-2xl font-light mb-6 text-card-foreground">Popüler Makaleler</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {popularArticles.map((article, idx) => (
-              <a key={idx} href={article.link} className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+              <a key={idx} href={article.link} className="flex items-center p-4 bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow border border-border">
                 <div className="text-primary mr-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 </div>
-                <span>{article.title}</span>
+                <span className="text-card-foreground">{article.title}</span>
               </a>
             ))}
           </div>
@@ -141,38 +141,38 @@ export default function YardimPage() {
 
         {/* Video Tutorials */}
         <div className="mb-16">
-          <h2 className="text-2xl font-light mb-6">Video Eğitimler</h2>
+          <h2 className="text-2xl font-light mb-6 text-card-foreground">Video Eğitimler</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="aspect-video bg-gray-100 relative">
+            <div className="bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-border">
+              <div className="aspect-video bg-muted relative">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-white opacity-80"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="white"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-primary opacity-80"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="font-medium mb-2">PazarSync&apos;e Başlangıç</h3>
+                <h3 className="font-medium mb-2 text-card-foreground">PazarSync&apos;e Başlangıç</h3>
                 <p className="text-sm text-muted-foreground">Temel özellikleri ve kurulum adımlarını öğrenin (5:32)</p>
               </div>
             </div>
-            <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="aspect-video bg-gray-100 relative">
+            <div className="bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-border">
+              <div className="aspect-video bg-muted relative">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-white opacity-80"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="white"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-primary opacity-80"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="font-medium mb-2">Ürün Katalog Yönetimi</h3>
+                <h3 className="font-medium mb-2 text-card-foreground">Ürün Katalog Yönetimi</h3>
                 <p className="text-sm text-muted-foreground">Ürünlerinizi verimli şekilde nasıl yöneteceğinizi öğrenin (7:15)</p>
               </div>
             </div>
-            <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="aspect-video bg-gray-100 relative">
+            <div className="bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-border">
+              <div className="aspect-video bg-muted relative">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-white opacity-80"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="white"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-primary opacity-80"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="font-medium mb-2">Otomatik Fiyat Optimizasyonu</h3>
+                <h3 className="font-medium mb-2 text-card-foreground">Otomatik Fiyat Optimizasyonu</h3>
                 <p className="text-sm text-muted-foreground">Rekabetçi fiyatlandırma kurallarını ayarlama (6:48)</p>
               </div>
             </div>
@@ -180,14 +180,14 @@ export default function YardimPage() {
         </div>
 
         {/* Contact Support */}
-        <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
-          <h2 className="text-2xl font-light mb-4">İhtiyacınız olan bilgiyi bulamadınız mı?</h2>
+        <div className="bg-card rounded-xl p-8 shadow-sm border border-border text-center">
+          <h2 className="text-2xl font-light mb-4 text-card-foreground">İhtiyacınız olan bilgiyi bulamadınız mı?</h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
             Destek ekibimiz size yardımcı olmak için hazır. İster e-posta gönderin, ister canlı destek hattımızdan bize ulaşın.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a href="/iletisim" className="inline-block">
-              <button className="bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 transition-colors w-full">
+              <button className="bg-primary text-primary-foreground px-6 py-3 rounded-full hover:bg-primary/90 transition-colors w-full">
                 Destek Talebi Oluştur
               </button>
             </a>

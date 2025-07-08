@@ -95,7 +95,7 @@ export default function KariyerPage() {
           <h2 className="text-3xl font-light mb-12 text-center">Açık Pozisyonlar</h2>
           <div className="space-y-8">
             {openPositions.map((position, index) => (
-              <div key={index} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+              <div key={index} className="bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-border">
                 <div className="p-8">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
                     <div>
