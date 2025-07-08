@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { logger } from '../utils';
 
 // İyzico HTTP API Client
 export class IyzicoHttpClient {
@@ -65,7 +66,7 @@ export class IyzicoHttpClient {
       'x-iyzi-client-version': 'iyzipay-node-2.0.64'
     };
 
-    console.log('🔗 İyzico HTTP Request:', {
+    logger.debug('İyzico HTTP Request', {
       url,
       method,
       headers: { ...headers, Authorization: '[HIDDEN]' },
@@ -81,14 +82,14 @@ export class IyzicoHttpClient {
 
       const responseData = await response.json();
       
-      console.log('📥 İyzico HTTP Response:', {
+      logger.debug('İyzico HTTP Response', {
         status: response.status,
         data: { ...responseData, paymentCard: '[HIDDEN]' }
       });
 
       return responseData;
     } catch (error) {
-      console.error('❌ İyzico HTTP Request Error:', error);
+      logger.error('İyzico HTTP Request Error', error);
       throw new Error(`İyzico API isteği başarısız: ${error}`);
     }
   }
@@ -130,9 +131,9 @@ export class IyzicoHttpClient {
         conversationId: `test_credentials_${Date.now()}`
       };
 
-      console.log('🔑 API Credentials Test başlatılıyor...');
-      console.log('📍 API Key:', this.apiKey);
-      console.log('🔐 Secret Key (ilk 10 karakter):', this.secretKey.substring(0, 10) + '...');
+      logger.debug('API Credentials Test başlatılıyor');
+      logger.debug('API Key', this.apiKey);
+      logger.debug('Secret Key (masked)', this.secretKey.substring(0, 10) + '...');
 
       const response = await this.makeRequest('/payment/bin/check', testRequest);
       

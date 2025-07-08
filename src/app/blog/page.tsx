@@ -7,28 +7,28 @@ export default function BlogPage() {
       id: 1,
       title: "E-ticarette Yapay Zeka Kullanımı: 2024 Trendleri",
       excerpt: "E-ticaret dünyasında yapay zeka kullanımı hızla artıyor. Peki bu teknolojiler nasıl rekabet avantajı sağlıyor?",
-      image: "/images/why-choose-us.jpg",
+      image: "/images/ai-thumbnail.jpg",
       date: "12 Mart 2024",
       category: "Yapay Zeka",
-      slug: "#"
+      slug: "/blog/e-ticarette-yapay-zeka-kullanimi-2024-trendleri"
     },
     {
       id: 2,
       title: "Pazaryeri Entegrasyonuyla Satışlarınızı Nasıl %40 Artırabilirsiniz?",
       excerpt: "Çoklu pazaryeri stratejisi ile satışlarınızı artırmanın yollarını ve en iyi uygulamaları açıklıyoruz.",
-      image: "/images/dashboard-screenshot.png",
+      image: "/images/marketplace-integration.jpg",
       date: "5 Mart 2024",
       category: "Entegrasyon",
-      slug: "#"
+      slug: "/blog/pazaryeri-entegrasyonuyla-satislarinizi-nasil-artirirsiniz"
     },
     {
       id: 3,
       title: "E-ticarette Stok Yönetimi: Karşılaşılan Zorluklar ve Çözümler",
       excerpt: "Çoklu kanal stratejisinde stok yönetiminin püf noktaları ve otomasyonun önemi hakkında.",
-      image: "/images/why-choose-us.jpg",
+      image: "/images/product-sync.jpg",
       date: "28 Şubat 2024",
       category: "Stok Yönetimi",
-      slug: "#"
+      slug: "/blog/e-ticarette-stok-yonetimi-zorluklar-cozumler"
     },
     {
       id: 4,
@@ -37,7 +37,7 @@ export default function BlogPage() {
       image: "/images/dashboard-screenshot.png",
       date: "20 Şubat 2024",
       category: "Pazaryeri",
-      slug: "#"
+      slug: "/blog/basarili-satis-stratejileri"
     },
     {
       id: 5,
@@ -46,16 +46,16 @@ export default function BlogPage() {
       image: "/images/why-choose-us.jpg",
       date: "15 Şubat 2024",
       category: "İçerik Stratejisi",
-      slug: "#"
+      slug: "/blog/urun-icerigi-optimizasyonu-donusum-artisi"
     },
     {
       id: 6,
       title: "E-ticaret Otomasyonu: Zamanınızı ve Kaynaklarınızı Verimli Kullanmanın Yolları",
       excerpt: "E-ticaret süreçlerinizi otomatikleştirerek operasyonel verimliliği nasıl artırabilirsiniz?",
-      image: "/images/dashboard-screenshot.png",
+      image: "/images/ai-thumbnail.jpg",
       date: "8 Şubat 2024",
       category: "Otomasyon",
-      slug: "#"
+      slug: "/blog/e-ticaret-otomasyonu-verimlilik"
     }
   ];
 

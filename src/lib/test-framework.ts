@@ -17,6 +17,7 @@ export interface PaymentTestConfig {
 }
 
 import { getIyzicoHttpClient } from './payment/iyzico-http-client';
+import { logger } from './utils';
 
 export class PaymentTestFramework {
   private results: TestResult[] = [];
@@ -36,7 +37,7 @@ export class PaymentTestFramework {
       timestamp: Date.now()
     };
     this.results.push(result);
-    console.log(`🧪 [${status.toUpperCase()}] ${step}: ${message}`, data || '');
+    logger.info(`🧪 [${status.toUpperCase()}] ${step}: ${message}`, data);
   }
 
   // Test 1: Auth Durumu Kontrolü

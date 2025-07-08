@@ -25,8 +25,8 @@ export default function PricingPage() {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <h1 className="text-4xl font-bold mb-4">İşletmenize Uygun Planı Seçin</h1>
-        <p className="text-lg text-gray-600 mb-8">
+        <h1 className="text-4xl font-bold mb-4 text-foreground">İşletmenize Uygun Planı Seçin</h1>
+        <p className="text-lg text-muted-foreground mb-8">
           Tüm planlarımız, temel özelliklerimize erişim sağlar. Daha fazla ürün, pazaryeri entegrasyonu ve öncelikli destek için üst seviye planları tercih edebilirsiniz.
         </p>
 
@@ -35,10 +35,10 @@ export default function PricingPage() {
           <span className={`mr-3 ${isAnnual ? 'text-gray-500' : 'font-semibold'}`}>Aylık</span>
           <button
             onClick={() => setIsAnnual(!isAnnual)}
-            className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200"
+            className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 dark:bg-gray-700"
           >
             <span
-              className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${
+              className={`inline-block h-4 w-4 transform rounded-full bg-white dark:bg-background transition ${
                 isAnnual ? 'translate-x-6' : 'translate-x-1'
               }`}
             />
@@ -51,9 +51,9 @@ export default function PricingPage() {
 
       <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {/* STARTER PLAN */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="p-6 border-b">
-            <h2 className="text-2xl font-bold mb-2">
+        <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
+          <div className="p-6 border-b border-border">
+            <h2 className="text-2xl font-bold mb-2 text-card-foreground">
               {PLAN_FEATURES[SUBSCRIPTION_PLANS.STARTER].name}
             </h2>
             <p className="text-gray-600 mb-6">
@@ -110,12 +110,12 @@ export default function PricingPage() {
         </div>
 
         {/* PRO PLAN */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-blue-500 transform scale-105 z-10">
-          <div className="bg-blue-500 text-white text-center py-2 text-sm font-semibold">
+        <div className="bg-card rounded-lg shadow-lg overflow-hidden border-2 border-primary transform scale-105 z-10">
+          <div className="bg-primary text-primary-foreground text-center py-2 text-sm font-semibold">
             EN ÇOK TERCİH EDİLEN
           </div>
-          <div className="p-6 border-b">
-            <h2 className="text-2xl font-bold mb-2">
+          <div className="p-6 border-b border-border">
+            <h2 className="text-2xl font-bold mb-2 text-card-foreground">
               {PLAN_FEATURES[SUBSCRIPTION_PLANS.PRO].name}
             </h2>
             <p className="text-gray-600 mb-6">
@@ -172,9 +172,9 @@ export default function PricingPage() {
         </div>
 
         {/* ENTERPRISE PLAN */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="p-6 border-b">
-            <h2 className="text-2xl font-bold mb-2">
+        <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
+          <div className="p-6 border-b border-border">
+            <h2 className="text-2xl font-bold mb-2 text-card-foreground">
               {PLAN_FEATURES[SUBSCRIPTION_PLANS.ENTERPRISE].name}
             </h2>
             <p className="text-gray-600 mb-6">

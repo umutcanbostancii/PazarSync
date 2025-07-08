@@ -37,7 +37,7 @@ export function HomeWhyChooseUs() {
           </div>
           <div className="order-1 lg:order-2 space-y-8">
             <div>
-              <h2 className="heading-lg mb-6">Neden PazarSync?</h2>
+              <h2 className="heading-lg mb-6 text-foreground">Neden PazarSync?</h2>
               <p className="text-muted-foreground text-lg mb-8">
                 PazarSync, e-ticaret süreçlerinizi otomatikleştirmek ve büyümenizi hızlandırmak için tasarlanmıştır.
               </p>
@@ -50,7 +50,7 @@ export function HomeWhyChooseUs() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium">{item.title}</h3>
+                    <h3 className="text-lg font-medium text-foreground">{item.title}</h3>
                     <p className="text-muted-foreground">{item.description}</p>
                   </div>
                 </div>

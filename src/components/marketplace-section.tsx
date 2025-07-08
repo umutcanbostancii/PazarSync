@@ -1,14 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 
 export function MarketplaceSection() {
+  const { theme } = useTheme();
   const marketplaces = [
-    { name: "Trendyol", logo: "/images/trendyol-logo.png", link: "/entegrasyonlar/trendyol" },
-    { name: "Hepsiburada", logo: "/images/hepsiburada-logo.png", link: "/entegrasyonlar/hepsiburada" },
-    { name: "Amazon", logo: "/images/amazon-logo.png", link: "/entegrasyonlar/amazon" },
-    { name: "N11", logo: "/images/n11-logo.png", link: "/entegrasyonlar/n11" },
-    { name: "Çiçek Sepeti", logo: "/images/ciceksepeti-logo.png", link: "/entegrasyonlar/ciceksepeti" }
+    { name: "Trendyol", logo: "/marketplace-logos/trendyol.svg", darkLogo: "/marketplace-logos/dark-mode-logos/trendyol-dark2.svg", link: "/entegrasyonlar/trendyol" },
+    { name: "Hepsiburada", logo: "/marketplace-logos/hepsiburada.svg", darkLogo: "/marketplace-logos/dark-mode-logos/hepsiburada-dark.svg", link: "/entegrasyonlar/hepsiburada" },
+    { name: "Amazon", logo: "/marketplace-logos/amazon.svg", darkLogo: "/marketplace-logos/dark-mode-logos/amazon-for-dark-mode.svg", link: "/entegrasyonlar/amazon" },
+    { name: "N11", logo: "/marketplace-logos/n11.png", link: "/entegrasyonlar/n11" },
+    { name: "Çiçek Sepeti", logo: "/marketplace-logos/ciceksepeti.svg", link: "/entegrasyonlar/ciceksepeti" },
+    { name: "PttAVM", logo: "/marketplace-logos/pttavm.png", link: "/entegrasyonlar/pttavm" },
+    { name: "Morhipo", logo: "/marketplace-logos/morhipo.svg", darkLogo: "/marketplace-logos/dark-mode-logos/Morhipo-dark.svg", link: "/entegrasyonlar/morhipo" },
   ];
 
   return (
@@ -29,16 +33,13 @@ export function MarketplaceSection() {
               className="group"
             >
               <div className="bg-white rounded-xl p-6 shadow-sm h-full flex flex-col">
-                <div className="h-16 flex items-center justify-center mb-4">
-                  <div className="h-10 w-24 relative">
-                    <Image
-                      src={marketplace.logo}
-                      alt={marketplace.name}
-                      fill
-                      sizes="96px"
-                      className="object-contain"
-                    />
-                  </div>
+                <div className="h-10 w-24 relative flex items-center justify-center">
+                  <img
+                    src={theme === "dark" && marketplace.darkLogo ? marketplace.darkLogo : marketplace.logo}
+                    alt={marketplace.name}
+                    style={{ maxHeight: 40, maxWidth: 96, objectFit: 'contain', width: 'auto', height: '100%' }}
+                    loading="lazy"
+                  />
                 </div>
                 <h3 className="text-lg font-semibold text-center mb-2">{marketplace.name}</h3>
                 <p className="text-sm text-muted-foreground text-center mb-4">

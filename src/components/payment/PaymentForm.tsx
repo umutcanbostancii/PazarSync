@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/auth-context';
 import { PLAN_PRICES, PLAN_FEATURES, SUBSCRIPTION_PLANS } from '@/lib/payment/plan-config';
+import { logger } from '@/lib/utils';
 
 type PlanType = keyof typeof SUBSCRIPTION_PLANS;
 
@@ -22,7 +23,7 @@ export default function PaymentForm({ selectedPlan }: PaymentFormProps) {
   const planPrice = PLAN_PRICES[SUBSCRIPTION_PLANS[selectedPlan]];
 
   // Debug log'ları
-  console.log('🔍 PaymentForm Debug:', {
+  logger.debug('PaymentForm Debug', {
     selectedPlan,
     user: user ? { id: user.id, email: user.email } : null,
     planInfo,
@@ -108,24 +109,24 @@ export default function PaymentForm({ selectedPlan }: PaymentFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('💰 Form Submit Başladı!');
+    logger.debug('Form Submit Başladı');
     setError(null);
     setSuccess(null);
 
-    console.log('👤 User Check:', user ? 'User var' : 'User YOK!');
+    logger.debug('User Check', user ? 'User var' : 'User YOK');
     if (!user) {
-      console.log('❌ User yoksa hata mesajı gösteriliyor');
+      logger.warn('User yoksa hata mesajı gösteriliyor');
       setError('Ödeme yapmak için giriş yapmalısınız');
       return;
     }
 
-    console.log('✅ Validation başlıyor...');
+    logger.debug('Validation başlıyor');
     if (!validateForm()) {
-      console.log('❌ Validation başarısız!');
+      logger.warn('Validation başarısız');
       return;
     }
 
-    console.log('🚀 API çağrısı başlıyor...');
+    logger.debug('API çağrısı başlıyor');
     setIsLoading(true);
 
     try {
@@ -165,7 +166,7 @@ export default function PaymentForm({ selectedPlan }: PaymentFormProps) {
       }, 2000);
       
     } catch (error) {
-      console.error('Ödeme hatası:', error);
+      logger.error('Ödeme hatası', error);
       setError(error instanceof Error ? error.message : 'Ödeme işlemi sırasında bir hata oluştu');
     } finally {
       setIsLoading(false);

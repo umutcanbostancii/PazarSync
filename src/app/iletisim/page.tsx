@@ -5,7 +5,7 @@ export default function IletisimPage() {
     <div className="container-wide py-20">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="heading-lg mb-6">İletişim</h1>
+          <h1 className="heading-lg mb-6 text-foreground">İletişim</h1>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
             Sorularınız veya önerileriniz için bizimle iletişime geçebilirsiniz. En kısa sürede size dönüş yapacağız.
           </p>
@@ -13,8 +13,8 @@ export default function IletisimPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
-            <div className="bg-white p-8 rounded-xl shadow-sm mb-8">
-              <h2 className="text-2xl font-light mb-6">İletişim Formu</h2>
+            <div className="bg-card p-8 rounded-xl shadow-sm mb-8 border border-border">
+              <h2 className="text-2xl font-light mb-6 text-card-foreground">İletişim Formu</h2>
               <form className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -75,8 +75,8 @@ export default function IletisimPage() {
           </div>
 
           <div>
-            <div className="bg-white p-8 rounded-xl shadow-sm mb-8">
-              <h2 className="text-2xl font-light mb-6">İletişim Bilgilerimiz</h2>
+            <div className="bg-card p-8 rounded-xl shadow-sm mb-8 border border-border">
+              <h2 className="text-2xl font-light mb-6 text-card-foreground">İletişim Bilgilerimiz</h2>
               <div className="space-y-6">
                 <div>
                   <h3 className="text-lg font-medium mb-2">Adres</h3>
@@ -115,8 +115,8 @@ export default function IletisimPage() {
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-sm">
-              <h2 className="text-2xl font-light mb-6">Sosyal Medya</h2>
+            <div className="bg-card p-8 rounded-xl shadow-sm border border-border">
+              <h2 className="text-2xl font-light mb-6 text-card-foreground">Sosyal Medya</h2>
               <div className="flex space-x-4">
                 <a
                   href="https://facebook.com"

@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import { logger } from './utils';
 
 // Database tablolarını kontrol etme fonksiyonu
 export const checkDatabaseTables = async () => {
@@ -14,7 +15,7 @@ export const checkDatabaseTables = async () => {
     'notifications'
   ];
 
-  console.log('🔍 Database tablolarını kontrol ediliyor...');
+  logger.info('Database tablolarını kontrol ediliyor');
   
   const tableStatus = [];
   
@@ -26,14 +27,14 @@ export const checkDatabaseTables = async () => {
         .limit(1);
       
       if (error) {
-        console.error(`❌ ${tableName} tablosu hatası:`, error);
+        logger.error(`${tableName} tablosu hatası`, error);
         tableStatus.push({ table: tableName, status: 'error', error: error.message });
       } else {
-        console.log(`✅ ${tableName} tablosu çalışıyor`);
+        logger.success(`${tableName} tablosu çalışıyor`);
         tableStatus.push({ table: tableName, status: 'ok', rowCount: data?.length || 0 });
       }
     } catch (err) {
-      console.error(`❌ ${tableName} tablosu beklenmeyen hata:`, err);
+      logger.error(`${tableName} tablosu beklenmeyen hata`, err);
       tableStatus.push({ table: tableName, status: 'exception', error: err });
     }
   }
@@ -116,7 +117,7 @@ export const checkUserSubscription = async (userId: string) => {
 // Database bağlantı durumunu test etme
 export const testDatabaseConnection = async () => {
   try {
-    console.log('🔄 Database bağlantısı test ediliyor...');
+    logger.info('Database bağlantısı test ediliyor');
     
     // Basit bir select sorgusu ile bağlantıyı test et
     const { data, error } = await supabase
@@ -125,21 +126,21 @@ export const testDatabaseConnection = async () => {
       .limit(1);
     
     if (error) {
-      console.error('❌ Database bağlantı hatası:', error);
+      logger.error('Database bağlantı hatası', error);
       return { success: false, error: error.message };
     }
     
-    console.log('✅ Database bağlantısı başarılı!');
+    logger.success('Database bağlantısı başarılı!');
     return { success: true };
   } catch (err) {
-    console.error('❌ Database bağlantı test hatası:', err);
+    logger.error('Database bağlantı test hatası', err);
     return { success: false, error: 'Beklenmeyen hata' };
   }
 };
 
 // Database durumunu kapsamlı kontrol etme
 export const checkFullDatabaseStatus = async () => {
-  console.log('🔍 Tam database durumu kontrol ediliyor...');
+  logger.info('Tam database durumu kontrol ediliyor');
   
   // Bağlantı testi
   const connectionTest = await testDatabaseConnection();
@@ -158,6 +159,6 @@ export const checkFullDatabaseStatus = async () => {
     }
   };
   
-  console.log('📊 Database durumu:', result);
+  logger.info('Database durumu', result);
   return result;
 }; 

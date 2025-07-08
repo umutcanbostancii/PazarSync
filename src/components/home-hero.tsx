@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 
 export function HomeHero() {
+  const { theme } = useTheme();
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-secondary/50 to-background pt-20 pb-16 md:pt-32 md:pb-24">
       <div className="container-wide">
@@ -33,7 +35,7 @@ export function HomeHero() {
               <div className="flex flex-wrap items-center gap-6">
                 <div className="h-8 w-24 relative">
                   <Image
-                    src="/images/trendyol-logo.png"
+                    src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/trendyol-dark2.svg" : "/marketplace-logos/trendyol.svg"}
                     alt="Trendyol"
                     fill
                     sizes="96px"
@@ -42,28 +44,46 @@ export function HomeHero() {
                 </div>
                 <div className="h-8 w-24 relative">
                   <Image
-                    src="/images/hepsiburada-logo.png"
+                    src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/hepsiburada-dark.svg" : "/marketplace-logos/hepsiburada.svg"}
                     alt="Hepsiburada"
                     fill
                     sizes="96px"
                     className="object-contain"
                   />
                 </div>
-                <div className="h-8 w-16 relative">
+                <div className="h-8 w-24 relative">
                   <Image
-                    src="/images/n11-logo.png"
-                    alt="N11"
+                    src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/shopify-dark.svg" : "/marketplace-logos/shopify.svg"}
+                    alt="Shopify"
                     fill
-                    sizes="64px"
+                    sizes="96px"
                     className="object-contain"
                   />
                 </div>
-                <div className="h-8 w-20 relative">
+                <div className="h-8 w-24 relative">
                   <Image
-                    src="/images/amazon-logo.png"
+                    src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/ikas-dark.svg" : "/marketplace-logos/ikas.svg"}
+                    alt="İkas"
+                    fill
+                    sizes="96px"
+                    className="object-contain"
+                  />
+                </div>
+                <div className="h-8 w-24 relative">
+                  <Image
+                    src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/etsy-dark.svg" : "/marketplace-logos/etsy.svg"}
+                    alt="Etsy"
+                    fill
+                    sizes="96px"
+                    className="object-contain"
+                  />
+                </div>
+                <div className="h-8 w-24 relative">
+                  <Image
+                    src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/amazon-for-dark-mode.svg" : "/marketplace-logos/amazon-for-light-mode.svg"}
                     alt="Amazon"
                     fill
-                    sizes="80px"
+                    sizes="96px"
                     className="object-contain"
                   />
                 </div>

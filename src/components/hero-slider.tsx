@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
+import { useTheme } from "next-themes";
 
 // Swiper CSS
 import 'swiper/css';
@@ -16,6 +17,7 @@ import 'swiper/css/pagination';
 import './hero-slider.css';
 
 export default function HeroSlider() {
+  const { theme } = useTheme();
   const [textActiveIndex, setTextActiveIndex] = useState(0);
   const [imageActiveIndex, setImageActiveIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -94,16 +96,25 @@ export default function HeroSlider() {
     }
   };
 
+  // Image error handler
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = e.target as HTMLImageElement;
+    const alt = target.alt || "Placeholder";
+    target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='32' viewBox='0 0 96 32' fill='none'%3E%3Crect width='96' height='32' rx='4' fill='%23f1f5f9'/%3E%3Ctext x='48' y='20' font-family='Arial' font-size='12' text-anchor='middle' fill='%23475569'%3E${alt}%3C/text%3E%3C/svg%3E`;
+  };
+
   return (
-    <section className={`relative w-full overflow-hidden bg-gradient-to-b from-secondary/30 to-background ${isLoaded ? 'fade-in' : 'opacity-0'}`}>
+    <section
+      className="hero-slider-container w-full flex flex-col justify-center bg-white dark:bg-[#18181b] text-gray-900 dark:text-white min-h-[600px] md:min-h-[700px] relative overflow-hidden"
+    >
       <div className="absolute inset-0 w-full h-full">
         <div className="absolute inset-0 hero-gradient-overlay z-10"></div>
       </div>
 
       <div className="relative z-20 flex flex-col lg:flex-row w-full hero-slider-container">
-        {/* Metin slider - Sol taraf */}
+        {/* Metin slider - Sol taraf / Üst taraf (mobil) */}
         <div className="w-full lg:w-1/2 flex items-center relative z-20">
-          <div className="w-full max-w-3xl mx-auto px-6 lg:pr-12 py-20 lg:py-32">
+          <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:pr-12 py-12 sm:py-16 lg:py-20 xl:py-32">
             <Swiper
               modules={[Autoplay, EffectFade, Pagination]}
               effect="fade"
@@ -112,7 +123,7 @@ export default function HeroSlider() {
                 delay: 5000,
                 disableOnInteraction: false,
               }}
-              onSwiper={(swiper) => (textSwiperRef.current = swiper)}
+              onSwiper={(swiper: SwiperType) => (textSwiperRef.current = swiper)}
               onSlideChange={handleTextSlideChange}
               className="w-full"
               pagination={{
@@ -124,17 +135,23 @@ export default function HeroSlider() {
             >
               {textSlides.map((slide, index) => (
                 <SwiperSlide key={`text-slide-${index}`}>
-                  <div className="space-y-6">
-                    <h1 className="heading-xl text-foreground" dangerouslySetInnerHTML={{ __html: slide.title }}></h1>
-                    <p className="text-lg text-muted-foreground max-w-lg" dangerouslySetInnerHTML={{ __html: slide.description }}></p>
+                  <div className="space-y-4 sm:space-y-6">
+                    <h1 
+                      className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-tight leading-tight text-gray-900 dark:text-white" 
+                      dangerouslySetInnerHTML={{ __html: slide.title }}
+                    ></h1>
+                    <p 
+                      className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 max-w-lg" 
+                      dangerouslySetInnerHTML={{ __html: slide.description }}
+                    ></p>
                     
-                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                       {slide.buttons.map((button, buttonIndex) => (
                         <Link key={buttonIndex} href={button.href}>
                           <Button 
                             size="lg" 
                             variant={button.variant === "outline" ? "outline" : "default"}
-                            className={button.variant === "outline" ? "w-full sm:w-auto no-borders" : "clean-button w-full sm:w-auto"}
+                            className={`w-full sm:w-auto ${button.variant === "outline" ? "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground" : "bg-primary text-primary-foreground hover:bg-primary/90"}`}
                           >
                             {button.text}
                           </Button>
@@ -144,65 +161,70 @@ export default function HeroSlider() {
                     
                     {index === 0 && (
                       <div className="pt-6">
-                        <p className="text-sm text-muted-foreground mb-4">
+                        <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 mb-4">
                           Desteklenen Pazaryerleri
                         </p>
-                        <div className="flex flex-wrap items-center gap-6">
-                          <div className="h-8 w-24 relative">
+                        <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                          <div className="h-6 w-20 sm:h-8 sm:w-24 relative">
                             <Image
-                              src="/images/trendyol-logo.png"
+                              src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/trendyol-dark2.svg" : "/marketplace-logos/trendyol.svg"}
                               alt="Trendyol"
                               fill
-                              sizes="96px"
+                              sizes="(max-width: 640px) 80px, 96px"
                               className="object-contain"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='32' viewBox='0 0 96 32' fill='none'%3E%3Crect width='96' height='32' rx='4' fill='%23f1f5f9'/%3E%3Cpath d='M48 16C48 20.4183 44.4183 24 40 24C35.5817 24 32 20.4183 32 16C32 11.5817 35.5817 8 40 8C44.4183 8 48 11.5817 48 16Z' fill='%2394a3b8'/%3E%3Cpath d='M64 16C64 20.4183 60.4183 24 56 24C51.5817 24 48 20.4183 48 16C48 11.5817 51.5817 8 56 8C60.4183 8 64 11.5817 64 16Z' fill='%23475569'/%3E%3C/svg%3E";
-                              }}
+                              onError={handleImageError}
                             />
                           </div>
-                          <div className="h-8 w-24 relative">
+                          <div className="h-6 w-20 sm:h-8 sm:w-24 relative">
                             <Image
-                              src="/images/hepsiburada-logo.png"
+                              src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/hepsiburada-dark.svg" : "/marketplace-logos/hepsiburada.svg"}
                               alt="Hepsiburada"
                               fill
-                              sizes="96px"
+                              sizes="(max-width: 640px) 80px, 96px"
                               className="object-contain"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='32' viewBox='0 0 96 32' fill='none'%3E%3Crect width='96' height='32' rx='4' fill='%23f1f5f9'/%3E%3Cpath d='M48 16C48 20.4183 44.4183 24 40 24C35.5817 24 32 20.4183 32 16C32 11.5817 35.5817 8 40 8C44.4183 8 48 11.5817 48 16Z' fill='%2394a3b8'/%3E%3Cpath d='M64 16C64 20.4183 60.4183 24 56 24C51.5817 24 48 20.4183 48 16C48 11.5817 51.5817 8 56 8C60.4183 8 64 11.5817 64 16Z' fill='%23475569'/%3E%3C/svg%3E";
-                              }}
+                              onError={handleImageError}
                             />
                           </div>
-                          <div className="h-8 w-16 relative">
+                          <div className="h-6 w-20 sm:h-8 sm:w-24 relative">
                             <Image
-                              src="/images/n11-logo.png"
-                              alt="N11"
+                              src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/shopify-dark.svg" : "/marketplace-logos/shopify.svg"}
+                              alt="Shopify"
                               fill
-                              sizes="64px"
+                              sizes="(max-width: 640px) 80px, 96px"
                               className="object-contain"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32' fill='none'%3E%3Crect width='64' height='32' rx='4' fill='%23f1f5f9'/%3E%3Cpath d='M32 16C32 20.4183 28.4183 24 24 24C19.5817 24 16 20.4183 16 16C16 11.5817 19.5817 8 24 8C28.4183 8 32 11.5817 32 16Z' fill='%2394a3b8'/%3E%3Cpath d='M48 16C48 20.4183 44.4183 24 40 24C35.5817 24 32 20.4183 32 16C32 11.5817 35.5817 8 40 8C44.4183 8 48 11.5817 48 16Z' fill='%23475569'/%3E%3C/svg%3E";
-                              }}
+                              onError={handleImageError}
                             />
                           </div>
-                          <div className="h-8 w-20 relative">
+                          <div className="h-6 w-20 sm:h-8 sm:w-24 relative">
                             <Image
-                              src="/images/amazon-logo.png"
+                              src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/ikas-dark.svg" : "/marketplace-logos/ikas.svg"}
+                              alt="İkas"
+                              fill
+                              sizes="(max-width: 640px) 80px, 96px"
+                              className="object-contain"
+                              onError={handleImageError}
+                            />
+                          </div>
+                          <div className="h-6 w-20 sm:h-8 sm:w-24 relative">
+                            <Image
+                              src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/etsy-dark.svg" : "/marketplace-logos/etsy.svg"}
+                              alt="Etsy"
+                              fill
+                              sizes="(max-width: 640px) 80px, 96px"
+                              className="object-contain"
+                              onError={handleImageError}
+                            />
+                          </div>
+                          <div className="h-6 w-20 sm:h-8 sm:w-24 relative">
+                            <Image
+                              src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/amazon-for-dark-mode.svg" : "/marketplace-logos/amazon-for-light-mode.svg"}
                               alt="Amazon"
                               fill
-                              sizes="80px"
+                              sizes="(max-width: 640px) 80px, 96px"
                               className="object-contain"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='32' viewBox='0 0 80 32' fill='none'%3E%3Crect width='80' height='32' rx='4' fill='%23f1f5f9'/%3E%3Cpath d='M40 16C40 20.4183 36.4183 24 32 24C27.5817 24 24 20.4183 24 16C24 11.5817 27.5817 8 32 8C36.4183 8 40 11.5817 40 16Z' fill='%2394a3b8'/%3E%3Cpath d='M56 16C56 20.4183 52.4183 24 48 24C43.5817 24 40 20.4183 40 16C40 11.5817 43.5817 8 48 8C52.4183 8 56 11.5817 56 16Z' fill='%23475569'/%3E%3C/svg%3E";
-                              }}
+                              onError={handleImageError}
                             />
                           </div>
-                          <span className="text-sm text-muted-foreground hover:text-primary">
-                            <Link href="/entegrasyonlar">+10 daha fazla</Link>
-                          </span>
                         </div>
                       </div>
                     )}
@@ -211,67 +233,53 @@ export default function HeroSlider() {
               ))}
             </Swiper>
             
-            {/* Özel tasarım slider pagination noktaları */}
-            <div className="flex space-x-2 mt-8 custom-pagination">
-              {textSlides.map((_, index) => (
-                <button
-                  key={index}
-                  className={`h-2 rounded-full transition-all custom-bullet ${
-                    index === textActiveIndex ? "custom-bullet-active w-8 bg-primary" : "w-2 bg-gray-300"
-                  }`}
-                  onClick={() => {
-                    // Tıklandığında hem metin hem de görsel sliderlarını güncelle
-                    if (textSwiperRef.current) {
-                      textSwiperRef.current.slideTo(index);
-                    }
-                    if (imageSwiperRef.current) {
-                      imageSwiperRef.current.slideTo(index);
-                    }
-                    setTextActiveIndex(index);
-                    setImageActiveIndex(index);
-                  }}
-                ></button>
-              ))}
-            </div>
+            {/* Pagination */}
+            <div className="custom-pagination mt-8 flex justify-center lg:justify-start"></div>
           </div>
         </div>
-        
-        {/* Görsel slider - Sağ taraf */}
-        <div className="w-full lg:w-1/2 relative">
-          <Swiper
-            modules={[Autoplay, EffectFade]}
-            effect="fade"
-            fadeEffect={{ crossFade: true }}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-            }}
-            onSwiper={(swiper) => (imageSwiperRef.current = swiper)}
-            onSlideChange={handleImageSlideChange}
-            className="w-full h-full"
-          >
-            {imageSlides.map((slide, index) => (
-              <SwiperSlide key={`image-slide-${index}`} className="h-full">
-                <div className="relative w-full h-[400px] md:h-[500px] lg:h-full">
-                  <Image
-                    src={slide.image}
-                    alt={slide.alt}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600' fill='none'%3E%3Crect width='800' height='600' fill='%23f1f5f9'/%3E%3Crect x='200' y='150' width='400' height='300' rx='8' fill='%23e2e8f0'/%3E%3Cpath d='M400 250C418.807 250 434 265.193 434 284C434 302.807 418.807 318 400 318C381.193 318 366 302.807 366 284C366 265.193 381.193 250 400 250Z' fill='%2394a3b8'/%3E%3Cpath d='M334 350H466C466 350 450 400 400 400C350 400 334 350 334 350Z' fill='%2394a3b8'/%3E%3C/svg%3E";
-                    }}
-                  />
-                  <div className="absolute bottom-8 left-8 bg-primary text-white rounded-lg p-4 shadow-lg z-10">
-                    <p className="text-sm font-medium">{slide.badge}</p>
+
+        {/* Görsel slider - Sağ taraf / Alt taraf (mobil) */}
+        <div className="w-full lg:w-1/2 relative flex items-center justify-center">
+          <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-12 py-12 lg:py-20 xl:py-32">
+            <Swiper
+              modules={[Autoplay, EffectFade]}
+              effect="fade"
+              fadeEffect={{ crossFade: true }}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
+              onSwiper={(swiper: SwiperType) => (imageSwiperRef.current = swiper)}
+              onSlideChange={handleImageSlideChange}
+              className="w-full"
+              allowTouchMove={false}
+            >
+              {imageSlides.map((slide, index) => (
+                <SwiperSlide key={`image-slide-${index}`}>
+                  <div className="relative bg-card/30 backdrop-blur-sm rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group">
+                    <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
+                      <span className="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-primary/20 text-primary backdrop-blur-sm">
+                        {slide.badge}
+                      </span>
+                    </div>
+                    <div className="aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] relative">
+                      <Image
+                        src={slide.image}
+                        alt={slide.alt}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600' fill='none'%3E%3Crect width='800' height='600' fill='%23f1f5f9'/%3E%3Cpath d='M400 200c-55.2 0-100 44.8-100 100s44.8 100 100 100 100-44.8 100-100-44.8-100-100-100zm0 160c-33.1 0-60-26.9-60-60s26.9-60 60-60 60 26.9 60 60-26.9 60-60 60z' fill='%2394a3b8'/%3E%3Cpath d='M400 260c-22.1 0-40 17.9-40 40s17.9 40 40 40 40-17.9 40-40-17.9-40-40-40z' fill='%23475569'/%3E%3Ctext x='400' y='450' font-family='Arial' font-size='16' text-anchor='middle' fill='%23475569'%3E${slide.alt}%3C/text%3E%3C/svg%3E`;
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </div>
     </section>

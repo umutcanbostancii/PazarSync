@@ -69,7 +69,7 @@ export function HomeFeatures() {
     <section className="py-24 bg-background">
       <div className="container-wide mb-16">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="heading-lg mb-4">Neler Yapabilirsiniz?</h2>
+          <h2 className="heading-lg mb-4 text-foreground">Neler Yapabilirsiniz?</h2>
           <p className="text-muted-foreground text-lg">
             PazarSync ile e-ticaret süreçlerinizi kolaylaştırın ve verimliliğinizi artırın.
           </p>
@@ -83,12 +83,12 @@ export function HomeFeatures() {
               key={index}
               className="hover-scale"
             >
-              <div className="bg-white rounded-xl shadow-sm p-6 h-full">
+              <div className="bg-card rounded-xl shadow-sm p-6 h-full border border-border">
                 <div className="flex flex-col">
-                  <div className="mb-4 bg-blue-50 w-14 h-14 flex items-center justify-center rounded-lg">
+                  <div className="mb-4 bg-primary/10 w-14 h-14 flex items-center justify-center rounded-lg">
                     {getIcon(card.icon)}
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{card.title}</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-card-foreground">{card.title}</h3>
                   <p className="text-muted-foreground">
                     {card.description}
                   </p>

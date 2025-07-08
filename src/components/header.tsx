@@ -1,15 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-context";
+import { useTheme } from "next-themes";
+import { Sun, Moon, Menu, X, User, LogOut, Home } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const { theme, setTheme } = useTheme();
   
   const isLoggedIn = !!user;
+  const [currentPath, setCurrentPath] = useState("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentPath(window.location.pathname);
+    }
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,7 +35,7 @@ export function Header() {
     window.location.href = "/";
   };
 
-  // Navigation links to match screenshot
+  // Navigation links optimized for responsive
   const navLinks = [
     { name: "Ana Sayfa", href: "/" },
     { name: "Kurumsal", href: "/kurumsal" },
@@ -34,147 +49,236 @@ export function Header() {
   return (
     <header 
       id="main-header" 
-      className={`sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${isMenuOpen ? 'menu-open' : ''}`}
+      className={`sticky top-0 z-50 w-full border-b bg-white dark:bg-black text-gray-900 dark:text-white shadow-sm ${isMenuOpen ? 'menu-open' : ''}`}
     >
-      <div className="container-wide flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2">
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 24 24"
-              stroke="#0066cc"
-              strokeWidth="2"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-primary"
-            >
-              <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1.5" />
-              <path d="M18 2v20" />
-              <path d="M9 11.5v-4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v4" />
-              <path d="M9 9h2" />
-              <path d="M11 13a2 2 0 0 1 4 0v4" />
-              <path d="M15 15h-2" />
-            </svg>
-            <span className="text-xl font-medium">PazarSync</span>
-          </Link>
-        </div>
-
-        {/* Navigasyon menüsü */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-            >
-              {item.name}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo - Responsive */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+              {/* Light/Dark mode logo */}
+              <span className="block dark:hidden">
+                <img
+                  src="/assets/light-mode-logo-name.svg"
+                  alt="PazarSync Logo"
+                  className="w-28 h-auto sm:w-36"
+                  style={{ maxHeight: 40 }}
+                />
+              </span>
+              <span className="hidden dark:block">
+                <img
+                  src="/assets/dark-mode-logo-name.svg"
+                  alt="PazarSync Logo Dark"
+                  className="w-28 h-auto sm:w-36"
+                  style={{ maxHeight: 40 }}
+                />
+              </span>
             </Link>
-          ))}
-        </nav>
+          </div>
 
-        {/* Butonlar */}
-        <div className="header-buttons hidden md:flex items-center gap-4">
-          {isLoggedIn ? (
-            <>
-              <Link href="/panel">
-                <Button variant="outline" size="sm" className="no-borders">
-                  Panel
-                </Button>
-              </Link>
-              <Button 
-                size="sm" 
-                variant="outline" 
-                className="no-borders text-red-500 hover:text-red-600"
-                onClick={handleSignOut}
-              >
-                Çıkış Yap
-              </Button>
-            </>
-          ) : (
-            <>
-              <Link href="/auth/login">
-                <Button variant="outline" size="sm" className="no-borders">
-                  Giriş Yap / Kayıt Ol
-                </Button>
-              </Link>
-              <Link href="/demo">
-                <Button size="sm" className="clean-button">
-                  Ücretsiz Deneyin
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 h-4 w-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </Button>
-              </Link>
-            </>
-          )}
-        </div>
-
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden p-2 text-muted-foreground"
-          onClick={toggleMenu}
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-menu"
-        >
-          {isMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-          )}
-        </button>
-      </div>
-
-      {/* Mobile menu - Açılınca gösterilecek */}
-      <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
-        <div className="container-wide py-4 space-y-6">
-          <nav className="flex flex-col space-y-4">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-1">
             {navLinks.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-foreground py-2"
-                onClick={() => setIsMenuOpen(false)}
+                className={
+                  `px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition font-medium
+                  ${item.href === currentPath ? 'bg-gray-200 dark:bg-gray-800 text-primary dark:text-white font-bold' : ''}`
+                }
+                style={{ minWidth: 90 }}
               >
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          <div className="flex flex-col gap-3">
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center space-x-3">
+            {/* Dark Mode Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="h-9 w-9 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+
             {isLoggedIn ? (
-              <>
-                <Link href="/panel" className="w-full">
-                  <Button variant="outline" className="w-full no-borders" onClick={() => setIsMenuOpen(false)}>
-                    Panel
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-9 w-9 rounded-full text-gray-900 dark:text-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <User className="h-4 w-4" />
                   </Button>
-                </Link>
-                <Button 
-                  className="w-full no-borders text-red-500 hover:text-red-600"
-                  variant="outline"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    handleSignOut();
-                  }}
-                >
-                  Çıkış Yap
-                </Button>
-              </>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 bg-white dark:bg-black text-gray-900 dark:text-white border border-border shadow-lg" align="end" forceMount>
+                  <DropdownMenuItem asChild>
+                    <Link href="/panel" className="flex items-center">
+                      <Home className="mr-2 h-4 w-4" />
+                      <span>Panel</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSignOut} className="text-destructive dark:text-red-400 dark:hover:bg-gray-800">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Çıkış Yap</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
-              <>
-                <Link href="/auth/login" className="w-full">
-                  <Button variant="outline" className="w-full no-borders" onClick={() => setIsMenuOpen(false)}>
-                    Giriş Yap / Kayıt Ol
+              <div className="flex items-center space-x-2">
+                <Link href="/auth/login">
+                  <Button variant="ghost" size="sm" className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+                    Giriş Yap
                   </Button>
                 </Link>
-                <Link href="/demo" className="w-full">
-                  <Button className="w-full clean-button" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/demo">
+                  <Button size="sm" className="text-white bg-primary hover:bg-primary/90 dark:bg-primary dark:text-white dark:hover:bg-primary/80">
                     Ücretsiz Deneyin
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 h-4 w-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                   </Button>
                 </Link>
-              </>
+              </div>
             )}
           </div>
+
+          {/* Mobile/Tablet Actions */}
+          <div className="flex lg:hidden items-center space-x-2">
+            {/* Dark Mode Toggle Mobile */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="h-9 w-9 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            </Button>
+
+            {/* User Menu Mobile (Tablet) */}
+            {isLoggedIn && (
+              <div className="hidden sm:block lg:hidden">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+                      <User className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <Link href="/panel">Panel</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleSignOut}>
+                      Çıkış Yap
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            )}
+
+            {/* Mobile menu button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleMenu}
+              className="h-9 w-9 lg:hidden text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+              aria-expanded={isMenuOpen}
+            >
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="lg:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-black border-t">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={
+                    `block px-3 py-2 text-base font-medium rounded-md transition-colors
+                    text-gray-900 dark:text-white hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                    ${item.href === currentPath ? 'bg-gray-200 dark:bg-gray-800 text-primary dark:text-white font-bold' : ''}`
+                  }
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              
+              {/* Mobile Auth Actions */}
+              <div className="pt-4 space-y-2">
+                {isLoggedIn ? (
+                  <>
+                    <Link
+                      href="/panel"
+                      className={
+                        `block w-full text-gray-900 dark:text-white hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70`
+                      }
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Button variant="outline" className="w-full justify-start">
+                        <Home className="mr-2 h-4 w-4" />
+                        Panel
+                      </Button>
+                    </Link>
+                    <Button 
+                      variant="outline" 
+                      className={
+                        `w-full justify-start text-destructive hover:text-destructive hover:bg-gray-100 dark:hover:bg-gray-800
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive/70`
+                      }
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        handleSignOut();
+                      }}
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Çıkış Yap
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/auth/login"
+                      className={
+                        `block w-full text-gray-900 dark:text-white hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70`
+                      }
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Button variant="outline" className="w-full">
+                        Giriş Yap
+                      </Button>
+                    </Link>
+                    <Link
+                      href="/demo"
+                      className={
+                        `block w-full text-gray-900 dark:text-white bg-primary hover:bg-primary/90 dark:bg-white dark:hover:bg-gray-200
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70`
+                      }
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Button className="w-full">
+                        Ücretsiz Deneyin
+                      </Button>
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
