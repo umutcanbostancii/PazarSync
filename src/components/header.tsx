@@ -38,11 +38,10 @@ export function Header() {
   // Navigation links optimized for responsive
   const navLinks = [
     { name: "Ana Sayfa", href: "/" },
-    { name: "Kurumsal", href: "/kurumsal" },
+    { name: "Ürün Çekme & Yükleme", href: "/urun-cekme-yukleme" },
+    { name: "E-Ticaret Kurulumu", href: "/eticaret-kurulumu" },
+    { name: "Yapay Zeka ile Kreatif", href: "/ai-kreatif" },
     { name: "Entegrasyonlar", href: "/entegrasyonlar" },
-    { name: "Kaynaklar", href: "/kaynaklar" },
-    { name: "Blog", href: "/blog" },
-    { name: "Fiyatlar", href: "/fiyatlar" },
     { name: "İletişim", href: "/iletisim" }
   ];
 

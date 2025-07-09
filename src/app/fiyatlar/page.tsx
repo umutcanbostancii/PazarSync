@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/auth-context';
 import { PLAN_PRICES, PLAN_FEATURES, SUBSCRIPTION_PLANS } from '@/lib/payment/plan-config';
+import { Button } from '@/components/ui/button';
 
 export default function PricingPage() {
   const { user } = useAuth();
@@ -99,13 +100,14 @@ export default function PricingPage() {
                 </span>
               </li>
             </ul>
-
-            <Link
-              href={user ? `/odeme/starter` : '/auth/login?redirect=/odeme/starter'}
-              className="block w-full text-center py-3 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
-            >
-              {user ? 'Hemen Başla' : 'Giriş Yap ve Başla'}
-            </Link>
+            
+            <Button asChild className="w-full">
+              <Link
+                href={user ? `/odeme/starter` : '/auth/login?redirect=/odeme/starter'}
+              >
+                {user ? 'Hemen Başla' : 'Giriş Yap ve Başla'}
+              </Link>
+            </Button>
           </div>
         </div>
 
@@ -162,12 +164,13 @@ export default function PricingPage() {
               </li>
             </ul>
 
-            <Link
-              href={user ? `/odeme/pro` : '/auth/login?redirect=/odeme/pro'}
-              className="block w-full text-center py-3 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
-            >
-              {user ? 'Hemen Başla' : 'Giriş Yap ve Başla'}
-            </Link>
+            <Button asChild className="w-full">
+              <Link
+                href={user ? `/odeme/pro` : '/auth/login?redirect=/odeme/pro'}
+              >
+                {user ? 'Hemen Başla' : 'Giriş Yap ve Başla'}
+              </Link>
+            </Button>
           </div>
         </div>
 
@@ -221,12 +224,13 @@ export default function PricingPage() {
               </li>
             </ul>
 
-            <Link
-              href={user ? `/odeme/enterprise` : '/auth/login?redirect=/odeme/enterprise'}
-              className="block w-full text-center py-3 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
-            >
-              {user ? 'Hemen Başla' : 'Giriş Yap ve Başla'}
-            </Link>
+            <Button asChild className="w-full">
+              <Link
+                href={user ? `/odeme/enterprise` : '/auth/login?redirect=/odeme/enterprise'}
+              >
+                {user ? 'Hemen Başla' : 'Giriş Yap ve Başla'}
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

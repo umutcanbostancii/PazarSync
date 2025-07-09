@@ -1,68 +1,85 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Check } from 'lucide-react';
+import Image from "next/image";
+
+const features = [
+  {
+    title: "Herhangi Bir Siteden Ürün Verisi Çıkarma",
+    description: "İstediğiniz herhangi bir web sitesi, toptancı veya markadan ürünleri istediğiniz formatta çıkarabilirsiniz.",
+    image: "/images/product-sync.webp",
+    points: ["Gelişmiş Web Kazıma", "XML/API Entegrasyonu", "Manuel Veri Girişi"]
+  },
+  {
+    title: "Yapay Zeka Destekli İçerik Optimizasyonu",
+    description: "Yapay zeka teknolojisiyle ürün açıklamalarını geliştirebilir, SEO'nuzu iyileştirebilir ve otomatik içerik toplayabilirsiniz.",
+    image: "/images/why-choose-us.webp",
+    points: ["Otomatik İçerik Oluşturma", "SEO Odaklı İyileştirme", "Görsel Optimizasyonu"]
+  },
+  {
+    title: "Çoklu Dil Desteği",
+    description: "Ürün bilgilerini herhangi bir dile otomatik olarak çevirerek global pazarlara açılın.",
+    image: "/images/marketplace-integration.webp",
+    points: ["Otomatik Çeviri", "Lokalizasyon Desteği", "Global Pazaryerleri"]
+  },
+];
 
 export function HomeAIServices() {
-  const features = [
-    {
-      title: "Herhangi Bir Siteden Ürün Verisi Çıkarma",
-      description: "İstediğiniz herhangi bir web sitesi, toptancı veya markadan ürünleri istediğiniz formatta çıkarabilirsiniz."
-    },
-    {
-      title: "Otomatik İçerik Toplama",
-      description: "Ürün açıklamaları, fiyatlar ve görselleri otomatik olarak toplayabilirsiniz."
-    },
-    {
-      title: "Çoklu Dil Desteği",
-      description: "Ürün bilgilerini herhangi bir dile otomatik olarak çevirebilirsiniz."
-    },
-    {
-      title: "Görsel Düzenleme",
-      description: "İhtiyaç duyduğunuz şekilde ürün görsellerini düzenleyebilir ve optimize edebilirsiniz."
-    },
-    {
-      title: "Yapay Zeka Desteği",
-      description: "Yapay zeka teknolojisiyle ürün açıklamalarını geliştirebilir ve SEO'nuzu iyileştirebilirsiniz."
-    },
-    {
-      title: "Uygun Fiyat",
-      description: "Tüm bu hizmetler ürün başına sadece 6 TL'dir."
-    }
-  ];
-
   return (
-    <section className="py-24 bg-secondary/10">
-      <div className="container-wide">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="heading-lg mb-4 text-foreground">Uzmanlığımız: Zahmetsiz Veri Çıkarma ve Yapay Zeka Optimizasyonu</h2>
-          <p className="text-muted-foreground text-lg">
-            E-ticaret verimliliğinizi sorunsuz otomasyon ve yapay zeka destekli içerikle artırın!
+    <section className="relative w-full py-16 md:py-24 lg:py-32 overflow-hidden">
+      {/* Arka Plan Görseli */}
+      <Image
+        src="/images/ai-background.webp"
+        alt="Yapay Zeka Arka Plan"
+        layout="fill"
+        objectFit="cover"
+        className="z-0"
+      />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/70 via-purple-900/60 to-black/70 z-10" />
+
+      {/* İçerik */}
+      <div className="relative z-20 container px-4 md:px-6">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
+          <div className="inline-block rounded-lg bg-white/10 px-3 py-1 text-sm text-white backdrop-blur-sm">
+            Uzmanlığımız
+          </div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-white shadow-lg">
+            Veri Çıkarma ve Yapay Zeka Optimizasyonu
+          </h2>
+          <p className="max-w-[900px] text-indigo-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            E-ticaret verimliliğinizi sorunsuz otomasyon ve yapay zeka destekli içerikle yeni bir seviyeye taşıyın.
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-1 lg:gap-12">
           {features.map((feature, index) => (
-            <div key={index}>
-              <div className="bg-card rounded-xl p-8 shadow-sm border border-border hover-scale">
-                <div className="flex space-x-5">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium mb-2 text-card-foreground">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
-                  </div>
+            <div
+              key={feature.title}
+              className="grid gap-8 md:grid-cols-2 items-center bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-2xl"
+            >
+              <div className={`flex flex-col justify-center space-y-4 ${index % 2 !== 0 ? 'md:order-last' : ''}`}>
+                <div className="space-y-3">
+                    <h3 className="text-2xl font-bold text-white">{feature.title}</h3>
+                    <p className="text-indigo-200">
+                      {feature.description}
+                    </p>
                 </div>
+                <ul className="grid gap-2 py-2">
+                  {feature.points.map(point => (
+                    <li key={point} className="flex items-center text-indigo-100">
+                      <Check className="mr-2 inline-block h-4 w-4 text-green-400" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
+              <Image
+                alt={feature.title}
+                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center"
+                height="310"
+                src={feature.image}
+                width="550"
+              />
             </div>
           ))}
-        </div>
-
-        <div className="text-center">
-          <Link href="/fiyatlar">
-            <Button size="lg" className="clean-button">
-              Hemen Başlayın
-            </Button>
-          </Link>
         </div>
       </div>
     </section>

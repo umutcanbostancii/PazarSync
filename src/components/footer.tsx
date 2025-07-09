@@ -7,25 +7,27 @@ export function Footer() {
 
   const footerLinks = [
     {
-      title: "Ürün",
+      title: "Hizmetlerimiz",
       links: [
-        { name: "Özellikler", href: "/ozellikler" },
+        { name: "Ürün Çekme & Yükleme", href: "/urun-cekme-yukleme" },
+        { name: "E-Ticaret Kurulumu", href: "/eticaret-kurulumu" },
+        { name: "Yapay Zeka ile Kreatif", href: "/ai-kreatif" },
         { name: "Entegrasyonlar", href: "/entegrasyonlar" },
-        { name: "Fiyatlar", href: "/fiyatlar" },
       ],
     },
     {
-      title: "Şirket",
+      title: "Kurumsal",
       links: [
         { name: "Hakkımızda", href: "/kurumsal/hakkimizda" },
+        { name: "Ekibimiz", href: "/kurumsal/ekibimiz" },
         { name: "Kariyer", href: "/kurumsal/kariyer" },
-        { name: "Blog", href: "/blog" },
         { name: "İletişim", href: "/iletisim" },
       ],
     },
     {
       title: "Kaynaklar",
       links: [
+        { name: "Blog", href: "/blog" },
         { name: "SSS", href: "/sss" },
         { name: "Yardım Merkezi", href: "/yardim" },
       ],
