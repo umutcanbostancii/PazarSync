@@ -56,7 +56,7 @@ export default function DemoPage() {
 
           <div className="order-1 lg:order-2 relative h-[400px]">
             <Image
-              src="/images/dashboard-screenshot.png"
+              src="/images/dashboard-screenshot.webp"
               alt="PazarSync Dashboard Demo"
               fill
               className="object-cover rounded-xl shadow-lg"

@@ -77,11 +77,9 @@ export default function OzelliklerPage() {
               </div>
               <div className="relative h-[300px] w-full rounded-lg overflow-hidden">
                 <Image
-                  src="/images/dashboard-screenshot.png"
+                  src="/images/dashboard-screenshot.webp"
                   alt="PazarSync Dashboard"
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>

@@ -7,17 +7,68 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { PlusCircle, CheckCircle, AlertTriangle, XCircle, ArrowUpDown, Settings, RefreshCw, ExternalLink } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-interface Marketplace {
-  id: number;
+type Marketplace = {
+  id: string;
   name: string;
   logo: string;
-  status: "connected" | "disconnected" | "error" | "pending";
+  status: "connected" | "disconnected" | "pending" | "error";
+  productCount: number;
   lastSync: string;
-  products: number;
-  orders: number;
-  enabled: boolean;
-}
+};
+
+const marketplaces: Marketplace[] = [
+  {
+    id: "trendyol",
+    name: "Trendyol",
+    logo: "/images/trendyol-logo.webp",
+    status: "connected",
+    productCount: 1250,
+    lastSync: "2 saat önce",
+  },
+  {
+    id: "hepsiburada",
+    name: "Hepsiburada",
+    logo: "/images/hepsiburada-logo.webp",
+    status: "disconnected",
+    productCount: 0,
+    lastSync: "Hiç senkronize edilmedi",
+  },
+  {
+    id: "n11",
+    name: "n11",
+    logo: "/images/n11-logo.webp",
+    status: "pending",
+    productCount: 0,
+    lastSync: "Onay bekleniyor",
+  },
+  {
+    id: "amazon",
+    name: "Amazon",
+    logo: "/images/amazon-logo.webp",
+    status: "connected",
+    productCount: 850,
+    lastSync: "5 saat önce",
+  },
+  {
+    id: "gittigidiyor",
+    name: "GittiGidiyor",
+    logo: "/images/gittigidiyor-logo.webp",
+    status: "error",
+    productCount: 300,
+    lastSync: "Dün 14:30",
+  },
+];
+
+const statusStyles = {
+  connected: "bg-green-500/20 text-green-500",
+  disconnected: "bg-gray-500/20 text-gray-500",
+  pending: "bg-yellow-500/20 text-yellow-500",
+  error: "bg-red-500/20 text-red-500",
+};
 
 export default function PazaryerleriPage() {
   // Örnek pazaryerleri verileri
@@ -25,7 +76,7 @@ export default function PazaryerleriPage() {
     {
       id: 1,
       name: "Trendyol",
-      logo: "/trendyol.png",
+      logo: "/images/trendyol-logo.webp",
       status: "connected",
       lastSync: "2023-05-20T10:30:00",
       products: 156,
@@ -35,7 +86,7 @@ export default function PazaryerleriPage() {
     {
       id: 2,
       name: "Hepsiburada",
-      logo: "/hepsiburada.png",
+      logo: "/images/hepsiburada-logo.webp",
       status: "connected",
       lastSync: "2023-05-19T14:45:00",
       products: 134,
@@ -45,7 +96,7 @@ export default function PazaryerleriPage() {
     {
       id: 3,
       name: "N11",
-      logo: "/n11.png",
+      logo: "/images/n11-logo.webp",
       status: "error",
       lastSync: "2023-05-18T09:15:00",
       products: 98,
@@ -55,7 +106,7 @@ export default function PazaryerleriPage() {
     {
       id: 4,
       name: "Amazon",
-      logo: "/amazon.png",
+      logo: "/images/amazon-logo.webp",
       status: "disconnected",
       lastSync: "2023-05-01T16:20:00",
       products: 0,
@@ -65,7 +116,7 @@ export default function PazaryerleriPage() {
     {
       id: 5,
       name: "GittiGidiyor",
-      logo: "/gittigidiyor.png",
+      logo: "/images/gittigidiyor-logo.webp",
       status: "pending",
       lastSync: "",
       products: 0,
@@ -125,6 +176,22 @@ export default function PazaryerleriPage() {
     alert(`${marketplaces.find(m => m.id === id)?.name} pazaryeri ayarları sayfasına yönlendiriliyorsunuz...`);
     // Burada normalde pazaryeri ayarları sayfasına yönlendirilecek
   };
+
+  const getStatusComponent = (status: Marketplace['status']) => {
+    switch (status) {
+      case "connected":
+        return <Badge variant="success">Bağlı</Badge>;
+      case "disconnected":
+        return <Badge variant="secondary">Bağlantı Kesildi</Badge>;
+      case "pending":
+        return <Badge variant="warning">Onay Bekliyor</Badge>;
+      case "error":
+        return <Badge variant="destructive">Hata</Badge>;
+      default:
+        return <Badge>Bilinmiyor</Badge>;
+    }
+  };
+
 
   return (
     <div className="space-y-6">

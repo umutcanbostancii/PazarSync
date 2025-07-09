@@ -129,13 +129,13 @@ export function Header() {
               </DropdownMenu>
             ) : (
               <div className="flex items-center space-x-2">
-                <Link href="/auth/login">
+                <Link href="/auth/login" className="hidden">
                   <Button variant="ghost" size="sm" className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
                     Giriş Yap
                   </Button>
                 </Link>
                 <Link href="/demo">
-                  <Button size="sm" className="text-white bg-primary hover:bg-primary/90 dark:bg-primary dark:text-white dark:hover:bg-primary/80">
+                  <Button size="sm">
                     Ücretsiz Deneyin
                   </Button>
                 </Link>
@@ -251,10 +251,7 @@ export function Header() {
                   <>
                     <Link
                       href="/auth/login"
-                      className={
-                        `block w-full text-gray-900 dark:text-white hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800
-                        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70`
-                      }
+                      className="hidden block w-full text-gray-900 dark:text-white hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       <Button variant="outline" className="w-full">
@@ -263,10 +260,7 @@ export function Header() {
                     </Link>
                     <Link
                       href="/demo"
-                      className={
-                        `block w-full text-gray-900 dark:text-white bg-primary hover:bg-primary/90 dark:bg-white dark:hover:bg-gray-200
-                        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70`
-                      }
+                      className="block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       <Button className="w-full">

@@ -1,45 +1,70 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Linkedin, Twitter } from "lucide-react";
 
 const EkibimizPage = () => {
   const teamMembers = [
     {
+      name: "Umut Can Bostancı",
+      role: "CEO & Kurucu Ortak",
+      image: "/images/team/ceo.webp",
+      bio: "10+ yıllık e-ticaret ve yazılım deneyimiyle PazarSync'i kurdu. E-ticaretin geleceğini şekillendirme vizyonuyla ekibe liderlik ediyor.",
+      social: {
+        linkedin: "https://www.linkedin.com/in/umut-can-bostanci/",
+        twitter: "https://twitter.com/umutcanbostanci",
+      },
+    },
+    {
+      name: "Yapay Zeka",
+      role: "CTO & Kurucu Ortak",
+      image: "/images/team/cto.webp",
+      bio: "PazarSync'in teknoloji vizyonunu ve altyapısını yönetiyor. Yenilikçi çözümlerle platformu sürekli ileri taşıyor.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+      },
+    },
+    {
       name: "Ahmet Yılmaz",
-      position: "Kurucu & CEO",
-      bio: "10+ yıllık e-ticaret ve yazılım deneyimi ile PazarSync'i 2018 yılında kurdu. Öncesinde çeşitli e-ticaret platformlarında üst düzey yönetici olarak görev aldı.",
-      image: "/images/team/ceo.jpg"
+      role: "Baş Geliştirici",
+      image: "/images/team/team.webp",
+      bio: "PazarSync'in çekirdek sistemlerinin geliştirilmesinden sorumlu. Güçlü ve ölçeklenebilir bir altyapı sağlıyor.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+      },
     },
     {
-      name: "Zeynep Kaya",
-      position: "CTO",
-      bio: "15 yıllık teknoloji ve yazılım geliştirme deneyimine sahip. PazarSync'in teknoloji stratejisini yöneterek inovatif çözümler geliştiriyor.",
-      image: "/images/team/cto.jpg"
+      name: "Ayşe Kaya",
+      role: "Pazarlama Direktörü",
+      image: "/images/team/team.webp",
+      bio: "PazarSync'in marka bilinirliğini ve büyüme stratejilerini yönetiyor. Dijital pazarlama ve iletişimde uzman.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+      },
     },
     {
-      name: "Mehmet Demir",
-      position: "Ürün Direktörü",
-      bio: "Kullanıcı deneyimi ve ürün yönetimi konusunda uzman. PazarSync'in müşteri odaklı ürün stratejisini şekillendiriyor.",
-      image: "/images/team/team.jpg"
+      name: "Fatma Demir",
+      role: "Ürün Yöneticisi",
+      image: "/images/team/team.webp",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+      },
     },
     {
-      name: "Ayşe Şahin",
-      position: "Pazarlama Direktörü",
-      bio: "Dijital pazarlama ve marka stratejisi konularında 8+ yıllık deneyime sahip. PazarSync'in büyüme stratejisini yönlendiriyor.",
-      image: "/images/team/team.jpg"
+      name: "Mehmet Çelik",
+      role: "Müşteri Başarı Uzmanı",
+      image: "/images/team/team.webp",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+      },
     },
-    {
-      name: "Emre Özkan",
-      position: "Müşteri Başarı Yöneticisi",
-      bio: "E-ticaret operasyonları ve müşteri ilişkileri yönetimi konusunda uzman. Müşterilerimizin PazarSync ile maksimum değer elde etmesini sağlıyor.",
-      image: "/images/team/team.jpg"
-    },
-    {
-      name: "Deniz Yıldız",
-      position: "Yazılım Geliştirme Lideri",
-      bio: "Full-stack geliştirme ve yazılım mimarisi konularında uzman. PazarSync'in teknik altyapısını ve yazılım geliştirme süreçlerini yönetiyor.",
-      image: "/images/team/team.jpg"
-    }
   ];
 
   return (
@@ -61,7 +86,7 @@ const EkibimizPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[300px] md:h-[400px]">
               <Image
-                src="/images/team/team.jpg"
+                src="/images/team/team.webp"
                 alt="PazarSync Ekibi"
                 className="object-cover rounded-xl"
                 fill
@@ -84,22 +109,25 @@ const EkibimizPage = () => {
 
         {/* Team Members */}
         <div className="mb-20">
-          <h2 className="text-3xl font-light mb-12 text-center">Yönetim Ekibimiz</h2>
+          <h2 className="text-3xl font-light mb-12 text-center">Yönetim Kadromuz</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
-              <div key={index} className="bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
-                <div className="relative h-64">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    fill
-                  />
+              <div key={member.name} className="bg-card rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
+                <div className="relative h-64 w-full">
+                  <Image src={member.image} alt={member.name} layout="fill" objectFit="cover" />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-medium mb-1 text-card-foreground">{member.name}</h3>
-                  <p className="text-primary font-medium text-sm mb-3">{member.position}</p>
-                  <p className="text-muted-foreground text-sm">{member.bio}</p>
+                  <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
+                  <p className="text-primary font-medium mb-3">{member.role}</p>
+                  <p className="text-muted-foreground text-sm mb-4">{member.bio}</p>
+                  <div className="flex gap-4">
+                    <Link href={member.social.linkedin} target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="h-5 w-5 text-muted-foreground hover:text-primary" />
+                    </Link>
+                    <Link href={member.social.twitter} target="_blank" rel="noopener noreferrer">
+                      <Twitter className="h-5 w-5 text-muted-foreground hover:text-primary" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -107,29 +135,29 @@ const EkibimizPage = () => {
         </div>
 
         {/* Join Us Section */}
-        <div className="bg-primary/5 rounded-xl p-8 md:p-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-light mb-4">Bize Katılın</h2>
-              <p className="text-muted-foreground mb-6">
-                Ekibimizin bir parçası olmak ve e-ticaret dünyasını değiştirmek ister misiniz? Açık pozisyonlarımızı inceleyin ve kariyer fırsatları için başvurun.
-              </p>
-              <a href="/kurumsal/kariyer">
-                <button className="bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 transition-colors">
-                  Kariyer Fırsatlarını İncele
-                </button>
-              </a>
-            </div>
-            <div className="relative h-[200px] md:h-[250px]">
-              <Image
-                src="/images/team/team.jpg"
-                alt="PazarSync Ofisi"
-                className="object-cover rounded-xl"
-                fill
-              />
+        <section className="py-12 md:py-24 bg-muted/40">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl font-bold mb-4">PazarSync Ailesine Katılın</h2>
+                <p className="text-muted-foreground mb-6">
+                  E-ticaretin geleceğini şekillendiren bir ekibin parçası olmak ister misiniz? Açık pozisyonlarımızı inceleyin ve bize katılın.
+                </p>
+                <Link href="/kurumsal/kariyer">
+                  <Button>Açık Pozisyonlar</Button>
+                </Link>
+              </div>
+              <div className="relative h-80 w-full overflow-hidden rounded-lg">
+                <Image
+                  src="/images/team/team.webp"
+                  alt="PazarSync Ofis"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

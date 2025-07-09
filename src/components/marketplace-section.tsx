@@ -9,9 +9,9 @@ export function MarketplaceSection() {
     { name: "Trendyol", logo: "/marketplace-logos/trendyol.svg", darkLogo: "/marketplace-logos/dark-mode-logos/trendyol-dark2.svg", link: "/entegrasyonlar/trendyol" },
     { name: "Hepsiburada", logo: "/marketplace-logos/hepsiburada.svg", darkLogo: "/marketplace-logos/dark-mode-logos/hepsiburada-dark.svg", link: "/entegrasyonlar/hepsiburada" },
     { name: "Amazon", logo: "/marketplace-logos/amazon.svg", darkLogo: "/marketplace-logos/dark-mode-logos/amazon-for-dark-mode.svg", link: "/entegrasyonlar/amazon" },
-    { name: "N11", logo: "/marketplace-logos/n11.png", link: "/entegrasyonlar/n11" },
+    { name: "N11", logo: "/marketplace-logos/n11.webp", link: "/entegrasyonlar/n11" },
     { name: "Çiçek Sepeti", logo: "/marketplace-logos/ciceksepeti.svg", link: "/entegrasyonlar/ciceksepeti" },
-    { name: "PttAVM", logo: "/marketplace-logos/pttavm.png", link: "/entegrasyonlar/pttavm" },
+    { name: "PttAVM", logo: "/marketplace-logos/pttavm.webp", link: "/entegrasyonlar/pttavm" },
     { name: "Morhipo", logo: "/marketplace-logos/morhipo.svg", darkLogo: "/marketplace-logos/dark-mode-logos/Morhipo-dark.svg", link: "/entegrasyonlar/morhipo" },
   ];
 

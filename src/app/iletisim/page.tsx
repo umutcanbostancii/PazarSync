@@ -76,17 +76,17 @@ export default function IletisimPage() {
             </p>
             
             {/* Ek Bilgi */}
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg mb-6">
-              <p className="text-sm text-blue-800 dark:text-blue-200">
+            <div className="bg-secondary/50 dark:bg-secondary/20 p-4 rounded-lg mb-6">
+              <p className="text-sm text-secondary-foreground dark:text-secondary-foreground/80">
                 📧 Onay e-postası gönderildi<br/>
                 ⏱️ Ortalama yanıt süresi: 2-4 saat
               </p>
             </div>
             
             {/* Kapatma Butonu */}
-            <Button 
+            <Button
               onClick={() => setOpen(false)}
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-medium"
+              className="px-8 py-3 rounded-lg font-medium"
             >
               Tamam
             </Button>

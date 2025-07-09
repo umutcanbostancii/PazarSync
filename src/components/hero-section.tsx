@@ -30,62 +30,45 @@ export function HeroSection() {
               <p className="text-sm text-muted-foreground mb-4">
                 Desteklenen Pazaryerleri
               </p>
-              <div className="flex flex-wrap items-center gap-6">
-                <div className="h-8 w-24 relative">
-                  <Image
-                    src="/images/trendyol-logo.png"
-                    alt="Trendyol"
-                    fill
-                    sizes="96px"
-                    className="object-contain"
-                  />
-                </div>
-                <div className="h-8 w-24 relative">
-                  <Image
-                    src="/images/hepsiburada-logo.png"
-                    alt="Hepsiburada"
-                    fill
-                    sizes="96px"
-                    className="object-contain"
-                  />
-                </div>
-                <div className="h-8 w-16 relative">
-                  <Image
-                    src="/images/n11-logo.png"
-                    alt="N11"
-                    fill
-                    sizes="64px"
-                    className="object-contain"
-                  />
-                </div>
-                <div className="h-8 w-20 relative">
-                  <Image
-                    src="/images/amazon-logo.png"
-                    alt="Amazon"
-                    fill
-                    sizes="80px"
-                    className="object-contain"
-                  />
-                </div>
-                <span className="text-sm text-muted-foreground hover:text-primary">
-                  <Link href="/entegrasyonlar">+10 daha fazla</Link>
-                </span>
+              <div className="flex flex-wrap justify-center items-center gap-4 mt-8">
+                <Image
+                  alt="Trendyol logo"
+                  className="w-24 h-auto"
+                  height="40"
+                  src="/images/trendyol-logo.webp"
+                  width="100"
+                />
+                <Image
+                  alt="Hepsiburada logo"
+                  className="w-24 h-auto"
+                  height="40"
+                  src="/images/hepsiburada-logo.webp"
+                  width="100"
+                />
+                <Image
+                  alt="n11 logo"
+                  className="w-24 h-auto"
+                  height="40"
+                  src="/images/n11-logo.webp"
+                  width="100"
+                />
+                <Image
+                  alt="Amazon logo"
+                  className="w-24 h-auto"
+                  height="40"
+                  src="/images/amazon-logo.webp"
+                  width="100"
+                />
               </div>
             </div>
-          </div>
-          <div className="relative fade-up">
-            <div className="relative h-[400px] w-full md:h-[500px] lg:h-[580px] rounded-lg overflow-hidden shadow-lg subtle-float">
+            <div className="w-full lg:w-1/2">
               <Image
-                src="/images/dashboard-screenshot.png"
                 alt="PazarSync Dashboard"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                className="rounded-lg shadow-xl"
+                height="600"
+                src="/images/dashboard-screenshot.webp"
+                width="800"
               />
-            </div>
-            <div className="absolute -bottom-6 -left-6 bg-primary text-white rounded-lg p-4 shadow-lg hidden md:block fade-up">
-              <p className="text-sm font-medium">İstediğiniz siteden ürün çekin</p>
             </div>
           </div>
         </div>

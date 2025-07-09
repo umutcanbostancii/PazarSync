@@ -66,30 +66,30 @@ export function HomeFeatures() {
   };
 
   return (
-    <section className="py-24 bg-background">
-      <div className="container-wide mb-16">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="heading-lg mb-4 text-foreground">Neler Yapabilirsiniz?</h2>
-          <p className="text-muted-foreground text-lg">
+    <section className="py-12 md:py-16 lg:py-24 bg-background">
+      <div className="container-wide mb-8 md:mb-12 lg:mb-16">
+        <div className="text-center max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-foreground">Neler Yapabilirsiniz?</h2>
+          <p className="text-muted-foreground text-base md:text-lg">
             PazarSync ile e-ticaret süreçlerinizi kolaylaştırın ve verimliliğinizi artırın.
           </p>
         </div>
       </div>
 
-      <div className="container-wide">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="container-wide px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {featureCards.map((card, index) => (
             <div
               key={index}
               className="hover-scale"
             >
-              <div className="bg-card rounded-xl shadow-sm p-6 h-full border border-border">
+              <div className="bg-card rounded-xl shadow-sm p-4 md:p-6 h-full border border-border transition-shadow hover:shadow-md">
                 <div className="flex flex-col">
-                  <div className="mb-4 bg-primary/10 w-14 h-14 flex items-center justify-center rounded-lg">
+                  <div className="mb-3 md:mb-4 bg-primary/10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-lg">
                     {getIcon(card.icon)}
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 text-card-foreground">{card.title}</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3 text-card-foreground">{card.title}</h3>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                     {card.description}
                   </p>
                 </div>

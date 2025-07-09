@@ -84,11 +84,10 @@ export default function APIDocsPage() {
   "status": "active",
   "images": [
     {
-      "id": "img_123",
-      "url": "https://example.com/images/product1.jpg",
-      "is_primary": true
-    },
-    {...}
+      "id": "img_1",
+      "url": "https://example.com/images/product1.webp",
+      "alt_text": "A front view of the product"
+    }
   ],
   "categories": [
     {

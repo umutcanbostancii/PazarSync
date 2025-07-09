@@ -21,8 +21,8 @@ export default function HeroSlider() {
   const [textActiveIndex, setTextActiveIndex] = useState(0);
   const [imageActiveIndex, setImageActiveIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const textSwiperRef = useRef<SwiperType | null>(null);
-  const imageSwiperRef = useRef<SwiperType | null>(null);
+  const textSwiperRef = useRef(null);
+  const imageSwiperRef = useRef(null);
 
   useEffect(() => {
     // Sayfa yüklendiğinde animasyonları etkinleştir
@@ -60,19 +60,19 @@ export default function HeroSlider() {
   // Görsel slider içeriği
   const imageSlides = [
     {
-      image: "/images/dashboard-screenshot.png",
+      image: "/images/dashboard-screenshot.webp",
       alt: "PazarSync Dashboard",
       badge: "İstediğiniz siteden ürün çekin"
     },
     {
-      image: "/images/product-sync.jpg",
-      alt: "Ürün Senkronizasyonu",
-      badge: "Otomatik senkronizasyon"
+      image: '/images/product-sync.webp',
+      alt: 'Stok ve Sipariş Senkronizasyonu',
+      badge: 'Daha Fazla Bilgi'
     },
     {
-      image: "/images/marketplace-integration.jpg",
-      alt: "Pazaryeri Entegrasyonu",
-      badge: "10+ Pazaryeri Entegrasyonu"
+      image: '/images/marketplace-integration.webp',
+      alt: 'Pazaryeri Entegrasyonları',
+      badge: 'Entegrasyonları Gör'
     }
   ];
 
@@ -132,6 +132,10 @@ export default function HeroSlider() {
                 bulletClass: 'custom-bullet',
                 bulletActiveClass: 'custom-bullet-active',
               }}
+              touchStartPreventDefault={false}
+              allowTouchMove={true}
+              spaceBetween={0}
+              slidesPerView={1}
             >
               {textSlides.map((slide, index) => (
                 <SwiperSlide key={`text-slide-${index}`}>
@@ -252,7 +256,10 @@ export default function HeroSlider() {
               onSwiper={(swiper: SwiperType) => (imageSwiperRef.current = swiper)}
               onSlideChange={handleImageSlideChange}
               className="w-full"
-              allowTouchMove={false}
+              allowTouchMove={true}
+              touchStartPreventDefault={false}
+              spaceBetween={0}
+              slidesPerView={1}
             >
               {imageSlides.map((slide, index) => (
                 <SwiperSlide key={`image-slide-${index}`}>

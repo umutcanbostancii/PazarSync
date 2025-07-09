@@ -4,41 +4,23 @@ import Image from "next/image";
 export default function KaynaklarPage() {
   const resources = [
     {
-      title: "SSS",
-      description: "En çok sorulan sorular ve cevapları",
-      image: "/images/why-choose-us.jpg",
-      link: "/sss"
+      title: "PazarSync'e Başlarken",
+      description: "PazarSync'i kullanmaya başlamak için ihtiyacınız olan her şey.",
+      image: "/images/dashboard-screenshot.webp",
+      link: "/kaynaklar/baslarken",
     },
     {
-      title: "Yardım Merkezi",
-      description: "Kapsamlı yardım dokümantasyonu ve kılavuzlar",
-      image: "/images/dashboard-screenshot.png",
-      link: "/yardim"
+      title: "Entegrasyon Rehberleri",
+      description: "Tüm pazar yerleri ve e-ticaret platformları için detaylı entegrasyon rehberleri.",
+      image: "/images/dashboard-screenshot.webp",
+      link: "/kaynaklar/entegrasyonlar",
     },
     {
-      title: "API Dokümantasyonu",
-      description: "Geliştiriciler için API referansı ve örnekler",
-      image: "/images/why-choose-us.jpg",
-      link: "/api-docs"
+      title: "Sıkça Sorulan Sorular",
+      description: "Merak ettiğiniz tüm soruların cevapları burada.",
+      image: "/images/dashboard-screenshot.webp",
+      link: "/sss",
     },
-    {
-      title: "Video Eğitimler",
-      description: "PazarSync'i etkili bir şekilde kullanmayı öğrenin",
-      image: "/images/dashboard-screenshot.png",
-      link: "/video-egitimler"
-    },
-    {
-      title: "Başarı Hikayeleri",
-      description: "Müşterilerimizin başarı hikayeleri ve vaka çalışmaları",
-      image: "/images/why-choose-us.jpg",
-      link: "/basari-hikayeleri"
-    },
-    {
-      title: "Pazaryeri Kılavuzları",
-      description: "Her pazaryeri için detaylı kılavuzlar ve ipuçları",
-      image: "/images/dashboard-screenshot.png",
-      link: "/pazaryeri-kilavuzlari"
-    }
   ];
 
   return (

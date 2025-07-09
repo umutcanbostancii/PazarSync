@@ -75,7 +75,7 @@ export function Footer() {
             <div className="flex items-center space-x-4">
               <Link
                 href="https://facebook.com"
-                className="text-muted-foreground hover:text-primary transition-colors p-1"
+                className="text-muted-foreground hover:text-secondary-foreground dark:hover:text-primary transition-colors p-1"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -86,7 +86,7 @@ export function Footer() {
               </Link>
               <Link
                 href="https://twitter.com"
-                className="text-muted-foreground hover:text-primary transition-colors p-1"
+                className="text-muted-foreground hover:text-secondary-foreground dark:hover:text-primary transition-colors p-1"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
@@ -97,7 +97,7 @@ export function Footer() {
               </Link>
               <Link
                 href="https://instagram.com"
-                className="text-muted-foreground hover:text-primary transition-colors p-1"
+                className="text-muted-foreground hover:text-secondary-foreground dark:hover:text-primary transition-colors p-1"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -110,7 +110,7 @@ export function Footer() {
               </Link>
               <Link
                 href="https://linkedin.com"
-                className="text-muted-foreground hover:text-primary transition-colors p-1"
+                className="text-muted-foreground hover:text-secondary-foreground dark:hover:text-primary transition-colors p-1"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"

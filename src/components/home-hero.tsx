@@ -6,17 +6,18 @@ import { useTheme } from "next-themes";
 export function HomeHero() {
   const { theme } = useTheme();
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-secondary/50 to-background pt-20 pb-16 md:pt-32 md:pb-24">
+    <section className="relative overflow-hidden bg-gradient-to-b from-secondary/50 to-background pt-16 pb-12 md:pt-32 md:pb-24">
       <div className="container-wide">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          <div className="space-y-6">
-            <h1 className="heading-xl text-foreground">
-              Tüm Pazaryerlerini <span className="text-primary">Tek Ekrandan</span> Yönetin
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Text Content - Order 2 on mobile, Order 1 on desktop */}
+          <div className="space-y-4 md:space-y-6 order-2 lg:order-1">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-foreground">
+              Tüm Pazaryerlerini <span className="text-secondary-foreground dark:text-primary">Tek Ekrandan</span> Yönetin
             </h1>
-            <p className="text-lg text-muted-foreground max-w-lg">
+            <p className="text-base md:text-lg text-muted-foreground max-w-lg">
               PazarSync ile e-ticaret operasyonlarınızı basitleştirin. <strong>İstediğiniz web sitesinden ürün çekip, dilediğiniz pazaryerine yükleyin.</strong> Stok ve fiyat güncellemelerinizi tek bir platformdan yönetin.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4">
               <Link href="/fiyatlar">
                 <Button size="lg" className="clean-button w-full sm:w-auto">
                   Ücretsiz Deneyin
@@ -28,67 +29,67 @@ export function HomeHero() {
                 </Button>
               </Link>
             </div>
-            <div className="pt-6">
-              <p className="text-sm text-muted-foreground mb-4">
+            <div className="pt-4 md:pt-6">
+              <p className="text-sm text-muted-foreground mb-3 md:mb-4">
                 Desteklenen Pazaryerleri
               </p>
-              <div className="flex flex-wrap items-center gap-6">
-                <div className="h-8 w-24 relative">
+              <div className="flex flex-wrap items-center gap-4 md:gap-6">
+                <div className="h-6 w-20 md:h-8 md:w-24 relative">
                   <Image
                     src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/trendyol-dark2.svg" : "/marketplace-logos/trendyol.svg"}
                     alt="Trendyol"
                     fill
-                    sizes="96px"
+                    sizes="(max-width: 768px) 80px, 96px"
                     className="object-contain"
                     onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/trendyol.svg"; }}
                   />
                 </div>
-                <div className="h-8 w-24 relative">
+                <div className="h-6 w-20 md:h-8 md:w-24 relative">
                   <Image
                     src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/hepsiburada-dark.svg" : "/marketplace-logos/hepsiburada.svg"}
                     alt="Hepsiburada"
                     fill
-                    sizes="96px"
+                    sizes="(max-width: 768px) 80px, 96px"
                     className="object-contain"
                     onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/hepsiburada.svg"; }}
                   />
                 </div>
-                <div className="h-8 w-24 relative">
+                <div className="h-6 w-20 md:h-8 md:w-24 relative">
                   <Image
                     src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/shopify-dark.svg" : "/marketplace-logos/shopify.svg"}
                     alt="Shopify"
                     fill
-                    sizes="96px"
+                    sizes="(max-width: 768px) 80px, 96px"
                     className="object-contain"
                     onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/shopify.svg"; }}
                   />
                 </div>
-                <div className="h-8 w-24 relative">
+                <div className="h-6 w-20 md:h-8 md:w-24 relative">
                   <Image
                     src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/ikas-dark.svg" : "/marketplace-logos/ikas.svg"}
                     alt="İkas"
                     fill
-                    sizes="96px"
+                    sizes="(max-width: 768px) 80px, 96px"
                     className="object-contain"
                     onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/ikas.svg"; }}
                   />
                 </div>
-                <div className="h-8 w-24 relative">
+                <div className="h-6 w-20 md:h-8 md:w-24 relative">
                   <Image
                     src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/etsy-dark.svg" : "/marketplace-logos/etsy.svg"}
                     alt="Etsy"
                     fill
-                    sizes="96px"
+                    sizes="(max-width: 768px) 80px, 96px"
                     className="object-contain"
                     onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/etsy.svg"; }}
                   />
                 </div>
-                <div className="h-8 w-24 relative">
+                <div className="h-6 w-20 md:h-8 md:w-24 relative">
                   <Image
                     src={theme === "dark" ? "/marketplace-logos/dark-mode-logos/amazon-for-dark-mode.svg" : "/marketplace-logos/amazon-for-light-mode.svg"}
                     alt="Amazon"
                     fill
-                    sizes="96px"
+                    sizes="(max-width: 768px) 80px, 96px"
                     className="object-contain"
                     onError={(e: React.SyntheticEvent<HTMLImageElement>) => { e.currentTarget.src = "/marketplace-logos/amazon-for-light-mode.svg"; }}
                   />
@@ -99,19 +100,19 @@ export function HomeHero() {
               </div>
             </div>
           </div>
-          <div className="relative">
-            <div className="relative h-[400px] w-full md:h-[500px] lg:h-[580px] rounded-lg overflow-hidden shadow-lg">
+          {/* Image Content - Order 1 on mobile, Order 2 on desktop */}
+          <div className="relative order-1 lg:order-2">
+            <div className="relative rounded-lg shadow-2xl overflow-hidden">
               <Image
-                src="/images/dashboard-screenshot.png"
                 alt="PazarSync Dashboard"
-                fill
                 className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                height={800}
+                src="/images/dashboard-screenshot.webp"
+                width={1400}
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-primary text-white rounded-lg p-4 shadow-lg hidden md:block">
-              <p className="text-sm font-medium">İstediğiniz siteden ürün çekin</p>
+            <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-primary text-white rounded-lg p-3 md:p-4 shadow-lg hidden sm:block">
+              <p className="text-xs md:text-sm font-medium">İstediğiniz siteden ürün çekin</p>
             </div>
           </div>
         </div>

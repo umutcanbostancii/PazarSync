@@ -77,12 +77,12 @@ export default function HakkimizdaPage() {
                 Yapay zeka destekli araçlarımız ve otomatik iş akışlarımız sayesinde, müşterilerimiz operasyonel yüklerini azaltarak büyümeye ve stratejik kararlara odaklanabilmektedir.
               </p>
             </div>
-            <div className="relative h-[300px] md:h-[400px] order-1 lg:order-2">
+            <div className="relative h-[500px] w-full rounded-lg overflow-hidden">
               <Image
-                src="/images/why-choose-us.jpg"
-                alt="PazarSync Ekibi"
-                className="object-cover rounded-xl"
+                alt="Hakkımızda"
+                className="object-cover"
                 fill
+                src="/images/why-choose-us.webp"
               />
             </div>
           </div>

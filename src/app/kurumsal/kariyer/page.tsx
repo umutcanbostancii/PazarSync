@@ -79,12 +79,12 @@ export default function KariyerPage() {
                 <li>Yemek ve ulaşım desteği</li>
               </ul>
             </div>
-            <div className="relative h-[300px] md:h-[400px]">
+            <div className="relative h-96 w-full overflow-hidden rounded-lg">
               <Image
-                src="/images/team/team.jpg"
-                alt="PazarSync Ekibi"
-                className="object-cover rounded-xl"
+                alt="Kariyer"
+                className="object-cover"
                 fill
+                src="/images/team/team.webp"
               />
             </div>
           </div>

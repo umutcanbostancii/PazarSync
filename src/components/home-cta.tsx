@@ -12,12 +12,12 @@ export function HomeCTA() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/fiyatlar">
-              <Button size="lg" variant="secondary" className="w-full sm:w-auto clean-button bg-white text-primary">
+              <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                 Ücretsiz Deneyin
               </Button>
             </Link>
             <Link href="/iletisim">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent border-white text-white hover:bg-white/10 no-borders">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
                 İletişime Geçin
               </Button>
             </Link>

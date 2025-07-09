@@ -7,7 +7,7 @@ export default function BlogPage() {
       id: 1,
       title: "E-ticarette Yapay Zeka Kullanımı: 2024 Trendleri",
       excerpt: "E-ticaret dünyasında yapay zeka kullanımı hızla artıyor. Peki bu teknolojiler nasıl rekabet avantajı sağlıyor?",
-      image: "/images/ai-thumbnail.jpg",
+      image: "/images/ai-thumbnail.webp",
       date: "12 Mart 2024",
       category: "Yapay Zeka",
       slug: "/blog/e-ticarette-yapay-zeka-kullanimi-2024-trendleri"
@@ -16,7 +16,7 @@ export default function BlogPage() {
       id: 2,
       title: "Pazaryeri Entegrasyonuyla Satışlarınızı Nasıl %40 Artırabilirsiniz?",
       excerpt: "Çoklu pazaryeri stratejisi ile satışlarınızı artırmanın yollarını ve en iyi uygulamaları açıklıyoruz.",
-      image: "/images/marketplace-integration.jpg",
+      image: "/images/marketplace-integration.webp",
       date: "5 Mart 2024",
       category: "Entegrasyon",
       slug: "/blog/pazaryeri-entegrasyonuyla-satislarinizi-nasil-artirirsiniz"
@@ -25,7 +25,7 @@ export default function BlogPage() {
       id: 3,
       title: "E-ticarette Stok Yönetimi: Karşılaşılan Zorluklar ve Çözümler",
       excerpt: "Çoklu kanal stratejisinde stok yönetiminin püf noktaları ve otomasyonun önemi hakkında.",
-      image: "/images/product-sync.jpg",
+      image: "/images/product-sync.webp",
       date: "28 Şubat 2024",
       category: "Stok Yönetimi",
       slug: "/blog/e-ticarette-stok-yonetimi-zorluklar-cozumler"
@@ -34,7 +34,7 @@ export default function BlogPage() {
       id: 4,
       title: "Trendyol, Hepsiburada ve Amazon'da Başarılı Satış Stratejileri",
       excerpt: "Türkiye'nin önde gelen e-ticaret pazaryerlerinde satışlarınızı artırmak için önemli ipuçları.",
-      image: "/images/dashboard-screenshot.png",
+      image: "/images/dashboard-screenshot.webp",
       date: "20 Şubat 2024",
       category: "Pazaryeri",
       slug: "/blog/basarili-satis-stratejileri"
@@ -43,7 +43,7 @@ export default function BlogPage() {
       id: 5,
       title: "E-ticarette Ürün İçeriği Optimizasyonu: Dönüşüm Oranını Artırmanın Yolları",
       excerpt: "Ürün başlıkları, açıklamaları ve görsellerini optimize ederek dönüşüm oranlarını nasıl yükseltebilirsiniz?",
-      image: "/images/why-choose-us.jpg",
+      image: "/images/why-choose-us.webp",
       date: "15 Şubat 2024",
       category: "İçerik Stratejisi",
       slug: "/blog/urun-icerigi-optimizasyonu-donusum-artisi"
@@ -52,7 +52,7 @@ export default function BlogPage() {
       id: 6,
       title: "E-ticaret Otomasyonu: Zamanınızı ve Kaynaklarınızı Verimli Kullanmanın Yolları",
       excerpt: "E-ticaret süreçlerinizi otomatikleştirerek operasyonel verimliliği nasıl artırabilirsiniz?",
-      image: "/images/ai-thumbnail.jpg",
+      image: "/images/ai-thumbnail.webp",
       date: "8 Şubat 2024",
       category: "Otomasyon",
       slug: "/blog/e-ticaret-otomasyonu-verimlilik"

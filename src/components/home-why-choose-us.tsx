@@ -28,8 +28,8 @@ export function HomeWhyChooseUs() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="order-2 lg:order-1 relative h-[300px] md:h-[500px]">
             <Image
-              src="/images/why-choose-us.jpg"
-              alt="PazarSync Avantajları"
+              src="/images/why-choose-us.webp"
+              alt="Why choose us"
               fill
               className="rounded-xl object-cover shadow-md"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"

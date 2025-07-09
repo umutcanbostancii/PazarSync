@@ -81,24 +81,25 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 14% 10%;
 
-    --primary: 213 95% 36%;
-    --primary-foreground: 210 40% 98%;
+    /* Light Mode - Mor Tema (Kontrast Düzeltmesi) */
+    --primary: 253 35% 49%; /* #604E9E */
+    --primary-foreground: 255 100% 100%; /* #FFFFFF */
 
-    --secondary: 213 85% 96%;
-    --secondary-foreground: 212 85% 32%;
+    --secondary: 255 78% 95%; /* #EDE9FE */
+    --secondary-foreground: 259 66% 30%; /* #4C33A8 */
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 212 85% 32%;
+    --accent: 255 78% 95%; /* #EDE9FE */
+    --accent-foreground: 259 66% 30%; /* #4C33A8 */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 213 95% 36%;
+    --ring: 253 35% 49%; /* #604E9E */
 
     --radius: 1rem;
   }
@@ -145,24 +146,25 @@
     --popover: 220 14% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 212 85% 32%;
-    --primary-foreground: 210 40% 98%;
+    /* Dark Mode - Mor Tema */
+    --primary: 249 70% 60%; /* #674ED2 */
+    --primary-foreground: 255 78% 95%; /* #EDE9FE */
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
+    --secondary: 248 56% 25%;
+    --secondary-foreground: 255 78% 95%; /* #EDE9FE */
+    
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 248 56% 25%;
+    --accent-foreground: 255 78% 95%; /* #EDE9FE */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212 85% 32%;
+    --ring: 249 70% 60%; /* #674ED2 */
   }
 
   * {
@@ -234,8 +236,23 @@
 
   /* Clean buttons without borders */
   .clean-button {
-    @apply rounded-full font-medium bg-primary text-white px-6 py-3 transition-all hover:shadow-md hover:opacity-90 focus:outline-none;
+    @apply rounded-full font-medium px-6 py-3 transition-all duration-200 hover:shadow-md focus:outline-none;
+    @apply bg-primary text-primary-foreground;
     border: none !important;
+  }
+
+  .clean-button:hover {
+    @apply bg-primary/80;
+    transform: translateY(-1px);
+  }
+
+  .dark .clean-button {
+    background-color: #2C6BE2 !important;
+    color: #E2E8F0 !important;
+  }
+
+  .dark .clean-button:hover {
+    background-color: #60A5FA !important;
   }
 
   /* Apple-style feature icon */

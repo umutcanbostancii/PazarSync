@@ -48,13 +48,12 @@ export default function KurumsalPage() {
         {/* Company Overview */}
         <div className="mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[300px] md:h-[400px]">
+            <div className="relative h-96 w-full overflow-hidden rounded-lg">
               <Image
-                src="/images/why-choose-us.jpg"
-                alt="PazarSync Ekibi"
+                alt="PazarSync Team"
+                className="object-cover"
                 fill
-                className="object-cover rounded-xl"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                src="/images/why-choose-us.webp"
               />
             </div>
             <div>
