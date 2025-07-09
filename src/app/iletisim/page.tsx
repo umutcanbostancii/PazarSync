@@ -1,8 +1,98 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import emailjs from '@emailjs/browser';
+import { useRef, useState } from 'react';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 
 export default function IletisimPage() {
+  const formRef = useRef(null);
+  const [sending, setSending] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSending(true);
+    setError(null);
+    setSuccess(false);
+    try {
+      if (!formRef.current) return;
+      await emailjs.sendForm(
+        "service_70g2asm",
+        "template_r5h0nlv",
+        formRef.current,
+        "vhoGl9gdEMpr1AQhN"
+      );
+      setSuccess(true);
+      formRef.current.reset();
+      setOpen(true);
+    } catch (err) {
+      setError('Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+      alert("Bir hata oluştu, lütfen tekrar deneyin.");
+      console.error("EmailJS Hatası:", err);
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <div className="container-wide py-20">
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-md">
+          <div className="text-center py-8">
+            {/* Logo */}
+            <div className="mb-6">
+              <img 
+                src="/assets/light-mode-logo-name.svg" 
+                alt="PazarSync" 
+                className="h-12 mx-auto dark:hidden"
+              />
+              <img 
+                src="/assets/dark-mode-logo-name.svg" 
+                alt="PazarSync" 
+                className="h-12 mx-auto hidden dark:block"
+              />
+            </div>
+            
+            {/* Başarı İkonu */}
+            <div className="mb-6">
+              <div className="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+            </div>
+            
+            {/* Başlık */}
+            <DialogTitle className="text-2xl font-semibold mb-4 text-green-600">
+              Talebiniz Alındı
+            </DialogTitle>
+            
+            {/* Açıklama */}
+            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+              Talebiniz başarıyla alındı. Uzman ekibimiz en kısa sürede sizinle iletişime geçecektir.
+            </p>
+            
+            {/* Ek Bilgi */}
+            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg mb-6">
+              <p className="text-sm text-blue-800 dark:text-blue-200">
+                📧 Onay e-postası gönderildi<br/>
+                ⏱️ Ortalama yanıt süresi: 2-4 saat
+              </p>
+            </div>
+            
+            {/* Kapatma Butonu */}
+            <Button 
+              onClick={() => setOpen(false)}
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-medium"
+            >
+              Tamam
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="heading-lg mb-6 text-foreground">İletişim</h1>
@@ -15,7 +105,7 @@ export default function IletisimPage() {
           <div>
             <div className="bg-card p-8 rounded-xl shadow-sm mb-8 border border-border">
               <h2 className="text-2xl font-light mb-6 text-card-foreground">İletişim Formu</h2>
-              <form className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -24,8 +114,10 @@ export default function IletisimPage() {
                     <input
                       type="text"
                       id="name"
+                      name="name"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                       placeholder="Adınız Soyadınız"
+                      required
                     />
                   </div>
                   <div>
@@ -35,41 +127,64 @@ export default function IletisimPage() {
                     <input
                       type="email"
                       id="email"
+                      name="email"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                       placeholder="ornek@sirket.com"
+                      required
                     />
                   </div>
                 </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                    Konu
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                    placeholder="Mesajınızın konusu"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                      Telefon
+                    </label>
+                    <input
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                      placeholder="Telefon numaranız"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                      Konu
+                    </label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                      placeholder="Mesajınızın konusu"
+                      required
+                    />
+                  </div>
                 </div>
-
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
                     Mesajınız
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={5}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                     placeholder="Mesajınızı buraya yazabilirsiniz..."
+                    required
                   ></textarea>
                 </div>
-
                 <div>
-                  <Button type="submit" className="clean-button">
-                    Mesaj Gönder
+                  <Button type="submit" className="clean-button" disabled={sending}>
+                    {sending ? "Gönderiliyor..." : "Mesaj Gönder"}
                   </Button>
                 </div>
+                {success && (
+                  <div className="p-3 bg-green-100 border border-green-300 text-green-800 rounded mt-2">Mesajınız başarıyla gönderildi!</div>
+                )}
+                {error && (
+                  <div className="p-3 bg-red-100 border border-red-300 text-red-800 rounded mt-2">{error}</div>
+                )}
               </form>
             </div>
           </div>
