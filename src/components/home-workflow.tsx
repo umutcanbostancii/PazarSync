@@ -58,11 +58,14 @@ export function HomeWorkflow() {
                 </div>
 
                 {/* Metin Bölümü */}
-                <div className={`flex flex-col items-center md:items-start text-center md:text-left ${index % 2 === 0 ? 'md:order-2' : 'md:order-1'}`}>
-                  <div className="absolute left-1/2 -translate-x-1/2 -top-4 md:top-1/2 md:-translate-y-1/2 bg-primary text-primary-foreground rounded-full h-12 w-12 flex items-center justify-center text-xl font-bold border-4 border-background">
+                <div className={`relative flex flex-col justify-center text-center md:text-left md:items-start ${index % 2 === 0 ? 'md:order-2' : 'md:order-1'} pt-12 md:pt-0 md:pl-20`}>
+                  {/* Adım Numarası */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 md:top-1/2 md:left-8 md:-translate-y-1/2 bg-primary text-primary-foreground rounded-full h-12 w-12 flex items-center justify-center text-xl font-bold border-4 border-background z-10">
                     {step.step}
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 mt-12 md:mt-0">{step.title}</h3>
+                  
+                  {/* Metin İçeriği */}
+                  <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
                   <p className="text-muted-foreground">{step.description}</p>
                 </div>
               </div>

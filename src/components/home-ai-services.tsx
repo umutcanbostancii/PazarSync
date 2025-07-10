@@ -5,19 +5,19 @@ const features = [
   {
     title: "Herhangi Bir Siteden Ürün Verisi Çıkarma",
     description: "İstediğiniz herhangi bir web sitesi, toptancı veya markadan ürünleri istediğiniz formatta çıkarabilirsiniz.",
-    image: "/images/product-sync.webp",
+    image: "/images/Herhangi-siteden-uruncekme.webp",
     points: ["Gelişmiş Web Kazıma", "XML/API Entegrasyonu", "Manuel Veri Girişi"]
   },
   {
     title: "Yapay Zeka Destekli İçerik Optimizasyonu",
     description: "Yapay zeka teknolojisiyle ürün açıklamalarını geliştirebilir, SEO'nuzu iyileştirebilir ve otomatik içerik toplayabilirsiniz.",
-    image: "/images/why-choose-us.webp",
+    image: "/images/Yapay-Zeka-Icerik-Large.webp",
     points: ["Otomatik İçerik Oluşturma", "SEO Odaklı İyileştirme", "Görsel Optimizasyonu"]
   },
   {
     title: "Çoklu Dil Desteği",
     description: "Ürün bilgilerini herhangi bir dile otomatik olarak çevirerek global pazarlara açılın.",
-    image: "/images/marketplace-integration.webp",
+    image: "/images/multiple-language.webp",
     points: ["Otomatik Çeviri", "Lokalizasyon Desteği", "Global Pazaryerleri"]
   },
 ];
@@ -53,7 +53,7 @@ export function HomeAIServices() {
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className="grid gap-8 md:grid-cols-2 items-center bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-2xl"
+              className="grid gap-8 md:grid-cols-2 items-center bg-white/5 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl"
             >
               <div className={`flex flex-col justify-center space-y-4 ${index % 2 !== 0 ? 'md:order-last' : ''}`}>
                 <div className="space-y-3">

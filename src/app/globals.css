@@ -2,71 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* En başa ekleyelim ki önceliği olsun */
-/* Header ve menü stillerini en önde tanımlıyoruz */
+/* FOUC (Flash of Unstyled Content) önlemek için Layout'tan taşınan stiller */
 #main-header {
+  display: flex !important;
+  visibility: visible !important;
   position: sticky;
   top: 0;
   z-index: 9999;
   width: 100%;
-  background-color: var(--background);
-  display: flex !important;
-  visibility: visible !important;
 }
-
 #main-header .container-wide {
-  width: 100%;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
-  height: 4rem;
 }
-
 #main-header nav {
   display: flex !important;
   visibility: visible !important;
-  align-items: center;
-  gap: 1.5rem;
 }
-
-#main-header nav a {
-  display: block;
-  color: var(--muted-foreground);
-  transition: color 0.2s;
-  font-size: 0.875rem;
-}
-
 #main-header .header-buttons {
   display: flex !important;
   visibility: visible !important;
-  align-items: center;
-  gap: 1rem;
 }
-
-/* Mobil düzende gizleme yerine özel stiller */
 @media (max-width: 767px) {
-  #main-header nav {
+  #main-header nav,
+  #main-header .header-buttons {
+    display: none !important;
+  }
+  #main-header.menu-open nav {
+    display: flex !important;
     position: absolute;
     top: 4rem;
     left: 0;
     right: 0;
-    flex-direction: column;
-    background-color: var(--background);
+    background: white; /* Bu temanın arka plan rengine göre ayarlanmalı */
     padding: 1rem;
-    display: none;
-  }
-  
-  #main-header .header-buttons {
-    display: none !important;
-  }
-  
-  #main-header.menu-open nav {
-    display: flex !important;
+    flex-direction: column;
   }
 }
 

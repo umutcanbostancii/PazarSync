@@ -34,24 +34,24 @@ export function HomeMarketplaces() {
               key={marketplace.name}
               className="group"
             >
-              <div className="bg-card rounded-xl p-4 md:p-6 shadow-sm h-full flex flex-col border border-border hover-scale transition-shadow hover:shadow-md">
-                <div className="h-8 md:h-10 w-full relative flex items-center justify-center mb-3 md:mb-4">
+              <div className="bg-card rounded-xl p-4 md:p-6 shadow-sm h-full flex flex-col border border-border hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div className="h-8 md:h-10 w-full relative flex items-center justify-center mb-3">
                   <img
                     src={theme === "dark" && marketplace.darkLogo ? marketplace.darkLogo : marketplace.logo}
                     alt={marketplace.name}
-                    style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', width: 'auto', height: '100%' }}
+                    style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
                     loading="lazy"
                     onError={(e) => { e.currentTarget.src = marketplace.logo; }}
                   />
                 </div>
-                <h3 className="text-sm md:text-lg font-semibold text-center mb-1 md:mb-2 text-card-foreground">{marketplace.name}</h3>
-                <p className="text-xs md:text-sm text-muted-foreground text-center mb-2 md:mb-4">
-                  {marketplace.name} Entegrasyonu
+                <h3 className="text-sm md:text-base font-semibold text-center text-card-foreground">{marketplace.name}</h3>
+                <p className="text-xs text-muted-foreground text-center mt-1">
+                  Entegrasyon
                 </p>
-                <div className="mt-auto text-center">
-                  <span className="text-primary inline-flex items-center text-xs md:text-sm">
-                    Detaylı Bilgi
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <div className="mt-auto text-center pt-3">
+                  <span className="text-primary inline-flex items-center text-xs font-semibold">
+                    Detaylar
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="m9 18 6-6-6-6"/></svg>
                   </span>
                 </div>
               </div>

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "google-site-verification-code",
+    google: process.env.GOOGLE_SITE_VERIFICATION_CODE || "",
   },
 };
 
@@ -52,50 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" suppressHydrationWarning>
-      <head>
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            #main-header {
-              display: flex !important;
-              visibility: visible !important;
-              position: sticky;
-              top: 0;
-              z-index: 9999;
-              width: 100%;
-            }
-            #main-header .container-wide {
-              display: flex !important;
-              align-items: center;
-              justify-content: space-between;
-            }
-            #main-header nav {
-              display: flex !important;
-              visibility: visible !important;
-            }
-            #main-header .header-buttons {
-              display: flex !important;
-              visibility: visible !important;
-            }
-            @media (max-width: 767px) {
-              #main-header nav, 
-              #main-header .header-buttons {
-                display: none !important;
-              }
-              #main-header.menu-open nav {
-                display: flex !important;
-                position: absolute;
-                top: 4rem;
-                left: 0;
-                right: 0;
-                background: white;
-                padding: 1rem;
-                flex-direction: column;
-              }
-            }
-          `
-        }} />
-
-      </head>
+      <head />
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"

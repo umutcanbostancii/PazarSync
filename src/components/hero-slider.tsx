@@ -112,8 +112,8 @@ export default function HeroSlider() {
       </div>
 
       <div className="relative z-20 flex flex-col lg:flex-row w-full hero-slider-container">
-        {/* Metin slider - Sol taraf / Üst taraf (mobil) */}
-        <div className="w-full lg:w-1/2 flex items-center relative z-20">
+        {/* Metin slider - Sol taraf / Üst taraf (mobil) - Mobil için order-2 */}
+        <div className="w-full lg:w-1/2 flex items-center relative z-20 order-2 lg:order-1">
           <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:pr-12 py-12 sm:py-16 lg:py-20 xl:py-32">
             <Swiper
               modules={[Autoplay, EffectFade, Pagination]}
@@ -141,7 +141,7 @@ export default function HeroSlider() {
                 <SwiperSlide key={`text-slide-${index}`}>
                   <div className="space-y-4 sm:space-y-6">
                     <h1 
-                      className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-tight leading-tight text-gray-900 dark:text-white" 
+                      className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light tracking-tight leading-tight text-gray-900 dark:text-white"
                       dangerouslySetInnerHTML={{ __html: slide.title }}
                     ></h1>
                     <p 
@@ -242,8 +242,8 @@ export default function HeroSlider() {
           </div>
         </div>
 
-        {/* Görsel slider - Sağ taraf / Alt taraf (mobil) */}
-        <div className="w-full lg:w-1/2 relative flex items-center justify-center">
+        {/* Görsel slider - Sağ taraf / Alt taraf (mobil) - Mobil için order-1 */}
+        <div className="w-full lg:w-1/2 relative flex items-center justify-center order-1 lg:order-2">
           <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-12 py-12 lg:py-20 xl:py-32">
             <Swiper
               modules={[Autoplay, EffectFade]}

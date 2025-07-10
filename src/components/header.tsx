@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-context";
 import { useTheme } from "next-themes";
@@ -57,19 +58,23 @@ export function Header() {
             <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               {/* Light/Dark mode logo */}
               <span className="block dark:hidden">
-                <img
+                <Image
                   src="/assets/light-mode-logo-name.svg"
                   alt="PazarSync Logo"
+                  width={144}
+                  height={40}
                   className="w-28 h-auto sm:w-36"
-                  style={{ maxHeight: 40 }}
+                  priority
                 />
               </span>
               <span className="hidden dark:block">
-                <img
+                <Image
                   src="/assets/dark-mode-logo-name.svg"
                   alt="PazarSync Logo Dark"
+                  width={144}
+                  height={40}
                   className="w-28 h-auto sm:w-36"
-                  style={{ maxHeight: 40 }}
+                  priority
                 />
               </span>
             </Link>
@@ -208,7 +213,7 @@ export function Header() {
                     focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
                     ${item.href === currentPath ? 'bg-gray-200 dark:bg-gray-800 text-primary dark:text-white font-bold' : ''}`
                   }
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={toggleMenu}
                 >
                   {item.name}
                 </Link>
@@ -224,7 +229,7 @@ export function Header() {
                         `block w-full text-gray-900 dark:text-white hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800
                         focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70`
                       }
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={toggleMenu}
                     >
                       <Button variant="outline" className="w-full justify-start">
                         <Home className="mr-2 h-4 w-4" />
@@ -238,7 +243,7 @@ export function Header() {
                         focus:outline-none focus-visible:ring-2 focus-visible:ring-destructive/70`
                       }
                       onClick={() => {
-                        setIsMenuOpen(false);
+                        toggleMenu();
                         handleSignOut();
                       }}
                     >
@@ -250,21 +255,17 @@ export function Header() {
                   <>
                     <Link
                       href="/auth/login"
-                      className="hidden block w-full text-gray-900 dark:text-white hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
-                      onClick={() => setIsMenuOpen(false)}
+                      className="block"
+                      onClick={toggleMenu}
                     >
-                      <Button variant="outline" className="w-full">
-                        Giriş Yap
-                      </Button>
+                      <Button variant="ghost" className="w-full justify-center">Giriş Yap</Button>
                     </Link>
                     <Link
                       href="/demo"
-                      className="block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
-                      onClick={() => setIsMenuOpen(false)}
+                      className="block"
+                      onClick={toggleMenu}
                     >
-                      <Button className="w-full">
-                        Ücretsiz Deneyin
-                      </Button>
+                      <Button className="w-full justify-center">Ücretsiz Deneyin</Button>
                     </Link>
                   </>
                 )}
