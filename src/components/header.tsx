@@ -60,7 +60,6 @@ export function Header() {
                   width={144}
                   height={40}
                   className="w-28 sm:w-36"
-                  style={{ width: 'auto', height: 'auto' }}
                   priority
                 />
               </span>
@@ -71,7 +70,6 @@ export function Header() {
                   width={144}
                   height={40}
                   className="w-28 sm:w-36"
-                  style={{ width: 'auto', height: 'auto' }}
                   priority
                 />
               </span>
