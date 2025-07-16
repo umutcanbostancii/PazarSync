@@ -29,9 +29,8 @@ export function HomeAIServices() {
       <Image
         src="/images/ai-background.webp"
         alt="Yapay Zeka Arka Plan"
-        layout="fill"
-        objectFit="cover"
-        className="z-0"
+        fill
+        className="z-0 object-cover"
       />
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/70 via-purple-900/60 to-black/70 z-10" />

@@ -59,7 +59,8 @@ export function Header() {
                   alt="PazarSync Logo"
                   width={144}
                   height={40}
-                  className="w-28 h-auto sm:w-36"
+                  className="w-28 sm:w-36"
+                  style={{ width: 'auto', height: 'auto' }}
                   priority
                 />
               </span>
@@ -69,7 +70,8 @@ export function Header() {
                   alt="PazarSync Logo Dark"
                   width={144}
                   height={40}
-                  className="w-28 h-auto sm:w-36"
+                  className="w-28 sm:w-36"
+                  style={{ width: 'auto', height: 'auto' }}
                   priority
                 />
               </span>

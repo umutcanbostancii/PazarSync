@@ -114,7 +114,7 @@ const EkibimizPage = () => {
             {teamMembers.map((member, index) => (
               <div key={member.name} className="bg-card rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
                 <div className="relative h-64 w-full">
-                  <Image src={member.image} alt={member.name} layout="fill" objectFit="cover" />
+                  <Image src={member.image} alt={member.name} fill className="object-cover" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
@@ -151,8 +151,8 @@ const EkibimizPage = () => {
                 <Image
                   src="/images/team/team.webp"
                   alt="PazarSync Ofis"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
             </div>

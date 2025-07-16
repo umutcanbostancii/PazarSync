@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// Global Swiper stilleri
-import 'swiper/css';
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/components/auth/auth-context";
 import { ClientBody } from "./ClientBody";
 
-// Font yükleme
-const inter = Inter({ subsets: ["latin"] });
+// Font yükleme - display: swap ile FOUC önleme
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial']
+});
 
 export const metadata: Metadata = {
   title: "PazarSync | Tüm Pazaryerlerini Tek Ekrandan Yönetin",

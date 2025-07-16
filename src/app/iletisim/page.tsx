@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import emailjs from '@emailjs/browser';
 import { useRef, useState } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import Image from "next/image";
 
 export default function IletisimPage() {
   const formRef = useRef(null);
@@ -44,15 +45,21 @@ export default function IletisimPage() {
           <div className="text-center py-8">
             {/* Logo */}
             <div className="mb-6">
-              <img 
+              <Image 
                 src="/assets/light-mode-logo-name.svg" 
                 alt="PazarSync" 
+                width={144}
+                height={48}
                 className="h-12 mx-auto dark:hidden"
+                style={{ width: 'auto', height: 'auto' }}
               />
-              <img 
+              <Image 
                 src="/assets/dark-mode-logo-name.svg" 
                 alt="PazarSync" 
+                width={144}
+                height={48}
                 className="h-12 mx-auto hidden dark:block"
+                style={{ width: 'auto', height: 'auto' }}
               />
             </div>
             

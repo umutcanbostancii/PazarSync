@@ -1,33 +1,25 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import { useTheme } from "next-themes";
 
 // Swiper CSS
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './hero-slider.css';
 
 export default function HeroSlider() {
   const { theme } = useTheme();
-  const [textActiveIndex, setTextActiveIndex] = useState(0);
-  const [imageActiveIndex, setImageActiveIndex] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const textSwiperRef = useRef(null);
-  const imageSwiperRef = useRef(null);
-
-  useEffect(() => {
-    // Sayfa yüklendiğinde animasyonları etkinleştir
-    setIsLoaded(true);
-  }, []);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const textSwiperRef = useRef<any>(null);
+  const imageSwiperRef = useRef<any>(null);
 
   // Text slider içeriği
   const textSlides = [
@@ -76,32 +68,24 @@ export default function HeroSlider() {
     }
   ];
 
-  // Metin sliderın değişimini izle ve görsel sliderını da güncelle
-  const handleTextSlideChange = (swiper: SwiperType) => {
-    setTextActiveIndex(swiper.activeIndex);
+  // Slide change handler - useCallback ile optimize edildi
+  const handleSlideChange = useCallback((swiper: any) => {
+    setActiveIndex(swiper.activeIndex);
     
-    // Görsel sliderını metin sliderı ile senkronize et
-    if (imageSwiperRef.current && swiper.activeIndex !== imageActiveIndex) {
+    // Senkronize diğer slider
+    if (swiper === textSwiperRef.current && imageSwiperRef.current) {
       imageSwiperRef.current.slideTo(swiper.activeIndex);
-    }
-  };
-  
-  // Görsel sliderının değişimini izle ve metin sliderını da güncelle
-  const handleImageSlideChange = (swiper: SwiperType) => {
-    setImageActiveIndex(swiper.activeIndex);
-    
-    // Metin sliderını görsel sliderı ile senkronize et
-    if (textSwiperRef.current && swiper.activeIndex !== textActiveIndex) {
+    } else if (swiper === imageSwiperRef.current && textSwiperRef.current) {
       textSwiperRef.current.slideTo(swiper.activeIndex);
     }
-  };
+  }, []);
 
   // Image error handler
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+  const handleImageError = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
     const alt = target.alt || "Placeholder";
     target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='32' viewBox='0 0 96 32' fill='none'%3E%3Crect width='96' height='32' rx='4' fill='%23f1f5f9'/%3E%3Ctext x='48' y='20' font-family='Arial' font-size='12' text-anchor='middle' fill='%23475569'%3E${alt}%3C/text%3E%3C/svg%3E`;
-  };
+  }, []);
 
   return (
     <section
@@ -123,8 +107,8 @@ export default function HeroSlider() {
                 delay: 5000,
                 disableOnInteraction: false,
               }}
-              onSwiper={(swiper: SwiperType) => (textSwiperRef.current = swiper)}
-              onSlideChange={handleTextSlideChange}
+              onSwiper={(swiper: any) => (textSwiperRef.current = swiper)}
+              onSlideChange={handleSlideChange}
               className="w-full"
               pagination={{
                 clickable: true,
@@ -176,6 +160,7 @@ export default function HeroSlider() {
                               fill
                               sizes="(max-width: 640px) 80px, 96px"
                               className="object-contain"
+                              priority={true}
                               onError={handleImageError}
                             />
                           </div>
@@ -253,34 +238,34 @@ export default function HeroSlider() {
                 delay: 5000,
                 disableOnInteraction: false,
               }}
-              onSwiper={(swiper: SwiperType) => (imageSwiperRef.current = swiper)}
-              onSlideChange={handleImageSlideChange}
+              onSwiper={(swiper: any) => (imageSwiperRef.current = swiper)}
+              onSlideChange={handleSlideChange}
               className="w-full"
-              allowTouchMove={true}
               touchStartPreventDefault={false}
+              allowTouchMove={true}
               spaceBetween={0}
               slidesPerView={1}
             >
               {imageSlides.map((slide, index) => (
                 <SwiperSlide key={`image-slide-${index}`}>
-                  <div className="relative bg-card/30 backdrop-blur-sm rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group">
-                    <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
-                      <span className="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-black/90 text-gray-900 dark:text-white backdrop-blur-sm shadow-lg border border-white/20 dark:border-gray-700/50">
-                        {slide.badge}
-                      </span>
-                    </div>
-                    <div className="aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] relative">
-                      <Image
-                        src={slide.image}
-                        alt={slide.alt}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600' fill='none'%3E%3Crect width='800' height='600' fill='%23f1f5f9'/%3E%3Cpath d='M400 200c-55.2 0-100 44.8-100 100s44.8 100 100 100 100-44.8 100-100-44.8-100-100-100zm0 160c-33.1 0-60-26.9-60-60s26.9-60 60-60 60 26.9 60 60-26.9 60-60 60z' fill='%2394a3b8'/%3E%3Cpath d='M400 260c-22.1 0-40 17.9-40 40s17.9 40 40 40 40-17.9 40-40-17.9-40-40-40z' fill='%23475569'/%3E%3Ctext x='400' y='450' font-family='Arial' font-size='16' text-anchor='middle' fill='%23475569'%3E${slide.alt}%3C/text%3E%3C/svg%3E`;
-                        }}
-                      />
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <div className="relative w-full max-w-lg mx-auto">
+                      <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
+                        <Image
+                          src={slide.image}
+                          alt={slide.alt}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover"
+                          priority={index === 0}
+                          onError={handleImageError}
+                        />
+                        {slide.badge && (
+                          <div className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium shadow-lg">
+                            {slide.badge}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </SwiperSlide>

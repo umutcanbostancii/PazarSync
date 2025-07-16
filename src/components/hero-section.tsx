@@ -33,31 +33,35 @@ export function HeroSection() {
               <div className="flex flex-wrap justify-center items-center gap-4 mt-8">
                 <Image
                   alt="Trendyol logo"
-                  className="w-24 h-auto"
+                  className="w-24"
                   height="40"
                   src="/images/trendyol-logo.webp"
                   width="100"
+                  style={{ width: 'auto', height: 'auto' }}
                 />
                 <Image
                   alt="Hepsiburada logo"
-                  className="w-24 h-auto"
+                  className="w-24"
                   height="40"
                   src="/images/hepsiburada-logo.webp"
                   width="100"
+                  style={{ width: 'auto', height: 'auto' }}
                 />
                 <Image
                   alt="n11 logo"
-                  className="w-24 h-auto"
+                  className="w-24"
                   height="40"
                   src="/images/n11-logo.webp"
                   width="100"
+                  style={{ width: 'auto', height: 'auto' }}
                 />
                 <Image
                   alt="Amazon logo"
-                  className="w-24 h-auto"
+                  className="w-24"
                   height="40"
                   src="/images/amazon-logo.webp"
                   width="100"
+                  style={{ width: 'auto', height: 'auto' }}
                 />
               </div>
             </div>

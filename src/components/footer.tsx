@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -53,19 +54,23 @@ export function Footer() {
             <Link href="/" className="inline-flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
               {/* Light/Dark mode logo */}
               <span className="block dark:hidden">
-                <img
+                <Image
                   src="/assets/light-mode-logo-name.svg"
                   alt="PazarSync Logo"
-                  className="w-24 h-auto"
-                  style={{ maxHeight: 36 }}
+                  width={96}
+                  height={36}
+                  className="w-24"
+                  style={{ width: 'auto', height: 'auto' }}
                 />
               </span>
               <span className="hidden dark:block">
-                <img
+                <Image
                   src="/assets/dark-mode-logo-name.svg"
                   alt="PazarSync Logo Dark"
-                  className="w-24 h-auto"
-                  style={{ maxHeight: 36 }}
+                  width={96}
+                  height={36}
+                  className="w-24"
+                  style={{ width: 'auto', height: 'auto' }}
                 />
               </span>
             </Link>
