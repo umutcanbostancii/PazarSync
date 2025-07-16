@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Store, Settings, Brush } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import PageHeroSlider from "@/components/page-hero-slider";
 
 export default function EticaretKurulumuPage() {
   const platforms = [
@@ -28,34 +29,59 @@ export default function EticaretKurulumuPage() {
     },
   ];
 
+  // Hero slider için slide'lar
+  const heroSlides = [
+    {
+      type: 'image' as const,
+      src: "/images/ecommerce-illustration.webp",
+      alt: "E-ticaret Kurulumu",
+      badge: "Profesyonel Kurulum"
+    },
+    {
+      type: 'image' as const,
+      src: "/images/dashboard-screenshot.webp",
+      alt: "E-ticaret Dashboard",
+      badge: "Modern Arayüz"
+    },
+    {
+      type: 'image' as const,
+      src: "/images/marketplace-integration.webp",
+      alt: "Pazaryeri Entegrasyonu",
+      badge: "Kolay Entegrasyon"
+    }
+  ];
+
   return (
     <div className="bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-secondary/20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-primary mb-4">
-            E-Ticaret Sistemi Kurulumu & Danışmanlığı
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Sıfırdan Online Mağazanızı Kuralım – Profesyonelce. Teknik yükleri bize bırakın, siz sadece satışa odaklanın.
-          </p>
-        </div>
-      </section>
+      {/* Hero Slider */}
+      <PageHeroSlider
+        title="E-Ticaret Sistemi <span class='text-primary'>Kurulumu</span> & Danışmanlığı"
+        description="Sıfırdan Online Mağazanızı Kuralım – Profesyonelce. Teknik yükleri bize bırakın, siz sadece satışa odaklanın."
+        slides={heroSlides}
+        ctaButton={{
+          text: "Danışmanlık Alın",
+          href: "/iletisim"
+        }}
+        secondaryButton={{
+          text: "Platformları İnceleyin",
+          href: "#kapsam"
+        }}
+      />
 
       {/* Kapsam Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+      <section id="kapsam" className="py-12 md:py-16 lg:py-24">
+        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div>
              <Image 
-              src="/images/marketplace-integration.webp" 
-              alt="E-ticaret Platformları"
+              src="/images/ecommerce-illustration.webp" 
+              alt="E-ticaret Kurulumu"
               width={500}
               height={500}
               className="rounded-lg shadow-xl mx-auto"
             />
           </div>
           <div>
-            <h2 className="text-3xl font-bold mb-4">Sadece Mağaza Değil, Satışa Hazır Bir Sistem Kuruyoruz</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Sadece Mağaza Değil, Satışa Hazır Bir Sistem Kuruyoruz</h2>
             <p className="text-muted-foreground mb-6">
               Markanız için en uygun platformu birlikte seçiyoruz. İster küçük bir butik olun, ister global bir oyuncu; tüm altyapıyı sizin için biz yönetiyoruz.
             </p>
@@ -72,13 +98,13 @@ export default function EticaretKurulumuPage() {
       </section>
 
       {/* Süreç Section */}
-      <section className="py-16 md:py-24 bg-secondary/20">
+      <section className="py-12 md:py-16 lg:py-24 bg-secondary/20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold">🎯 3 Günde Yayındasınız!</h2>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold">🎯 3 Günde Yayındasınız!</h2>
             <p className="text-muted-foreground mt-2">İstediğiniz e-ticaret platformunu seçin, size özel kurulumla hızla satışa başlayın.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {processSteps.map((step) => (
               <div key={step.title} className="text-center p-6 border border-border/50 rounded-lg">
                 <div className="flex justify-center items-center mb-4 h-16 w-16 rounded-full bg-primary/10 mx-auto">
@@ -93,9 +119,9 @@ export default function EticaretKurulumuPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 md:py-16 lg:py-24">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-primary mb-4">E-ticaret Hayallerinizi Ertelemeyin</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-4">E-ticaret Hayallerinizi Ertelemeyin</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
             Profesyonel bir başlangıç yapmak için ilk adımı atın. Projenizi ve hedeflerinizi görüşmek üzere bizimle iletişime geçin.
           </p>

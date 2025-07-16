@@ -60,17 +60,17 @@ export default function HeroSlider() {
   // Görsel slider içeriği
   const imageSlides = [
     {
-      image: "/images/dashboard-screenshot.webp",
+      image: theme === "dark" ? "/images/dashboard-screenshot-darkmode.webp" : "/images/dashboard-screenshot.webp",
       alt: "PazarSync Dashboard",
       badge: "İstediğiniz siteden ürün çekin"
     },
     {
-      image: '/images/product-sync.webp',
+      image: theme === "dark" ? "/images/dashboard-screenshot-darkmode.webp" : "/images/product-sync.webp",
       alt: 'Stok ve Sipariş Senkronizasyonu',
       badge: 'Daha Fazla Bilgi'
     },
     {
-      image: '/images/marketplace-integration.webp',
+      image: theme === "dark" ? "/images/dashboard-screenshot-darkmode.webp" : "/images/marketplace-integration.webp",
       alt: 'Pazaryeri Entegrasyonları',
       badge: 'Entegrasyonları Gör'
     }
@@ -265,7 +265,7 @@ export default function HeroSlider() {
                 <SwiperSlide key={`image-slide-${index}`}>
                   <div className="relative bg-card/30 backdrop-blur-sm rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group">
                     <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
-                      <span className="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-primary/20 text-primary backdrop-blur-sm">
+                      <span className="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-black/90 text-gray-900 dark:text-white backdrop-blur-sm shadow-lg border border-white/20 dark:border-gray-700/50">
                         {slide.badge}
                       </span>
                     </div>

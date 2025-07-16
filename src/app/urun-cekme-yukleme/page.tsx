@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Download, BrainCircuit, Upload } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import PageHeroSlider from "@/components/page-hero-slider";
 
 export default function UrunCekmeYuklemePage() {
   const features = [
@@ -23,28 +24,53 @@ export default function UrunCekmeYuklemePage() {
     },
   ];
 
+  // Hero slider için slide'lar
+  const heroSlides = [
+    {
+      type: 'image' as const,
+      src: "/images/Herhangi-siteden-uruncekme.webp",
+      alt: "Ürün Çekme Otomasyonu",
+      badge: "Otomatik Veri Çekme"
+    },
+    {
+      type: 'image' as const,
+      src: "/images/product-sync.webp",
+      alt: "Ürün Senkronizasyonu",
+      badge: "Hızlı Senkronizasyon"
+    },
+    {
+      type: 'image' as const,
+      src: "/images/automation-illustration Large.webp",
+      alt: "Otomasyon Süreci",
+      badge: "Akıllı Otomasyon"
+    }
+  ];
+
   return (
     <div className="bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-secondary/20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-primary mb-4">
-            Ürün Çekme & Yükleme Otomasyonu
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Sitenizi Ürünle Doldurmanın En Kolay Yolu: PazarSync ile tek tıkla binlerce ürünü internetteki herhangi bir siteden çekin, kendi e-ticaret mağazanıza kolayca yükleyin.
-          </p>
-        </div>
-      </section>
+      {/* Hero Slider */}
+      <PageHeroSlider
+        title="Ürün Çekme & Yükleme <span class='text-primary'>Otomasyonu</span>"
+        description="Sitenizi Ürünle Doldurmanın En Kolay Yolu: PazarSync ile tek tıkla binlerce ürünü internetteki herhangi bir siteden çekin, kendi e-ticaret mağazanıza kolayca yükleyin."
+        slides={heroSlides}
+        ctaButton={{
+          text: "Ücretsiz Deneyin",
+          href: "/demo"
+        }}
+        secondaryButton={{
+          text: "Nasıl Çalışır?",
+          href: "#nasil-calisir"
+        }}
+      />
 
       {/* Nasıl Çalışır? Section */}
-      <section className="py-16 md:py-24">
+      <section id="nasil-calisir" className="py-12 md:py-16 lg:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold">Akıllı Bot Sistemimiz Nasıl Çalışır?</h2>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold">Akıllı Bot Sistemimiz Nasıl Çalışır?</h2>
             <p className="text-muted-foreground mt-2">Satışa giden yolda ilk adımı otomatik atın.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {features.map((feature) => (
               <Card key={feature.title} className="text-center p-6">
                 <div className="flex justify-center items-center mb-4 h-16 w-16 rounded-full bg-primary/10 mx-auto">
@@ -59,10 +85,10 @@ export default function UrunCekmeYuklemePage() {
       </section>
 
       {/* Avantajlar Section */}
-      <section className="py-16 md:py-24 bg-secondary/20">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-12 md:py-16 lg:py-24 bg-secondary/20">
+        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="order-2 md:order-1">
-            <h2 className="text-3xl font-bold mb-4">Otomasyonun Gücüyle Tanışın</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Otomasyonun Gücüyle Tanışın</h2>
             <p className="text-muted-foreground mb-6">
               Manuel ürün girişiyle saatlerinizi harcamak yerine, PazarSync otomasyonu ile iş akışınızı hızlandırın. Rakiplerinizin ürünlerini, pazar yerlerindeki popüler ürünleri veya tedarikçi kataloglarını saniyeler içinde mağazanıza taşıyın.
             </p>
@@ -83,8 +109,8 @@ export default function UrunCekmeYuklemePage() {
           </div>
           <div className="order-1 md:order-2">
             <Image 
-              src="/images/product-sync.webp" 
-              alt="Ürün Senkronizasyon Otomasyonu"
+              src="/images/automation-illustration Large.webp" 
+              alt="Ürün Otomasyonu"
               width={500}
               height={500}
               className="rounded-lg shadow-xl mx-auto"
@@ -94,9 +120,9 @@ export default function UrunCekmeYuklemePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 md:py-16 lg:py-24">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-primary mb-4">Hazır mısınız?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-4">Hazır mısınız?</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
             Hemen ücretsiz denemeye başlayın ve ürün listeleme sürecinizi otomatize ederek işinizi büyütmenin keyfini çıkarın.
           </p>

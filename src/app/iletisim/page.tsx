@@ -101,12 +101,12 @@ export default function IletisimPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           <div>
-            <div className="bg-card p-8 rounded-xl shadow-sm mb-8 border border-border">
-              <h2 className="text-2xl font-light mb-6 text-card-foreground">İletişim Formu</h2>
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-card p-4 sm:p-6 lg:p-8 rounded-xl shadow-sm mb-8 border border-border">
+              <h2 className="text-xl sm:text-2xl font-light mb-6 text-card-foreground">İletişim Formu</h2>
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
                       Adınız Soyadınız
@@ -115,7 +115,7 @@ export default function IletisimPage() {
                       type="text"
                       id="name"
                       name="name"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-base"
                       placeholder="Adınız Soyadınız"
                       required
                     />
@@ -128,13 +128,13 @@ export default function IletisimPage() {
                       type="email"
                       id="email"
                       name="email"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-base"
                       placeholder="ornek@sirket.com"
                       required
                     />
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium mb-2">
                       Telefon
@@ -143,7 +143,7 @@ export default function IletisimPage() {
                       type="text"
                       id="phone"
                       name="phone"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-base"
                       placeholder="Telefon numaranız"
                     />
                   </div>
@@ -155,7 +155,7 @@ export default function IletisimPage() {
                       type="text"
                       id="subject"
                       name="subject"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-base"
                       placeholder="Mesajınızın konusu"
                       required
                     />
@@ -169,7 +169,7 @@ export default function IletisimPage() {
                     id="message"
                     name="message"
                     rows={5}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-base"
                     placeholder="Mesajınızı buraya yazabilirsiniz..."
                     required
                   ></textarea>
@@ -190,8 +190,8 @@ export default function IletisimPage() {
           </div>
 
           <div>
-            <div className="bg-card p-8 rounded-xl shadow-sm mb-8 border border-border">
-              <h2 className="text-2xl font-light mb-6 text-card-foreground">İletişim Bilgilerimiz</h2>
+            <div className="bg-card p-4 sm:p-6 lg:p-8 rounded-xl shadow-sm mb-8 border border-border">
+              <h2 className="text-xl sm:text-2xl font-light mb-6 text-card-foreground">İletişim Bilgilerimiz</h2>
               <div className="space-y-6">
                 <div>
                   <h3 className="text-lg font-medium mb-2">Adres</h3>
@@ -205,8 +205,8 @@ export default function IletisimPage() {
                 <div>
                   <h3 className="text-lg font-medium mb-2">Telefon</h3>
                   <p className="text-muted-foreground">
-                    <a href="tel:+908508407777" className="hover:text-primary transition-colors">
-                      +90 850 840 77 77
+                    <a href="tel:+905348427282" className="hover:text-primary transition-colors">
+                      +90 534 842 72 82
                     </a>
                   </p>
                 </div>
@@ -214,8 +214,8 @@ export default function IletisimPage() {
                 <div>
                   <h3 className="text-lg font-medium mb-2">E-posta</h3>
                   <p className="text-muted-foreground">
-                    <a href="mailto:bilgi@pazarsync.com" className="hover:text-primary transition-colors">
-                      bilgi@pazarsync.com
+                    <a href="mailto:info@pazarsync.com" className="hover:text-primary transition-colors">
+                      info@pazarsync.com
                     </a>
                   </p>
                 </div>
@@ -230,9 +230,9 @@ export default function IletisimPage() {
               </div>
             </div>
 
-            <div className="bg-card p-8 rounded-xl shadow-sm border border-border">
-              <h2 className="text-2xl font-light mb-6 text-card-foreground">Sosyal Medya</h2>
-              <div className="flex space-x-4">
+            <div className="bg-card p-4 sm:p-6 lg:p-8 rounded-xl shadow-sm border border-border">
+              <h2 className="text-xl sm:text-2xl font-light mb-6 text-card-foreground">Sosyal Medya</h2>
+              <div className="flex space-x-3 sm:space-x-4">
                 <a
                   href="https://facebook.com"
                   target="_blank"

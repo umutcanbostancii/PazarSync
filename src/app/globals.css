@@ -351,6 +351,48 @@
     }
   }
 
+  /* Page Hero Slider Styles */
+  .page-hero-slider-container {
+    min-height: 500px;
+  }
+
+  @media (min-width: 640px) {
+    .page-hero-slider-container {
+      min-height: 600px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-hero-slider-container {
+      min-height: 700px;
+    }
+  }
+
+  /* Page Hero Slider Pagination */
+  .page-hero-slider-container .custom-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    margin: 0 4px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.2);
+    display: inline-block;
+  }
+
+  .page-hero-slider-container .custom-bullet-active {
+    width: 32px;
+    background-color: hsl(var(--primary)) !important;
+  }
+
+  .dark .page-hero-slider-container .custom-bullet {
+    background-color: rgba(255,255,255,0.2);
+  }
+
+  .dark .page-hero-slider-container .custom-bullet-active {
+    background-color: hsl(var(--primary)) !important;
+  }
+
   /* Card Components */
   .card-responsive {
     @apply bg-card rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-border;

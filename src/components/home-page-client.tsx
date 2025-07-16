@@ -17,10 +17,10 @@ export default function HomePageClient() {
     <>
       <HeroSlider />
       <HomeStats />
+      <HomeAIServices />
       <HomeFeatures />
       <HomeWorkflow />
       <HomeServices />
-      <HomeAIServices />
       <HomeMarketplaces />
       <HomeWhyChooseUs />
       <HomeCTA />

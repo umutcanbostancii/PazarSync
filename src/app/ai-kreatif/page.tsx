@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Clapperboard, PenSquare, Palette, Sparkles, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import PageHeroSlider from "@/components/page-hero-slider";
 
 export default function AiKreatifPage() {
   const services = [
@@ -28,28 +29,53 @@ export default function AiKreatifPage() {
     },
   ];
 
+  // Hero slider için slide'lar
+  const heroSlides = [
+    {
+      type: 'image' as const,
+      src: "/images/ai-creative-illustration.webp",
+      alt: "AI Kreatif Üretim",
+      badge: "Yapay Zeka Destekli"
+    },
+    {
+      type: 'image' as const,
+      src: "/images/Yapay-Zeka-Icerik-Large.webp",
+      alt: "AI İçerik Üretimi",
+      badge: "Otomatik İçerik"
+    },
+    {
+      type: 'image' as const,
+      src: "/images/ai-background.webp",
+      alt: "AI Teknolojisi",
+      badge: "Gelecek Teknolojisi"
+    }
+  ];
+
   return (
     <div className="bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-secondary/20 text-center">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-primary mb-4">
-            Yapay Zeka ile Kreatif Üretim
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Yapay Zeka ile E-Ticarette Fark Yaratın. Sıradan içeriklerle boğulmayın, PazarSync'in kreatif servisleriyle markanızı parlatın.
-          </p>
-        </div>
-      </section>
+      {/* Hero Slider */}
+      <PageHeroSlider
+        title="Yapay Zeka ile <span class='text-primary'>Kreatif Üretim</span>"
+        description="Yapay Zeka ile E-Ticarette Fark Yaratın. Sıradan içeriklerle boğulmayın, PazarSync'in kreatif servisleriyle markanızı parlatın."
+        slides={heroSlides}
+        ctaButton={{
+          text: "Projenizi Görüşelim",
+          href: "/iletisim"
+        }}
+        secondaryButton={{
+          text: "Hizmetleri İnceleyin",
+          href: "#hizmetler"
+        }}
+      />
 
       {/* Hizmetler Section */}
-      <section className="py-16 md:py-24">
+      <section id="hizmetler" className="py-12 md:py-16 lg:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold">Ajanslara Bağımlı Kalmayın</h2>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold">Ajanslara Bağımlı Kalmayın</h2>
             <p className="text-muted-foreground mt-2">Zaman, maliyet ve kalite: Hepsini tek pakette sunuyoruz.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {services.map((service) => (
               <Card key={service.title} className="p-6">
                 <div className="flex justify-center items-center mb-4 h-16 w-16 rounded-full bg-primary/10 mx-auto">
@@ -64,10 +90,10 @@ export default function AiKreatifPage() {
       </section>
 
       {/* Neden AI? Section */}
-      <section className="py-16 md:py-24 bg-secondary/20">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-12 md:py-16 lg:py-24 bg-secondary/20">
+        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="order-2 md:order-1">
-            <h2 className="text-3xl font-bold mb-4">Kreatif Süreçlerinizi Otomatize Edin</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Kreatif Süreçlerinizi Otomatize Edin</h2>
             <p className="text-muted-foreground mb-6">
               Yapay zeka, sadece içerik üretmekle kalmaz, aynı zamanda A/B testleri için sayısız varyasyon oluşturarak en etkili kreatifleri bulmanızı sağlar. Bu sayede reklam harcamalarınızın geri dönüşünü (ROAS) maksimize eder.
             </p>
@@ -88,7 +114,7 @@ export default function AiKreatifPage() {
           </div>
           <div className="order-1 md:order-2">
             <Image 
-              src="/images/why-choose-us.webp" 
+              src="/images/ai-creative-illustration.webp" 
               alt="Yapay Zeka Kreatif Üretim"
               width={500}
               height={500}
@@ -99,9 +125,9 @@ export default function AiKreatifPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 md:py-16 lg:py-24">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-primary mb-4">Markanızı Geleceğe Taşıyın</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-4">Markanızı Geleceğe Taşıyın</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
             Yapay zekanın sunduğu sınırsız kreatif potansiyelden yararlanmak için bizimle iletişime geçin ve projenizi bir sonraki seviyeye taşıyalım.
           </p>

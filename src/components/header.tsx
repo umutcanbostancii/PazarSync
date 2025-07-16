@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-context";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X, User, LogOut, Home } from "lucide-react";
+import { usePathname } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,14 +19,9 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut } = useAuth();
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
   
   const isLoggedIn = !!user;
-  const [currentPath, setCurrentPath] = useState("");
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentPath(window.location.pathname);
-    }
-  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -81,24 +77,27 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={
-                  `px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition font-medium
-                  ${item.href === currentPath ? 'bg-gray-200 dark:bg-gray-800 text-primary dark:text-white font-bold' : ''}`
-                }
-                style={{ minWidth: 90 }}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <nav className="hidden md:flex items-center space-x-1">
+            {navLinks.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={
+                    `px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition font-medium
+                    ${isActive ? 'bg-gray-200 dark:bg-gray-800 text-primary dark:text-white font-bold' : ''}`
+                  }
+                  style={{ minWidth: 90 }}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center space-x-3">
+          <div className="hidden md:flex items-center space-x-3">
             {/* Dark Mode Toggle */}
             <Button
               variant="ghost"
@@ -148,21 +147,10 @@ export function Header() {
           </div>
 
           {/* Mobile/Tablet Actions */}
-          <div className="flex lg:hidden items-center space-x-2">
-            {/* Dark Mode Toggle Mobile */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="h-9 w-9 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
-
+          <div className="flex md:hidden items-center space-x-2">
             {/* User Menu Mobile (Tablet) */}
             {isLoggedIn && (
-              <div className="hidden sm:block lg:hidden">
+              <div className="hidden sm:block md:hidden">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
@@ -186,7 +174,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={toggleMenu}
-              className="h-9 w-9 lg:hidden text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="h-9 w-9 md:hidden text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
               aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? (
@@ -201,23 +189,26 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden">
+          <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-black border-t">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={
-                    `block px-3 py-2 text-base font-medium rounded-md transition-colors
-                    text-gray-900 dark:text-white hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
-                    ${item.href === currentPath ? 'bg-gray-200 dark:bg-gray-800 text-primary dark:text-white font-bold' : ''}`
-                  }
-                  onClick={toggleMenu}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navLinks.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={
+                      `block px-3 py-2 text-base font-medium rounded-md transition-colors
+                      text-gray-900 dark:text-white hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                      ${isActive ? 'bg-gray-200 dark:bg-gray-800 text-primary dark:text-white font-bold' : ''}`
+                    }
+                    onClick={toggleMenu}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
               
               {/* Mobile Auth Actions */}
               <div className="pt-4 space-y-2">

@@ -1,0 +1,40 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://pazarsync.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /panel/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow important pages
+Allow: /
+Allow: /urun-cekme-yukleme
+Allow: /eticaret-kurulumu
+Allow: /ai-kreatif
+Allow: /entegrasyonlar
+Allow: /iletisim
+Allow: /fiyatlar
+Allow: /demo
+Allow: /ozellikler
+Allow: /kaynaklar
+Allow: /sss
+Allow: /yardim
+Allow: /api-docs
+Allow: /kurumsal/
+Allow: /blog
+Allow: /odeme/
+Allow: /kullanim-sartlari
+Allow: /gizlilik-politikasi
+Allow: /cerez-politikasi
+Allow: /giris
+Allow: /kayit
+Allow: /sifre-sifirlama 

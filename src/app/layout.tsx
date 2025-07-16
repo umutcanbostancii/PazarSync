@@ -54,12 +54,7 @@ export default function RootLayout({
     <html lang="tr" suppressHydrationWarning>
       <head />
       <body className={inter.className} suppressHydrationWarning>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider>
           <AuthProvider>
             <ClientBody>{children}</ClientBody>
           </AuthProvider>
